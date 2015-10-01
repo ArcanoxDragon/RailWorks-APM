@@ -224,7 +224,7 @@ function Update(interval)
 				
 				Call( "*:SetControlValue", "TAccel", 0, tAccel)
 				Call( "*:SetControlValue", "Regulator", 0, finalRegulator)
-				Call( "*:SetControlValue", "DynamicBrake", 0, 0.0 )
+				Call( "*:SetControlValue", "DynamicBrake", 0, gSetBrake )
 				Call( "*:SetControlValue", "TrainBrakeControl", 0, gSetBrake )
 				Call( "*:SetControlValue", "TrueThrottle", 0, tThrottle )
 			end
