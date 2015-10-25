@@ -55,7 +55,7 @@ function Setup()
 	gLastJerkLimit = 0
 
 -- For controlling delayed doors interlocks.
-	DOORDELAYTIME = 6 -- seconds.
+	DOORDELAYTIME = 2.5 -- seconds.
 	gDoorsDelay = DOORDELAYTIME
 end
 
@@ -160,8 +160,15 @@ function Update(interval)
 				tAccel = math.max(tAccel, 0.0)
 			end
 			
-			tJerkLimit = JERK_LIMIT * sign(tTAccel - tAccel)
-			tAccel = tAccel + (tJerkLimit * gTimeDelta)
+			tJerkLimit = JERK_LIMIT * gTimeDelta
+			
+			if (tAccel < tTAccel - tJerkLimit) then
+				tAccel = tAccel + tJerkLimit
+			elseif (tAccel > tTAccel + tJerkLimit) then
+				tAccel = tAccel - tJerkLimit
+			else
+				tAccel = tTAccel
+			end
 			
 			-- Parked or track brake engaged
 			if (math.abs(ReverserLever) < 0.9 or TrackBrake > 0) then

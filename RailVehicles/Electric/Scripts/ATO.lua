@@ -2,7 +2,7 @@ local MI_TO_M = 1609.34 -- Miles to Meters
 local M_TO_MI = 1.0 / MI_TO_M -- Meters to Miles
 local SIGNAL_STATE_SPEED = 20
 local SIGNAL_STATE_STATION = 21
-local ATO_TARGET_DECELERATION = 0.85 -- Meters/second/second
+local ATO_TARGET_DECELERATION = 1.25 -- Meters/second/second
 local ACCEL_PER_SECOND = 1.0 -- Units of acceleration per second (jerk limit, used for extra buffers)
 atoK_P = 1.0 / 5.0
 atoK_I = 1.0 / 18.0
@@ -199,12 +199,12 @@ function UpdateATO(interval)
 		end
 		
 		if (atoStopping > 0) then
-			local distBuffer = 2.0
+			local distBuffer = 2.25
 			targetSpeed = math.min(ATCRestrictedSpeed * MPH_TO_MPS, math.max(getStoppingSpeed(targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - (sigDist - distBuffer)), 1.0 * MPH_TO_MPS))
 				
 			statStopTime = statStopTime + interval
 			
-			if (sigDist < 0.5 or (atoOverrunDist > 0 and atoOverrunDist < 5.0)) then
+			if (sigDist < 0.65 or (atoOverrunDist > 0 and atoOverrunDist < 5.0)) then
 				targetSpeed = 0.0
 				if (trainSpeed <= 0.025) then
 					if (atoIsStopped < 0.25) then
@@ -263,7 +263,11 @@ function UpdateATO(interval)
 		Call("*:SetControlValue", "ATOTargetSpeed", 0, targetSpeed)
 		Call("*:SetControlValue", "ATOOverrun", 0, round(atoOverrunDist * 100.0, 2))
 		if (targetSpeed < 0.25) then
-			atoThrottle = -1.0
+			if (trainSpeedMPH > 2.0) then
+				atoThrottle = -1.0
+			else
+				atoThrottle = -0.2
+			end
 		else
 			-- pid(tD, kP, kI, kD, e, minErr, maxErr)
 			atoK_P = 1.0 / 4.0
