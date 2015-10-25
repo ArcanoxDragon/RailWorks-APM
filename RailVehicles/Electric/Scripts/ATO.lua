@@ -5,10 +5,10 @@ local SIGNAL_STATE_STATION = 21
 local ATO_TARGET_DECELERATION = 1.25 -- Meters/second/second
 local ACCEL_PER_SECOND = 1.0 -- Units of acceleration per second (jerk limit, used for extra buffers)
 atoK_P = 1.0 / 5.0
-atoK_I = 1.0 / 18.0
+atoK_I = 1.0 / 25.0
 atoK_D = 0.0
-atoMIN_ERROR = -3.0
-atoMAX_ERROR =  3.0
+atoMIN_ERROR = -5.0
+atoMAX_ERROR =  5.0
 atoSigDirection = 0
 gLastSigDistTime = 0
 atoOverrunDist = 0
@@ -167,11 +167,13 @@ function UpdateATO(interval)
 		end
 		
 		searchDist = sigDist + 0.1
-		while (searchDist < spdBuffer and sigAspect ~= SIGNAL_STATE_STATION) do
+		searchCount = 0
+		while (searchDist < spdBuffer and sigAspect ~= SIGNAL_STATE_STATION and searchCount < 20) do
 			tSigType, tSigState, tSigDist, tSigAspect = Call("*:GetNextRestrictiveSignal", atoSigDirection, searchDist)
 			if (tSigAspect == SIGNAL_STATE_STATION) then
 				sigType, sigState, sigDist, sigAspect = tSigType, tSigState, tSigDist, tSigAspect
 			end
+			searchCount = searchCount + 1
 			searchDist = tSigDist + 0.1
 		end
 		
