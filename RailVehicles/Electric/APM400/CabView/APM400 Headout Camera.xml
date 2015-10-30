@@ -41,7 +41,7 @@
 											<Attribute name="Y">
 												<sFloat32>
 													<Element>
-														<Value>1.85</Value>
+														<Value>2.75</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
@@ -70,7 +70,7 @@
 											<Attribute name="Y">
 												<sFloat32>
 													<Element>
-														<Value>1.85</Value>
+														<Value>2.75</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
