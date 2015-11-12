@@ -61,14 +61,14 @@
 										<Attribute name="MinDistance">
 											<sFloat32>
 												<Element>
-													<Value>0.1</Value>
+													<Value>0.02</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="MaxDistance">
 											<sFloat32>
 												<Element>
-													<Value>0.1</Value>
+													<Value>0.2</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -82,14 +82,14 @@
 										<Attribute name="SpringCoefficient">
 											<sFloat32>
 												<Element>
-													<Value>0</Value>
+													<Value>1000000</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="Damping">
 											<sFloat32>
 												<Element>
-													<Value>0</Value>
+													<Value>10000</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>

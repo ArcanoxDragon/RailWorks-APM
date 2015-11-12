@@ -2830,7 +2830,7 @@
 																	<Attribute name="Y">
 																		<sFloat32>
 																			<Element>
-																				<Value>1.5</Value>
+																				<Value>1.25</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
