@@ -229,7 +229,7 @@ function Update(interval)
 				
 				local finalRegulator = gSetReg
 				local aSpeed = math.abs( TrainSpeed )
-				local maxReg = clamp( math.log( aSpeed / 2.0 + 1.0 ), 0.1, 1.0 )
+				local maxReg = clamp( math.log( aSpeed / 2.5 + 1.0 ), 0.125, 1.0 )
 				
 				finalRegulator = finalRegulator * maxReg
 				

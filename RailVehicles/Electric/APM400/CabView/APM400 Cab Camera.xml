@@ -99,14 +99,14 @@
 											<Attribute name="Y">
 												<sFloat32>
 													<Element>
-														<Value>2.45</Value>
+														<Value>2.7</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
 											<Attribute name="Z">
 												<sFloat32>
 													<Element>
-														<Value>5.5</Value>
+														<Value>0.5</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
