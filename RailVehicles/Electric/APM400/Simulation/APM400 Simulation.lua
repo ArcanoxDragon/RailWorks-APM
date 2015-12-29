@@ -36,6 +36,9 @@ function Setup()
 	JERK_LIMIT = 0.75
 	MAX_SERVICE_BRAKE = 1.0
 	MIN_SERVICE_BRAKE = 0.0
+	UPHILL_STALL_THRESHOLD = 0.125
+	UPHILL_STALL_DELAY = 2.0
+	UPHILL_STALL_CORRECTION_RATE = 0.25
 	
 -- Propulsion system variables
 	realAccel = 0.0
@@ -53,6 +56,8 @@ function Setup()
 	gBrakeRelease = 0.0
 	brkAdjust = 0.0
 	gLastJerkLimit = 0
+	gTimeSincePositiveAcceleration = 0.0
+	gMinAccelAdjust = 0.0
 
 -- For controlling delayed doors interlocks.
 	DOORDELAYTIME = 2.75 -- seconds.
@@ -229,7 +234,25 @@ function Update(interval)
 				
 				local finalRegulator = gSetReg
 				local aSpeed = math.abs( TrainSpeed )
-				local maxReg = clamp( math.log( aSpeed / 2.5 + 1.0 ), 0.125, 1.0 )
+				local maxReg = clamp( math.log( aSpeed / 2.5 + 1.0 ), 0.125 + gMinAccelAdjust, 1.0 )
+				
+				if (gSetReg >= 0.95) then
+					if (realAccel < UPHILL_STALL_THRESHOLD) then
+						gTimeSincePositiveAcceleration = gTimeSincePositiveAcceleration + interval
+					else
+						gTimeSincePositiveAcceleration = 0.0
+					end
+				else
+					gTimeSincePositiveAcceleration = 0.0
+				end
+				
+				if (gTimeSincePositiveAcceleration >= UPHILL_STALL_DELAY) then
+					gMinAccelAdjust = gMinAccelAdjust + (UPHILL_STALL_CORRECTION_RATE * interval)
+				else
+					gMinAccelAdjust = gMinAccelAdjust - (UPHILL_STALL_CORRECTION_RATE * interval)
+				end
+				
+				gMinAccelAdjust = clamp(gMinAccelAdjust, 0.0, 0.875)
 				
 				finalRegulator = finalRegulator * maxReg
 				
