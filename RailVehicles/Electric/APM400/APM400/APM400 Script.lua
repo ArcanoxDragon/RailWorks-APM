@@ -24,14 +24,6 @@ function Initialise()
 	Call( "BeginUpdate" )
 end
 
-function GetControlValue(name)
-	return Call("*:GetControlValue", name, 0)
-end
-
-function SetControlValue(name, value)
-	Call("*:SetControlValue", name, 0, value)
-end
-
 function Update(time)
 	local trainSpeed = Call("GetSpeed") * MPS_TO_MPH
 	local accel = Call("GetAcceleration") * MPS_TO_MPH

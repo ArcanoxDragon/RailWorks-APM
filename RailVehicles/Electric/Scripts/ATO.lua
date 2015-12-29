@@ -274,6 +274,10 @@ function UpdateATO(interval)
 			-- pid(tD, kP, kI, kD, e, minErr, maxErr)
 			atoK_P = 1.0 / 4.0
 			if (atoStopping > 0) then atoK_P = atoK_P * 2.0 end
+			
+			-- Prevents I buildup while brakes are releasing, etc
+			if (trainSpeedMPH < 5.0 and atoThrottle > 0.0) then resetPid("ato") end
+			
 			--t, p, i, d = pid("ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0, 2.0, pidTargetSpeed)
 			t, p, i, d = pid("ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0)
 			--atoThrottle = clamp(t, -1.0 - (1/8), 1.0 + (1/8))

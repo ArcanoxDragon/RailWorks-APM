@@ -82,14 +82,14 @@
 										<Attribute name="SpringCoefficient">
 											<sFloat32>
 												<Element>
-													<Value>1000000</Value>
+													<Value>1E+15</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="Damping">
 											<sFloat32>
 												<Element>
-													<Value>10000</Value>
+													<Value>1E+08</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>

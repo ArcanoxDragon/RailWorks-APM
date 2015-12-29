@@ -179,7 +179,7 @@ function UpdateATC(interval)
 	gLastSpeedLimit = targetSpeed
 	
 	if enabled then
-		if (not ATOEnabled) then
+		--[[if (not ATOEnabled) then
 			-- The ATC can only display certain speed limits; allow the next lowest one above actual, and driver is responsible for following actual
 			if (targetSpeed >= 10) then
 				targetSpeed = getSpeedLimitAbove(targetSpeed)
@@ -190,7 +190,7 @@ function UpdateATC(interval)
 					targetSpeed = getSpeedLimitAbove(targetSpeed)
 				end
 			end
-		end
+		end]]
 	else
 		targetSpeed = 70
 	end

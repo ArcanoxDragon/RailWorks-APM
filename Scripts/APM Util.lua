@@ -13,6 +13,14 @@ FALSE = 0
 PRIMARY_DIGITS = 0
 SECONDARY_DIGITS = 1
 
+function GetControlValue(name)
+	return Call("*:GetControlValue", name, 0)
+end
+
+function SetControlValue(name, value)
+	Call("*:SetControlValue", name, 0, value)
+end
+
 function debugPrint(msg)
 	Print(msg)
 	debugFile:seek("end", 0)

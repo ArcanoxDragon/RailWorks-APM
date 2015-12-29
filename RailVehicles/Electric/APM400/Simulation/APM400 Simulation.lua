@@ -1,5 +1,6 @@
 --include=..\..\Scripts\ATC.lua
 --include=..\..\Scripts\ATO.lua
+--include=..\CabView\APM400 Hud.lua
 --include=..\..\..\..\Scripts\APM Util.lua
 
 ------------------------------------------------------------
@@ -9,9 +10,8 @@
 -- (c) briman0094 2015
 --
 ------------------------------------------------------------
-
 function Setup()
-
+	
 -- For throttle/brake control.
 
 	gLastDoorsOpen = 0
@@ -55,7 +55,7 @@ function Setup()
 	gLastJerkLimit = 0
 
 -- For controlling delayed doors interlocks.
-	DOORDELAYTIME = 2.5 -- seconds.
+	DOORDELAYTIME = 2.75 -- seconds.
 	gDoorsDelay = DOORDELAYTIME
 end
 
@@ -228,6 +228,10 @@ function Update(interval)
 				end
 				
 				local finalRegulator = gSetReg
+				local aSpeed = math.abs( TrainSpeed )
+				local maxReg = clamp( math.log( aSpeed / 2.0 + 1.0 ), 0.1, 1.0 )
+				
+				finalRegulator = finalRegulator * maxReg
 				
 				Call( "*:SetControlValue", "TAccel", 0, tAccel)
 				Call( "*:SetControlValue", "Regulator", 0, finalRegulator)
@@ -249,6 +253,14 @@ function Update(interval)
 			end
 			
 			-- End ATC system
+			
+			-- Begin HUD
+			
+			if UpdateHUD then
+				UpdateHUD(gTimeDelta)
+			end
+			
+			-- End HUD
 
 			if ( DoorsOpen ~= FALSE ) then
 				Call( "*:SetControlValue", "Regulator", 0, 0 )
