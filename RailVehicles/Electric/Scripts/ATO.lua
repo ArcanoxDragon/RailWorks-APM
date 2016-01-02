@@ -265,11 +265,7 @@ function UpdateATO(interval)
 		Call("*:SetControlValue", "ATOTargetSpeed", 0, targetSpeed)
 		Call("*:SetControlValue", "ATOOverrun", 0, round(atoOverrunDist * 100.0, 2))
 		if (targetSpeed < 0.25) then
-			if (trainSpeedMPH > 2.0) then
 				atoThrottle = -1.0
-			else
-				atoThrottle = -0.2
-			end
 		else
 			-- pid(tD, kP, kI, kD, e, minErr, maxErr)
 			atoK_P = 1.0 / 4.0

@@ -18,7 +18,11 @@ function GetControlValue(name)
 end
 
 function SetControlValue(name, value)
-	Call("*:SetControlValue", name, 0, value)
+	if (type(value) == "boolean") then
+		Call("*:SetControlValue", name, 0, value and 1 or 0)
+	else
+		Call("*:SetControlValue", name, 0, value)
+	end
 end
 
 function debugPrint(msg)

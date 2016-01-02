@@ -19,7 +19,7 @@
 			<Attribute name="Strength">
 				<sFloat32>
 					<Element>
-						<Value>200</Value>
+						<Value>2E+10</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
@@ -68,28 +68,28 @@
 										<Attribute name="MaxDistance">
 											<sFloat32>
 												<Element>
-													<Value>0.2</Value>
+													<Value>0.08</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="TargetDistance">
 											<sFloat32>
 												<Element>
-													<Value>0.1</Value>
+													<Value>0.05</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="SpringCoefficient">
 											<sFloat32>
 												<Element>
-													<Value>1E+15</Value>
+													<Value>1E+20</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="Damping">
 											<sFloat32>
 												<Element>
-													<Value>1E+08</Value>
+													<Value>1E+15</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>

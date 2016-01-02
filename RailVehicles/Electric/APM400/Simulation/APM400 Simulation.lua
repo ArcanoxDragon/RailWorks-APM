@@ -36,9 +36,9 @@ function Setup()
 	JERK_LIMIT = 0.75
 	MAX_SERVICE_BRAKE = 1.0
 	MIN_SERVICE_BRAKE = 0.0
-	UPHILL_STALL_THRESHOLD = 0.125
-	UPHILL_STALL_DELAY = 2.0
-	UPHILL_STALL_CORRECTION_RATE = 0.25
+	ACCEL_CORRECTION_THRESHOLD = 0.125
+	ACCEL_CORRECTION_DELAY = 0.85
+	ACCEL_CORRECTION_RATE = 0.25
 	
 -- Propulsion system variables
 	realAccel = 0.0
@@ -56,8 +56,10 @@ function Setup()
 	gBrakeRelease = 0.0
 	brkAdjust = 0.0
 	gLastJerkLimit = 0
-	gTimeSincePositiveAcceleration = 0.0
+	gPosAccelTime = 0.0
+	gNegAccelTime = 0.0
 	gMinAccelAdjust = 0.0
+	gMinBrakeAdjust = 0.0
 
 -- For controlling delayed doors interlocks.
 	DOORDELAYTIME = 2.75 -- seconds.
@@ -89,6 +91,7 @@ function Update(interval)
 			PantoValue = Call( "*:GetControlValue", "PantographControl", 0 )
 			ThirdRailValue = Call( "*:GetControlValue", "ThirdRail", 0 )
 			TrainSpeed = Call( "*:GetControlValue", "SpeedometerMPH", 0 )
+			AbsSpeed = math.abs(TrainSpeed)
 			BrakeCylBAR = Call( "*:GetControlValue", "TrainBrakeCylinderPressureBAR", 0 )
 			IsEndCar = Call( "*:GetControlValue", "IsEndCar", 0 ) > 0
 			ATOEnabled = (Call( "*:GetControlValue", "ATOEnabled", 0 ) or -1) > 0.5
@@ -161,8 +164,14 @@ function Update(interval)
 			end
 			
 			-- If requesting acceleration and stopped, release brakes instantly
-			if (tTAccel >= 0 and math.abs(TrainSpeed) < 0.1) then
+			if (tTAccel >= 0 and AbsSpeed < 0.1) then
 				tAccel = math.max(tAccel, 0.0)
+			end
+			
+			-- Reduce jerk while train comes to a complete stop
+			if (AbsSpeed < 3.0) then
+				local maxBrake = clamp( mapRange( AbsSpeed, 3.0, 1.0, 1.0, 0.2 ), 0.2, 1.0 )
+				tTAccel = math.max( tTAccel, -maxBrake )
 			end
 			
 			tJerkLimit = JERK_LIMIT * gTimeDelta
@@ -179,6 +188,7 @@ function Update(interval)
 			if (math.abs(ReverserLever) < 0.9 or TrackBrake > 0) then
 				Call( "*:SetControlValue", "Regulator", 0, 0.0 )
 				Call( "*:SetControlValue", "TrainBrakeControl", 0, 1.0 )
+				Call( "*:SetControlValue", "DynamicBrake", 0, 1.0 )
 				
 				if (TrackBrake > 0) then
 					Call( "*:SetControlValue", "Sander", 0, 1 )
@@ -232,29 +242,49 @@ function Update(interval)
 					end
 				end
 				
-				local finalRegulator = gSetReg
-				local aSpeed = math.abs( TrainSpeed )
-				local maxReg = clamp( math.log( aSpeed / 2.5 + 1.0 ), 0.125 + gMinAccelAdjust, 1.0 )
-				
+				-- adjust minimum acceleration if starting uphill
 				if (gSetReg >= 0.95) then
-					if (realAccel < UPHILL_STALL_THRESHOLD) then
-						gTimeSincePositiveAcceleration = gTimeSincePositiveAcceleration + interval
+					if (realAccel < ACCEL_CORRECTION_THRESHOLD) then
+						gPosAccelTime = gPosAccelTime + interval
 					else
-						gTimeSincePositiveAcceleration = 0.0
+						gPosAccelTime = 0.0
 					end
 				else
-					gTimeSincePositiveAcceleration = 0.0
+					gPosAccelTime = 0.0
 				end
 				
-				if (gTimeSincePositiveAcceleration >= UPHILL_STALL_DELAY) then
-					gMinAccelAdjust = gMinAccelAdjust + (UPHILL_STALL_CORRECTION_RATE * interval)
+				if (gPosAccelTime >= ACCEL_CORRECTION_DELAY) then
+					gMinAccelAdjust = gMinAccelAdjust + (ACCEL_CORRECTION_RATE * interval)
 				else
-					gMinAccelAdjust = gMinAccelAdjust - (UPHILL_STALL_CORRECTION_RATE * interval)
+					gMinAccelAdjust = gMinAccelAdjust - (ACCEL_CORRECTION_RATE * interval)
 				end
 				
-				gMinAccelAdjust = clamp(gMinAccelAdjust, 0.0, 0.875)
+				gMinAccelAdjust = clamp(gMinAccelAdjust, 0.0, 0.75)
+				
+				local finalRegulator = gSetReg
+				local maxReg = clamp( math.log( AbsSpeed / 2.5 + 1.0 ), 0.25 + gMinAccelAdjust, 1.0 )
 				
 				finalRegulator = finalRegulator * maxReg
+				
+				-- adjust brakes if stopping downhill
+				if (gSetBrake >= 0.95) then
+					if (realAccel > -ACCEL_CORRECTION_RATE) then
+						gNegAccelTime = gNegAccelTime + interval
+					else
+						gNegAccelTime = 0.0
+					end
+				else
+					gNegAccelTime = 0.0
+				end
+				
+				if (gNegAccelTime >= ACCEL_CORRECTION_RATE) then
+					gMinBrakeAdjust = gMinBrakeAdjust + (ACCEL_CORRECTION_RATE * interval)
+				else
+					gMinBrakeAdjust = gMinBrakeAdjust - (ACCEL_CORRECTION_RATE * interval)
+				end
+				
+				gMinBrakeAdjust = clamp(gMinBrakeAdjust, 0.0, 0.8)
+				gSetBrake = clamp(gSetBrake + gMinBrakeAdjust, 0.0, 1.0)
 				
 				Call( "*:SetControlValue", "TAccel", 0, tAccel)
 				Call( "*:SetControlValue", "Regulator", 0, finalRegulator)

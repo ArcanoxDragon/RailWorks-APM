@@ -17,6 +17,10 @@ function Initialise()
 	gHeadlight = -1
 	gTaillight = -1
 	gInitialised = FALSE
+
+-- TractionRelay
+	gTractionRelay = false
+	gLastTractionRelay = false
 	
 -- Misc variables
 	gInit = false
@@ -28,6 +32,15 @@ function Update(time)
 	local trainSpeed = Call("GetSpeed") * MPS_TO_MPH
 	local accel = Call("GetAcceleration") * MPS_TO_MPH
 	local reverser = GetControlValue("Reverser")
+	local doorsOpen = GetControlValue("DoorsOpen") > 0.5
+	local atoEnabled = GetControlValue("ATOEnabled") > 0.5
+	local throttle
+	
+	if (atoEnabled) then
+		throttle = GetControlValue("ATOThrottle")
+	else
+		throttle = GetControlValue("ThrottleAndBrake") * 2.0 - 1.0
+	end
 	
 	if (not gInit) then
 		gInit = true
@@ -94,6 +107,19 @@ function Update(time)
 	else
 		Call("*:ActivateNode", "headlights", 0)
 	end
+	
+	-- Traction relay
+	if (doorsOpen) then
+		gTractionRelay = false
+	elseif (throttle > 0.0) then
+		gTractionRelay = true
+	end
+	
+	if (gTractionRelay ~= gLastTractionRelay) then
+		SetControlValue("TractionRelay", gTractionRelay)
+	end
+	
+	gLastTractionRelay = gTractionRelay
 end
 
 function OnConsistMessage ( msg, argument, direction )
