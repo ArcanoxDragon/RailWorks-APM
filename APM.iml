@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Editor" />
+      <excludeFolder url="file://$MODULE_DIR$/InputMappers" />
+      <excludeFolder url="file://$MODULE_DIR$/archives" />
+      <excludeFolder url="file://$MODULE_DIR$/autoback" />
+      <excludeFolder url="file://$MODULE_DIR$/downloads" />
+      <excludeFolder url="file://$MODULE_DIR$/export" />
+      <excludeFolder url="file://$MODULE_DIR$/express" />
+      <excludeFolder url="file://$MODULE_DIR$/import" />
+      <excludeFolder url="file://$MODULE_DIR$/materiallibraries" />
+      <excludeFolder url="file://$MODULE_DIR$/previews" />
+      <excludeFolder url="file://$MODULE_DIR$/proxies" />
+      <excludeFolder url="file://$MODULE_DIR$/renderoutput" />
+      <excludeFolder url="file://$MODULE_DIR$/renderpresets" />
+      <excludeFolder url="file://$MODULE_DIR$/sceneassets" />
+      <excludeFolder url="file://$MODULE_DIR$/scenes" />
+      <excludeFolder url="file://$MODULE_DIR$/vpost" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

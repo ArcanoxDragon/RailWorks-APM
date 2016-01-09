@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="CopyrightManager" default="" />
+  <component name="InspectionProjectProfileManager">
+    <profile version="1.0">
+      <option name="myName" value="Project Default" />
+      <inspection_tool class="GlobalCreationOutsideO" enabled="true" level="MINOR" enabled_by_default="true" />
+      <inspection_tool class="LuaOverlyComplexMethod" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+      <inspection_tool class="LuaOverlyLongMethod" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    </profile>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
+    <info color="525229">
+      <option name="FOREGROUND" value="ff2332" />
+      <option name="EFFECT_COLOR" value="353535" />
+      <option name="EFFECT_TYPE" value="5" />
+      <option name="myName" value="MINOR" />
+      <option name="myVal" value="50" />
+      <option name="myExternalName" value="MINOR" />
+      <option name="myDefaultAttributes" />
+    </info>
+    <list size="7">
+      <item index="0" class="java.lang.String" itemvalue="MINOR" />
+      <item index="1" class="java.lang.String" itemvalue="TYPO" />
+      <item index="2" class="java.lang.String" itemvalue="SERVER PROBLEM" />
+      <item index="3" class="java.lang.String" itemvalue="INFO" />
+      <item index="4" class="java.lang.String" itemvalue="WEAK WARNING" />
+      <item index="5" class="java.lang.String" itemvalue="WARNING" />
+      <item index="6" class="java.lang.String" itemvalue="ERROR" />
+    </list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value />
+    </option>
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Preferred" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/APM.iml" filepath="$PROJECT_DIR$/APM.iml" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="Kahlua" project-jdk-type="Lua SDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
+</project>

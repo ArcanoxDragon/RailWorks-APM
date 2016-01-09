@@ -34,6 +34,7 @@ function Update(time)
 	local reverser = GetControlValue("Reverser")
 	local doorsOpen = GetControlValue("DoorsOpen") > 0.5
 	local atoEnabled = GetControlValue("ATOEnabled") > 0.5
+	local ammeter = GetControlValue("Ammeter")
 	local throttle
 	
 	if (atoEnabled) then
@@ -111,7 +112,7 @@ function Update(time)
 	-- Traction relay
 	if (doorsOpen) then
 		gTractionRelay = false
-	elseif (throttle > 0.0) then
+	elseif (ammeter > 0.01) then
 		gTractionRelay = true
 	end
 	

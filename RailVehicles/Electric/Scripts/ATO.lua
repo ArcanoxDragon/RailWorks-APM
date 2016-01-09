@@ -206,7 +206,7 @@ function UpdateATO(interval)
 				
 			statStopTime = statStopTime + interval
 			
-			if (sigDist < 0.65 or (atoOverrunDist > 0 and atoOverrunDist < 5.0)) then
+			if (sigDist < 0.75 or (atoOverrunDist > 0 and atoOverrunDist < 5.0)) then
 				targetSpeed = 0.0
 				if (trainSpeed <= 0.025) then
 					if (atoIsStopped < 0.25) then
@@ -302,9 +302,13 @@ function UpdateATO(interval)
 		end]]
 		
 		Call("*:SetControlValue", "ThrottleAndBrake", 0, (Call("*:GetControlValue", "ATOThrottle", 0) + 1) / 2)
+		Call("*:SetControlValue", "ApproachingStation", 0, atoStopping)
+		Call("*:LockControl", "ApproachingStation", 1)
 	else
 		if (gLastATO > 0.0) then
 			Call("*:SetControlValue", "ThrottleAndBrake", 0, 0)
+			Call("*:SetControlValue", "ApproachingStation", 0, 0)
+			Call("*:LockControl", "ApproachingStation", 0)
 			Call("*:SetControlValue", "ATCEnabled", 0, gLastATC)
 			debugPrint("Turning on ATC and restoring " .. tostring(gLastATC))
 			Call("*:LockControl", "ThrottleAndBrake", 0, 0)

@@ -36,12 +36,13 @@ function Setup()
 	JERK_LIMIT = 0.75
 	MAX_SERVICE_BRAKE = 1.0
 	MIN_SERVICE_BRAKE = 0.0
-	ACCEL_CORRECTION_THRESHOLD = 0.125
+	ACCEL_CORRECTION_THRESHOLD = 0.3
 	ACCEL_CORRECTION_DELAY = 0.85
 	ACCEL_CORRECTION_RATE = 0.25
 	
 -- Propulsion system variables
 	realAccel = 0.0
+	gAccel = 0.0
 	tAccel = 0.0
 	tTAccel = 0.0
 	tThrottle = 0.0
@@ -124,7 +125,8 @@ function Update(interval)
 			gAvgAccelTime = gAvgAccelTime + gTimeDelta
 			-- Average out acceleration
 			if (gAvgAccelTime >= 1/15) then
-				Call( "*:SetControlValue", "Acceleration", 0, round(gAvgAccel / gAvgAccelTime, 2) )
+				gAccel = round(gAvgAccel / gAvgAccelTime, 2)
+				Call( "*:SetControlValue", "Acceleration", 0, gAccel )
 				gAvgAccelTime = 0.0
 				gAvgAccel = 0.0
 			end
@@ -244,10 +246,8 @@ function Update(interval)
 				
 				-- adjust minimum acceleration if starting uphill
 				if (gSetReg >= 0.95) then
-					if (realAccel < ACCEL_CORRECTION_THRESHOLD) then
+					if (gAccel < ACCEL_CORRECTION_THRESHOLD) then
 						gPosAccelTime = gPosAccelTime + interval
-					else
-						gPosAccelTime = 0.0
 					end
 				else
 					gPosAccelTime = 0.0
@@ -267,20 +267,18 @@ function Update(interval)
 				finalRegulator = finalRegulator * maxReg
 				
 				-- adjust brakes if stopping downhill
-				if (gSetBrake >= 0.95) then
-					if (realAccel > -ACCEL_CORRECTION_RATE) then
+				if ( tThrottle <= -0.99 and math.abs( tTAccel - tAccel ) < 0.01 ) then
+					if (gAccel > -ACCEL_CORRECTION_THRESHOLD) then
 						gNegAccelTime = gNegAccelTime + interval
-					else
-						gNegAccelTime = 0.0
 					end
 				else
 					gNegAccelTime = 0.0
 				end
 				
-				if (gNegAccelTime >= ACCEL_CORRECTION_RATE) then
+				if (gNegAccelTime >= ACCEL_CORRECTION_DELAY) then
 					gMinBrakeAdjust = gMinBrakeAdjust + (ACCEL_CORRECTION_RATE * interval)
 				else
-					gMinBrakeAdjust = gMinBrakeAdjust - (ACCEL_CORRECTION_RATE * interval)
+					gMinBrakeAdjust = 0.0
 				end
 				
 				gMinBrakeAdjust = clamp(gMinBrakeAdjust, 0.0, 0.8)
