@@ -18,7 +18,7 @@ ATC_WARN_INTERMITTENT = 2.0
 DISPLAY_SPEEDS = { 0, 15, 25, 35, 45, 55, 70 }
 NUM_DISPLAY_SPEEDS = 7
 EST_REACTION_TIME = 3 -- Estimated reaction time of the driver for speed drops
-SIGNAL_DISTANCE_BUFFER = 2.25
+SIGNAL_DISTANCE_BUFFER = 3.00
 ACCEL_TIME = 2 -- The amount of time it takes to go from full power to full brake (with jerk limit)
 ACCEL_PER_SECOND = 1.0 -- Units of acceleration per second (jerk limit, used for extra buffers)
 
@@ -73,8 +73,9 @@ function UpdateATC(interval)
 	enabled = Call("*:GetControlValue", "ATCEnabled", 0) > 0
 	reactionTimeDistance = trackSpeed * (EST_REACTION_TIME + ACCEL_TIME)
 	trackStoppingDistance = getBrakingDistance(0, math.max(trackSpeed, 0.01), -ATC_TARGET_DECELERATION)
+	totalStoppingDistance = reactionTimeDistance + trackStoppingDistance
 	
-	spdBuffer = math.max(getBrakingDistance(0.0, targetSpeed, -ATC_TARGET_DECELERATION), 0)
+	spdBuffer = math.max(trackStoppingDistance, 0) + 10
 		
 	accelBuff = ((tAccel - (-1)) / ACCEL_PER_SECOND) -- Estimated time to reach full brakes from current throttle
 	accelBuff = accelBuff * trainSpeed -- Estimated meters covered in the time taken to reach full brakes
@@ -114,8 +115,8 @@ function UpdateATC(interval)
 		if (spdType == 0) then -- End of line...stop the train
 			Call("*:SetControlValue", "SpeedBuffer", 0, spdBuffer)
 			if (spdDist <= spdBuffer) then
-				targetSpeed = math.max(getStoppingSpeed(trackSpeed, -ATC_TARGET_DECELERATION, spdBuffer - (sigDist - SIGNAL_DISTANCE_BUFFER)), 6.0 * MPH_TO_MPS)
-				if (spdDist < 10) then
+				targetSpeed = math.min( targetSpeed, math.max(getStoppingSpeed(trackSpeed, -ATC_TARGET_DECELERATION, spdBuffer - (sigDist - SIGNAL_DISTANCE_BUFFER)), 6.0 * MPH_TO_MPS) )
+				if (spdDist < 15) then
 					targetSpeed = 0
 				end
 			end
