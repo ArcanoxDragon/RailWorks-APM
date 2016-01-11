@@ -7404,7 +7404,7 @@
 														<Attribute name="Name">
 															<cDeltaString>
 																<Element>
-																	<Value>ApproachingStation</Value>
+																	<Value />
 																</Element>
 															</cDeltaString>
 														</Attribute>

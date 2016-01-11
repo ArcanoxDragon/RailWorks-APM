@@ -113,9 +113,8 @@ function UpdateATC(interval)
 		end
 
 		if (spdType == 0) then -- End of line...stop the train
-			Call("*:SetControlValue", "SpeedBuffer", 0, spdBuffer)
 			if (spdDist <= spdBuffer) then
-				targetSpeed = math.min( targetSpeed, math.max(getStoppingSpeed(trackSpeed, -ATC_TARGET_DECELERATION, spdBuffer - (sigDist - SIGNAL_DISTANCE_BUFFER)), 6.0 * MPH_TO_MPS) )
+				targetSpeed = math.min( targetSpeed, math.max(getStoppingSpeed(trackSpeed, -ATC_TARGET_DECELERATION, spdBuffer - (spdDist - SIGNAL_DISTANCE_BUFFER)), 6.0 * MPH_TO_MPS) )
 				if (spdDist < 15) then
 					targetSpeed = 0
 				end

@@ -5,7 +5,7 @@ local SIGNAL_STATE_STATION = 21
 local ATO_TARGET_DECELERATION = 1.25 -- Meters/second/second
 local ACCEL_PER_SECOND = 1.0 -- Units of acceleration per second (jerk limit, used for extra buffers)
 atoK_P = 1.0 / 5.0
-atoK_I = 1.0 / 25.0
+atoK_I = 1.0 / 12.0
 atoK_D = 0.0
 atoMIN_ERROR = -5.0
 atoMAX_ERROR =  5.0
@@ -187,7 +187,7 @@ function UpdateATO(interval)
 		--Call("*:SetControlValue", "NextSignalAspect", 0, sigAspect)
 		
 		if (sigAspect == SIGNAL_STATE_STATION) then
-			if (sigDist <= spdBuffer and sigDist >= 15 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist) then
+			if (trainSpeed > 1.5 and sigDist <= spdBuffer and sigDist >= 15 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist) then
 				if (atoStopping < 0.25) then
 					statStopStartingSpeed = trainSpeed
 					statStopSpeedLimit = targetSpeed
@@ -249,7 +249,7 @@ function UpdateATO(interval)
 				end
 			end
 			
-			if (sigAspect ~= SIGNAL_STATE_STATION or sigDist > atoStartingSpeedBuffer + 15) then -- Lost station marker; possibly overshot
+			if (sigAspect ~= SIGNAL_STATE_STATION or sigDist > statStopDistance + 15 and atoIsStopped < 0.25) then -- Lost station marker; possibly overshot
 				atoOverrunDist = atoOverrunDist + (trainSpeed * interval)
 				targetSpeed = 0.0
 				if (atoOverrunDist > 5.0) then -- overshot station by 5.0 meters -- something went wrong; cancel stop
