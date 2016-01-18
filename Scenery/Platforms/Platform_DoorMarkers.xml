@@ -342,7 +342,7 @@
 			<Attribute name="Category">
 				<cLoftSectionBlueprint-eLoftCategory>
 					<Element>
-						<Value>eMisc</Value>
+						<Value>eScenery</Value>
 					</Element>
 				</cLoftSectionBlueprint-eLoftCategory>
 			</Attribute>
@@ -357,14 +357,14 @@
 											<Attribute name="Provider">
 												<cDeltaString>
 													<Element>
-														<Value />
+														<Value>RSC</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
 											<Attribute name="Product">
 												<cDeltaString>
 													<Element>
-														<Value />
+														<Value>NewYorkNewHaven</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
@@ -375,7 +375,7 @@
 							<Attribute name="BlueprintID">
 								<cDeltaString>
 									<Element>
-										<Value />
+										<Value>Scenery\Platforms\PlatformCharacters US.xml</Value>
 									</Element>
 								</cDeltaString>
 							</Attribute>
