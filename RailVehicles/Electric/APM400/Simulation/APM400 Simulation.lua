@@ -2,6 +2,8 @@
 --include=..\..\Scripts\ATO.lua
 --include=..\CabView\APM400 Hud.lua
 --include=..\..\..\..\Scripts\APM Util.lua
+--include=..\..\Scripts\ThrottleControl.lua
+
 
 ------------------------------------------------------------
 -- Simulation file for the APM 400
@@ -14,53 +16,58 @@ function Setup()
 	
 -- For throttle/brake control.
 
-	gLastDoorsOpen = 0
-	gSetReg = 0
-	gSetDynamic = 0
-	gSetBrake = 0
-	gLastSpeed = 0
-	gTimeDelta = 0
-	gCurrent = 0
-	gLastReverser = 0
-	
-	tReg = 0
-	tBrake = 0
-	
-	REG_DELTA = 0.7
-	BRK_DELTA = 0.45
-	
-	MAX_ACCELERATION = 1.0
-	MIN_ACCELERATION = 0.125
-	MAX_BRAKING = 1.0
-	MIN_BRAKING = 0.2
-	JERK_LIMIT = 0.75
-	MAX_SERVICE_BRAKE = 1.0
-	MIN_SERVICE_BRAKE = 0.0
-	ACCEL_CORRECTION_THRESHOLD = 0.3
-	ACCEL_CORRECTION_DELAY = 0.85
-	ACCEL_CORRECTION_RATE = 0.25
+	gLastDoorsOpen 				= 0
+	gSetReg 					= 0
+	gSetDynamic 				= 0
+	gSetBrake 					= 0
+	gLastSpeed 					= 0
+	gTimeDelta 					= 0
+	gCurrent 					= 0
+	gLastReverser 				= 0
+
+	tReg 						= 0
+	tBrake 						= 0
+
+	REG_DELTA 					= 0.7
+	BRK_DELTA 					= 0.45
+
+	MAX_ACCELERATION 			= 1.0
+	MIN_ACCELERATION 			= 0.125
+	MAX_BRAKING 				= 1.0
+	MIN_BRAKING 				= 0.2
+	JERK_LIMIT 					= 1.0 / 1.65
+	JERK_DELTA 					= JERK_LIMIT * 3.0
+	JERK_THRESHOLD 				= 1.0 / 2.5
+	MAX_SERVICE_BRAKE 			= 1.0
+	MIN_SERVICE_BRAKE 			= 0.0
+	ACCEL_CORRECTION_THRESHOLD	= 0.3
+	ACCEL_CORRECTION_DELAY 		= 0.85
+	ACCEL_CORRECTION_RATE 		= 0.25
 	
 -- Propulsion system variables
-	realAccel = 0.0
-	gAccel = 0.0
-	tAccel = 0.0
-	tTAccel = 0.0
-	tThrottle = 0.0
-	dDyn = 0.0
-	dReg = 0.0
-	dBrk = 0.0
-	dAccel = 0.0
-	MAX_BRAKE = 1.0
-	gThrottleTime = 0.0
-	gAvgAccel = 0.0
-	gAvgAccelTime = 0.0
-	gBrakeRelease = 0.0
-	brkAdjust = 0.0
-	gLastJerkLimit = 0
-	gPosAccelTime = 0.0
-	gNegAccelTime = 0.0
-	gMinAccelAdjust = 0.0
-	gMinBrakeAdjust = 0.0
+	realAccel 					= 0.0
+	gAccel 						= 0.0
+	tAccel 						= 0.0
+	tTAccel 					= 0.0
+	tThrottle 					= 0.0
+	dDyn 						= 0.0
+	dReg 						= 0.0
+	dBrk 						= 0.0
+	dAccel 						= 0.0
+	MAX_BRAKE 					= 1.0
+	gThrottleTime 				= 0.0
+	gAvgAccel 					= 0.0
+	gAvgAccelTime 				= 0.0
+	gBrakeRelease 				= 0.0
+	brkAdjust 					= 0.0
+	gLastJerkLimit 				= 0.0
+	gPosAccelTime 				= 0.0
+	gNegAccelTime 				= 0.0
+	gMinAccelAdjust 			= 0.0
+	gMinBrakeAdjust 			= 0.0
+	
+-- Throttle Control
+	gThrottleControl = ThrottleControl.create( JERK_LIMIT, JERK_DELTA, JERK_THRESHOLD )
 
 -- For controlling delayed doors interlocks.
 	DOORDELAYTIME = 2.75 -- seconds.
@@ -76,10 +83,7 @@ end
 --	interval = time since last update
 ------------------------------------------------------------
 
-function Update(interval)
-	local rInterval = round(interval, 5)
-	--gTimeDelta = gTimeDelta + rInterval
-	gTimeDelta = interval
+function Update( gTimeDelta )
 
 	if Call( "*:GetControlValue", "Active", 0 ) == 1 then -- This is lead engine.
 
@@ -92,19 +96,20 @@ function Update(interval)
 			PantoValue = Call( "*:GetControlValue", "PantographControl", 0 )
 			ThirdRailValue = Call( "*:GetControlValue", "ThirdRail", 0 )
 			TrainSpeed = Call( "*:GetControlValue", "SpeedometerMPH", 0 )
-			AbsSpeed = math.abs(TrainSpeed)
+			AbsSpeed = math.abs( TrainSpeed )
 			BrakeCylBAR = Call( "*:GetControlValue", "TrainBrakeCylinderPressureBAR", 0 )
 			IsEndCar = Call( "*:GetControlValue", "IsEndCar", 0 ) > 0
-			ATOEnabled = (Call( "*:GetControlValue", "ATOEnabled", 0 ) or -1) > 0.5
-			ATOThrottle = (Call( "*:GetControlValue", "ATOThrottle", 0 ) or -1)
+			ATOEnabled = ( Call( "*:GetControlValue", "ATOEnabled", 0 ) or -1 ) > 0.5
+			ATOThrottle = ( Call( "*:GetControlValue", "ATOThrottle", 0 ) or -1 )
+			Ammeter = Call( "*:GetControlValue", "Ammeter", 0 )
 			
 			-- Headlights
 			
-			if (Call("*:GetControlValue", "Active", 0) > 0.5) then
-				if (math.abs(ReverserLever) > 0.8) then
-					Call("*:SetControlValue", "Headlights", 0, 1)
-				elseif (math.abs(ReverserLever) < 0.2) then
-					Call("*:SetControlValue", "Headlights", 0, 0)
+			if ( Call( "*:GetControlValue", "Active", 0 ) > 0.5 ) then
+				if ( math.abs( ReverserLever ) > 0.8 ) then
+					Call( "*:SetControlValue", "Headlights", 0, 1 )
+				elseif ( math.abs( ReverserLever ) < 0.2 ) then
+					Call( "*:SetControlValue", "Headlights", 0, 0 )
 				end
 			end
 			
@@ -117,15 +122,15 @@ function Update(interval)
 					DoorsOpen = TRUE
 				end
 			end
-			Call( "*:SetControlValue", "DoorsOpen", 0, math.min(DoorsOpen, 1) )
+			Call( "*:SetControlValue", "DoorsOpen", 0, math.min( DoorsOpen, 1 ) )
 		
 			-- Begin propulsion system
-			realAccel = (TrainSpeed - gLastSpeed) / gTimeDelta
-			gAvgAccel = gAvgAccel + (TrainSpeed - gLastSpeed)
+			realAccel = ( TrainSpeed - gLastSpeed ) / gTimeDelta
+			gAvgAccel = gAvgAccel + ( TrainSpeed - gLastSpeed )
 			gAvgAccelTime = gAvgAccelTime + gTimeDelta
 			-- Average out acceleration
-			if (gAvgAccelTime >= 1/15) then
-				gAccel = round(gAvgAccel / gAvgAccelTime, 2)
+			if ( gAvgAccelTime >= 1/15 ) then
+				gAccel = round( gAvgAccel / gAvgAccelTime, 2 )
 				Call( "*:SetControlValue", "Acceleration", 0, gAccel )
 				gAvgAccelTime = 0.0
 				gAvgAccel = 0.0
@@ -143,59 +148,49 @@ function Update(interval)
 			end
 			
 			-- Round throttle to 0 if it's below 10% power/brake; widens "coast" gap
-			if (math.abs(tThrottle) < 0.1 and not ATOEnabled) then
+			if ( math.abs( tThrottle ) < 0.1 and not ATOEnabled ) then
 				tThrottle = 0.0
 			end
 			
-			if (ATOEnabled) then
-				if (tThrottle >= 0.001) then -- Accelerating; bind range to [ MIN_ACCELERATION, MAX_ACCELERATION ]
-					tTAccel = mapRange(tThrottle, 0.0, 1.0, 0.0, MAX_ACCELERATION)
-				elseif (tThrottle <= -0.001) then -- Braking; bind range to [ MIN_BRAKING, MAX_BRAKING ]
-					tTAccel = -mapRange(-tThrottle, 0.0, 1.0, 0.0, MAX_BRAKING)
+			if ( ATOEnabled ) then
+				if ( tThrottle >= 0.001 ) then -- Accelerating; bind range to [ MIN_ACCELERATION, MAX_ACCELERATION ]
+					tTAccel = mapRange( tThrottle, 0.0, 1.0, 0.0, MAX_ACCELERATION )
+				elseif ( tThrottle <= -0.001 ) then -- Braking; bind range to [ MIN_BRAKING, MAX_BRAKING ]
+					tTAccel = -mapRange( -tThrottle, 0.0, 1.0, 0.0, MAX_BRAKING )
 				else
 					tTAccel = 0.0
 				end
 			else
-				if (tThrottle >= 0.1) then -- Accelerating; bind range to [ MIN_ACCELERATION, MAX_ACCELERATION ]
-					tTAccel = mapRange(tThrottle, 0.1, 0.9, MIN_ACCELERATION, MAX_ACCELERATION)
-				elseif (tThrottle <= -0.1) then -- Braking; bind range to [ MIN_BRAKING, MAX_BRAKING ]
-					tTAccel = -mapRange(-tThrottle, 0.1, 0.9, MIN_BRAKING, MAX_BRAKING)
+				if ( tThrottle >= 0.1 ) then -- Accelerating; bind range to [ MIN_ACCELERATION, MAX_ACCELERATION ]
+					tTAccel = mapRange( tThrottle, 0.1, 0.9, MIN_ACCELERATION, MAX_ACCELERATION )
+				elseif ( tThrottle <= -0.1 ) then -- Braking; bind range to [ MIN_BRAKING, MAX_BRAKING ]
+					tTAccel = -mapRange( -tThrottle, 0.1, 0.9, MIN_BRAKING, MAX_BRAKING )
 				else
 					tTAccel = 0.0
 				end
 			end
 			
 			-- If requesting acceleration and stopped, release brakes instantly
-			if (tTAccel >= 0 and AbsSpeed < 0.1) then
-				tAccel = math.max(tAccel, 0.0)
+			if ( tTAccel >= 0 and AbsSpeed < 0.1 ) then
+				tAccel = math.max( tAccel, 0.0 )
 			end
 			
 			-- Reduce jerk while train comes to a complete stop
-			if (AbsSpeed < 3.0) then
-				local maxBrake = clamp( mapRange( AbsSpeed, 3.0, 1.0, 1.0, 0.2 ), 0.2, 1.0 )
+			if ( AbsSpeed < 5.0 ) then
+				local maxBrake = clamp( mapRange( AbsSpeed, 5.0, 1.0, 1.0, 0.325 ), 0.2, 1.0 )
 				tTAccel = math.max( tTAccel, -maxBrake )
 			end
 			
-			tJerkLimit = JERK_LIMIT * gTimeDelta
-			
-			if (tAccel < tTAccel - tJerkLimit) then
-				tAccel = tAccel + tJerkLimit
-			elseif (tAccel > tTAccel + tJerkLimit) then
-				tAccel = tAccel - tJerkLimit
-			else
-				tAccel = tTAccel
-			end
-			
 			-- Parked or track brake engaged
-			if (math.abs(ReverserLever) < 0.9 or TrackBrake > 0) then
+			if ( math.abs( ReverserLever ) < 0.9 or TrackBrake > 0 ) then
 				Call( "*:SetControlValue", "Regulator", 0, 0.0 )
 				Call( "*:SetControlValue", "TrainBrakeControl", 0, 1.0 )
 				Call( "*:SetControlValue", "DynamicBrake", 0, 1.0 )
 				
-				if (TrackBrake > 0) then
+				if ( TrackBrake > 0 ) then
 					Call( "*:SetControlValue", "Sander", 0, 1 )
 					Call( "*:SetControlValue", "HandBrake", 0, 1 )
-					tAccel = math.min(tAccel, 0.0)
+					tAccel = math.min( tAccel, 0.0 )
 				else
 					Call( "*:SetControlValue", "Sander", 0, 0 )
 					Call( "*:SetControlValue", "HandBrake", 0, 0 )
@@ -203,92 +198,49 @@ function Update(interval)
 				gSetReg = 0.0
 				gSetDynamic = 0.0
 				gSetBrake = 0.0
-				if (math.abs(ReverserLever) < 0.9) then
+				if ( math.abs( ReverserLever ) < 0.9 ) then
 					Call( "*:SetControlValue", "ThrottleAndBrake", 0, -1.0 )
 				end
 			else
 				Call( "*:SetControlValue", "Sander", 0, 0 )
 				Call( "*:SetControlValue", "HandBrake", 0, 0 )
 				
-				if (math.abs(tAccel) > 0.05) then
-					local tAccelSign = sign(tAccel)
-					if (tAccelSign ~= gLastAccelSign) then
-						gThrottleTime = 0.0
-					end
-					gLastAccelSign = tAccelSign
-				end
-				
-				if (BrakeCylBAR > 0.005 and tAccel > 0) then
-					gThrottleTime = 0.0
-				end
-				
-				if (gThrottleTime < 0.125) then
-					gThrottleTime = gThrottleTime + gTimeDelta
-					tAccel = 0.01 * gLastAccelSign
-					gLastJerkLimit = 0
-				end
-				
-				if (DoorsOpen == TRUE) then
+				if ( DoorsOpen == TRUE ) then
 					gSetReg = 0.0
 					gSetDynamic = 0.0
 					gSetBrake = 0.95
 					brkAdjust = MAX_CORRECTION
 				else
-					if (math.abs(tAccel) < 0.01) then
+					if ( math.abs( tAccel ) < 0.01 ) then
 						gSetReg = 0.0
 						gSetDynamic = 0.0
 						gSetBrake = 0.0
 					else
-						gSetReg = clamp(tAccel, 0.0, 1.0)
-						gSetBrake = clamp(-tAccel, 0.0, 1.0)
+						gSetReg = clamp( tAccel, 0.0, 1.0 )
+						gSetBrake = clamp( -tAccel, 0.0, 1.0 )
 					end
 				end
 				
-				-- adjust minimum acceleration if starting uphill
-				if (gSetReg >= 0.95) then
-					if (gAccel < ACCEL_CORRECTION_THRESHOLD) then
-						gPosAccelTime = gPosAccelTime + interval
+				gThrottleControl:update( gTimeDelta )
+				
+				if ( tTAccel > 0.0 and BrakeCylBAR > 0.001 ) then
+					tTAccel = 0.0
+					
+					if ( AbsSpeed < 0.1 ) then
+						gThrottleControl.value = 0
 					end
-				else
-					gPosAccelTime = 0.0
 				end
 				
-				if (gPosAccelTime >= ACCEL_CORRECTION_DELAY) then
-					gMinAccelAdjust = gMinAccelAdjust + (ACCEL_CORRECTION_RATE * interval)
-				else
-					gMinAccelAdjust = gMinAccelAdjust - (ACCEL_CORRECTION_RATE * interval)
-				end
+				gThrottleControl:set( tTAccel )
 				
-				gMinAccelAdjust = clamp(gMinAccelAdjust, 0.0, 0.75)
-				
-				local finalRegulator = gSetReg
-				local maxReg = clamp( math.log( AbsSpeed / 2.5 + 1.0 ), 0.25 + gMinAccelAdjust, 1.0 )
-				
-				finalRegulator = finalRegulator * maxReg
-				
-				-- adjust brakes if stopping downhill
-				if ( tThrottle <= -0.99 and math.abs( tTAccel - tAccel ) < 0.01 ) then
-					if (gAccel > -ACCEL_CORRECTION_THRESHOLD) then
-						gNegAccelTime = gNegAccelTime + interval
-					end
-				else
-					gNegAccelTime = 0.0
-				end
-				
-				if (gNegAccelTime >= ACCEL_CORRECTION_DELAY) then
-					gMinBrakeAdjust = gMinBrakeAdjust + (ACCEL_CORRECTION_RATE * interval)
-				else
-					gMinBrakeAdjust = 0.0
-				end
-				
-				gMinBrakeAdjust = clamp(gMinBrakeAdjust, 0.0, 0.8)
-				gSetBrake = clamp(gSetBrake + gMinBrakeAdjust, 0.0, 1.0)
+				gSetReg			= clamp(  gThrottleControl.value, 0.0, 1.0 )
+				gSetBrake		= clamp( -gThrottleControl.value, 0.0, 1.0 )
 				
 				Call( "*:SetControlValue", "TAccel", 0, tAccel)
-				Call( "*:SetControlValue", "Regulator", 0, finalRegulator)
+				Call( "*:SetControlValue", "Regulator", 0, gSetReg)
 				Call( "*:SetControlValue", "DynamicBrake", 0, gSetBrake )
 				Call( "*:SetControlValue", "TrainBrakeControl", 0, gSetBrake )
-				Call( "*:SetControlValue", "TrueThrottle", 0, tThrottle )
+				Call( "*:SetControlValue", "TrueThrottle", 0, gThrottleControl.value )
 			end
 
 			-- End propulsion system
@@ -296,11 +248,11 @@ function Update(interval)
 			-- Begin ATC system
 			
 			if UpdateATC then
-				UpdateATC(gTimeDelta)
+				UpdateATC( gTimeDelta )
 			end
 			
 			if UpdateATO then
-				UpdateATO(gTimeDelta)
+				UpdateATO( gTimeDelta )
 			end
 			
 			-- End ATC system
@@ -308,7 +260,7 @@ function Update(interval)
 			-- Begin HUD
 			
 			if UpdateHUD then
-				UpdateHUD(gTimeDelta)
+				UpdateHUD( gTimeDelta )
 			end
 			
 			-- End HUD
