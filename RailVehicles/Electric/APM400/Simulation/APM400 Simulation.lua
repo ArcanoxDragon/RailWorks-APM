@@ -40,9 +40,11 @@ function Setup()
 	JERK_THRESHOLD 				= 1.0 / 2.5
 	MAX_SERVICE_BRAKE 			= 1.0
 	MIN_SERVICE_BRAKE 			= 0.0
-	ACCEL_CORRECTION_THRESHOLD	= 0.3
-	ACCEL_CORRECTION_DELAY 		= 0.85
-	ACCEL_CORRECTION_RATE 		= 0.25
+	ACCEL_CORRECTION_DELAY 		= 3.0
+	ACCEL_CORRECTION_RATE		= 0.125
+	ACCEL_CORRECTION_THRESHOLD	= 0.2
+	BRAKE_CORRECTION_DELAY		= 4.0
+	BRAKE_CORRECTION_RATE		= 0.5
 	
 -- Propulsion system variables
 	realAccel 					= 0.0
@@ -61,10 +63,10 @@ function Setup()
 	gBrakeRelease 				= 0.0
 	brkAdjust 					= 0.0
 	gLastJerkLimit 				= 0.0
-	gPosAccelTime 				= 0.0
-	gNegAccelTime 				= 0.0
+	gAccelStartTime				= 0.0
+	gBrakeStartTime				= 0.0
 	gMinAccelAdjust 			= 0.0
-	gMinBrakeAdjust 			= 0.0
+	gMinBrakeAdjust				= 0.0
 	
 -- Throttle Control
 	gThrottleControl = ThrottleControl.create( JERK_LIMIT, JERK_DELTA, JERK_THRESHOLD )
@@ -187,6 +189,8 @@ function Update( gTimeDelta )
 				Call( "*:SetControlValue", "TrainBrakeControl", 0, 1.0 )
 				Call( "*:SetControlValue", "DynamicBrake", 0, 1.0 )
 				
+				gThrottleControl.value = 0.0
+				
 				if ( TrackBrake > 0 ) then
 					Call( "*:SetControlValue", "Sander", 0, 1 )
 					Call( "*:SetControlValue", "HandBrake", 0, 1 )
@@ -231,10 +235,40 @@ function Update( gTimeDelta )
 					end
 				end
 				
+				if ( gThrottleControl.value <= 0.0 and AbsSpeed < 1.0 ) then
+					gAccelStartTime = 0.0
+				elseif ( realAccel < ACCEL_CORRECTION_THRESHOLD ) then
+					gAccelStartTime = clamp( gAccelStartTime + gTimeDelta, 0.0, ACCEL_CORRECTION_DELAY )
+				end
+				
+				if ( gAccelStartTime >= ACCEL_CORRECTION_DELAY ) then
+					gMinAccelAdjust = clamp( gMinAccelAdjust + ACCEL_CORRECTION_RATE * gTimeDelta, 0.0, 0.25 )
+				else
+					gMinAccelAdjust = 0.0
+				end
+				
+				if ( tTAccel > 0.0 ) then
+					tTAccel = tTAccel * clamp( mapRange( AbsSpeed, 0.25, 5.0, 0.0, 1.0 ), gMinAccelAdjust + 0.25, 1.0 )
+				end
+				
 				gThrottleControl:set( tTAccel )
 				
 				gSetReg			= clamp(  gThrottleControl.value, 0.0, 1.0 )
 				gSetBrake		= clamp( -gThrottleControl.value, 0.0, 1.0 )
+				
+				if ( tThrottle < -0.99 and AbsSpeed < 3.0 ) then
+					gBrakeStartTime = clamp( gBrakeStartTime + gTimeDelta, 0.0, BRAKE_CORRECTION_DELAY )
+				else
+					gBrakeStartTime = 0.0
+				end
+				
+				if ( gBrakeStartTime >= BRAKE_CORRECTION_DELAY ) then
+					gMinBrakeAdjust = clamp( gMinBrakeAdjust + BRAKE_CORRECTION_RATE * gTimeDelta, 0.0, 1.0 )
+				else
+					gMinBrakeAdjust = 0.0
+				end
+				
+				gSetBrake = clamp( gSetBrake, gMinBrakeAdjust, 1.0 )
 				
 				Call( "*:SetControlValue", "TAccel", 0, tAccel)
 				Call( "*:SetControlValue", "Regulator", 0, gSetReg)
