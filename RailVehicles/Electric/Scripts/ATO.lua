@@ -4,6 +4,7 @@ local SIGNAL_STATE_SPEED = 20
 local SIGNAL_STATE_STATION = 21
 local ATO_TARGET_DECELERATION = 1.20 -- Meters/second/second
 local ACCEL_PER_SECOND = 1.0 / 3.0 -- Units of acceleration per second ( jerk limit, used for extra buffers )
+local DEPART_WAIT_TIME = 5.0
 atoK_P = 1.0 / 5.0
 atoK_I = 1.0 / 12.0
 atoK_D = 0.0
@@ -187,8 +188,8 @@ function UpdateATO( interval )
 		--Call( "*:SetControlValue", "NextSignalAspect", 0, sigAspect )
 		
 		if ( sigAspect == SIGNAL_STATE_STATION ) then
-			if ( trainSpeed > 1.5 and sigDist <= spdBuffer and sigDist >= 15 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist ) then
-				if ( atoStopping < 0.25 ) then
+			if ( trainSpeedMPH > 10.0 and sigDist <= spdBuffer and sigDist >= 15 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist ) then
+				if ( atoStopping < 0.5 ) then
 					statStopStartingSpeed = trainSpeed
 					statStopSpeedLimit = targetSpeed
 					statStopDistance = sigDist
@@ -200,28 +201,35 @@ function UpdateATO( interval )
 			end
 		end
 		
-		if ( atoStopping > 0 ) then
+		SetControlValue( "db_AtoStopping"	 , atoStopping    )
+		SetControlValue( "db_AtoStopped" 	 , atoIsStopped   )
+		SetControlValue( "db_AtoTimeStopped" , atoTimeStopped )
+		SetControlValue( "db_Doors" 		 , doors		  )
+		
+		if ( atoStopping > 0.5 ) then
 			local distBuffer = 1.05
-			targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), 1.0 * MPH_TO_MPS ) )
-				
 			statStopTime = statStopTime + interval
 			
-			if ( sigDist < 1.05 or ( atoOverrunDist > 0 and atoOverrunDist < 5.0 ) ) then
+			if ( ( sigDist < 1.05 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
+				
+				if ( atoIsStopped < 0.5 ) then atoIsStopped = 1.0 end
+				
 				if ( trainSpeed <= 0.025 ) then
-					if ( atoIsStopped < 0.25 ) then
+					if ( atoIsStopped < 1.5 ) then
 						targetSpeed = 0.0
-						atoIsStopped = 0.5
+						atoIsStopped = 2.0
 					end
 					
 					if ( doors ) then
-						atoIsStopped = 1
+						atoIsStopped = 3.0
 					end
 					
-					if ( atoIsStopped > 0.75 ) then
+					if ( atoIsStopped > 2.5 ) then
 						if ( not doors ) then
 							atoTimeStopped = atoTimeStopped + interval
-							if ( atoTimeStopped >= 2.0 ) then
+							
+							if ( atoTimeStopped >= DEPART_WAIT_TIME ) then
 								--Call( "*:SetControlValue", "LoadCargo", 0, 0 )
 								atoStopping = 0
 								atoIsStopped = 0
@@ -241,23 +249,35 @@ function UpdateATO( interval )
 								statStopDistance = 0
 								statStopTime = 0
 								atoOverrunDist = 0
+							else
+								SetControlValue( "DepartingStation", 1 )
 							end
 						else
 							atoTimeStopped = 0.0
 						end
 					end
 				end
+			else
+				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), 1.0 * MPH_TO_MPS ) )
 			end
 			
-			if ( sigAspect ~= SIGNAL_STATE_STATION or sigDist > statStopDistance + 15 and atoIsStopped < 0.25 ) then -- Lost station marker; possibly overshot
+			if ( sigAspect ~= SIGNAL_STATE_STATION or sigDist > statStopDistance + 15 and atoIsStopped < 2.5 ) then -- Lost station marker; possibly overshot
 				atoOverrunDist = atoOverrunDist + ( trainSpeed * interval )
 				targetSpeed = 0.0
+				
 				if ( atoOverrunDist > 5.0 ) then -- overshot station by 5.0 meters -- something went wrong; cancel stop
-					atoOverrunDist = 0
+					debugPrint( "Overran too much (" .. tostring( atoOverrunDist ) .. " m); cancelling stop" )
+				
+					atoIsStopped = 0
 					atoStopping = 0
 					atoTimeStopped = 0
 				end
 			end
+		elseif ( trainSpeedMPH > 2.0 ) then
+			SetControlValue( "DepartingStation", 0 )
+			atoOverrunDist = 0
+			atoIsStopped = 0
+			atoTimeStopped = 0
 		end
 		
 		targetSpeed = math.floor( targetSpeed * MPS_TO_MPH * 10 ) / 10 -- Round down to nearest 0.1
@@ -302,11 +322,14 @@ function UpdateATO( interval )
 		Call( "*:SetControlValue", "ThrottleAndBrake", 0, ( Call( "*:GetControlValue", "ATOThrottle", 0 ) + 1 ) / 2 )
 		Call( "*:SetControlValue", "ApproachingStation", 0, atoStopping )
 		Call( "*:LockControl", "ApproachingStation", 1 )
+		Call( "*:LockControl", "DepartingStation", 1 )
 	else
 		if ( gLastATO > 0.0 ) then
 			Call( "*:SetControlValue", "ThrottleAndBrake", 0, 0 )
 			Call( "*:SetControlValue", "ApproachingStation", 0, 0 )
+			Call( "*:SetControlValue", "DepartingStation", 0, 0 )
 			Call( "*:LockControl", "ApproachingStation", 0 )
+			Call( "*:LockControl", "DepartingStation", 0 )
 			Call( "*:SetControlValue", "ATCEnabled", 0, gLastATC )
 			Call( "*:SetControlValue", "CancelJerkLimit", 0, 0 )
 			debugPrint( "Turning on ATC and restoring " .. tostring( gLastATC ) )

@@ -165,7 +165,7 @@ function UpdateATC( interval )
 		gLastSigDist = sigDist
 	end
 
-	targetSpeed = math.floor( ( targetSpeed * MPS_TO_MPH * 10 ) + 0.5 ) / 10 -- Round to nearest 0.1
+	targetSpeed = math.floor( ( targetSpeed * MPS_TO_MPH * 4 ) + 0.5 ) / 4 -- Round to nearest 0.25
 
 	local ATOEnabled = ( Call( "*:GetControlValue", "ATOEnabled", 0 ) or -1 ) > 0.0
 

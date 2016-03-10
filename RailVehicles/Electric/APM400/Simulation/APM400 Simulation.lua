@@ -40,8 +40,8 @@ function Setup()
 	JERK_THRESHOLD 				= 1.0 / 2.5
 	MAX_SERVICE_BRAKE 			= 1.0
 	MIN_SERVICE_BRAKE 			= 0.0
-	ACCEL_CORRECTION_THRESHOLD	= 0.3
-	ACCEL_CORRECTION_DELAY 		= 0.85
+	ACCEL_CORRECTION_THRESHOLD	= 0.1
+	ACCEL_CORRECTION_DELAY 		= 1.5
 	ACCEL_CORRECTION_RATE 		= 0.25
 	
 -- Propulsion system variables
@@ -65,12 +65,13 @@ function Setup()
 	gNegAccelTime 				= 0.0
 	gMinAccelAdjust 			= 0.0
 	gMinBrakeAdjust 			= 0.0
+	gRollback					= false
 	
 -- Throttle Control
 	gThrottleControl = ThrottleControl.create( JERK_LIMIT, JERK_DELTA, JERK_THRESHOLD )
 
 -- For controlling delayed doors interlocks.
-	DOORDELAYTIME = 2.75 -- seconds.
+	DOORDELAYTIME = 9.5 -- seconds.
 	gDoorsDelay = DOORDELAYTIME
 end
 
@@ -176,10 +177,26 @@ function Update( gTimeDelta )
 			end
 			
 			-- Reduce jerk while train comes to a complete stop
-			if ( AbsSpeed < 5.0 ) then
-				local maxBrake = clamp( mapRange( AbsSpeed, 5.0, 1.0, 1.0, 0.325 ), 0.2, 1.0 )
+			if ( AbsSpeed < 6.5 ) then
+				local maxBrake = clamp( mapRange( AbsSpeed, 6.5, 1.0, 1.0, 0.325 ), gMinBrakeAdjust, 1.0 )
 				tTAccel = math.max( tTAccel, -maxBrake )
 			end
+			
+			if ( tTAccel < 0 and AbsSpeed < 3.0 ) then
+				if ( gAccel > -ACCEL_CORRECTION_THRESHOLD ) then
+					gNegAccelTime = gNegAccelTime + gTimeDelta
+				end
+			else
+				gNegAccelTime = 0
+			end
+			
+			if ( gNegAccelTime > ACCEL_CORRECTION_DELAY ) then
+				gMinBrakeAdjust = gMinBrakeAdjust + ( ACCEL_CORRECTION_RATE * gTimeDelta )
+			else
+				gMinBrakeAdjust = 0.0
+			end
+			
+			gMinBrakeAdjust = clamp( gMinBrakeAdjust, 0.2, 1.0 )
 			
 			-- Parked or track brake engaged
 			if ( math.abs( ReverserLever ) < 0.9 or TrackBrake > 0 ) then
@@ -209,6 +226,8 @@ function Update( gTimeDelta )
 					gSetReg = 0.0
 					gSetDynamic = 0.0
 					gSetBrake = 0.95
+					tTAccel = -1.0
+					gThrottleControl.value = -1.0
 					brkAdjust = MAX_CORRECTION
 				else
 					if ( math.abs( tAccel ) < 0.01 ) then
@@ -223,7 +242,7 @@ function Update( gTimeDelta )
 				
 				gThrottleControl:update( gTimeDelta )
 				
-				if ( tTAccel > 0.0 and BrakeCylBAR > 0.001 ) then
+				if ( tTAccel > 0.0 and ( BrakeCylBAR > 0.001 and not gRollback ) ) then
 					tTAccel = 0.0
 					
 					if ( AbsSpeed < 0.1 ) then
@@ -235,6 +254,20 @@ function Update( gTimeDelta )
 				
 				gSetReg			= clamp(  gThrottleControl.value, 0.0, 1.0 )
 				gSetBrake		= clamp( -gThrottleControl.value, 0.0, 1.0 )
+				
+				speedSign = sign( TrainSpeed )
+				speed2Sign = sign( GetControlValue( "Speed2" ) ) * ReverserLever
+				
+				if ( speedSign ~= speed2Sign ) then
+					if ( AbsSpeed > 1.0 or gRollback ) then
+						gRollback = true
+						gSetBrake = 1.0 -- Prevent rollback
+					end
+				else
+					if ( AbsSpeed > 0.1 ) then
+						gRollback = false
+					end
+				end
 				
 				Call( "*:SetControlValue", "TAccel", 0, tAccel)
 				Call( "*:SetControlValue", "Regulator", 0, gSetReg)

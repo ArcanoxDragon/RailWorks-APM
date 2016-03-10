@@ -26,303 +26,6 @@
 										<Attribute name="Name">
 											<cDeltaString>
 												<Element>
-													<Value>MotorStage1Outside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="IsLooped">
-											<bool>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</bool>
-										</Attribute>
-										<Attribute name="Priority">
-											<sUInt32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sUInt32>
-										</Attribute>
-										<Attribute name="BaseVolume">
-											<sFloat32>
-												<Element>
-													<Value>0.75</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="VolumeVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="BasePitchShift">
-											<sFloat32>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="PitchShiftVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="AttenuationStartDist">
-											<sFloat32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="NoFutherAttenuationDist">
-											<sFloat32>
-												<Element>
-													<Value>300</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-										<Attribute name="Sample">
-											<kLoud-cSampleID>
-												<Element>
-													<Value>
-														<Attribute name="Filename">
-															<cDeltaString>
-																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_stage1_out.wav</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSampleID>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cSingleSampleSound>
-							<kLoud-cSingleSampleSound>
-								<Element>
-									<Value>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>MotorStage2Outside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="IsLooped">
-											<bool>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</bool>
-										</Attribute>
-										<Attribute name="Priority">
-											<sUInt32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sUInt32>
-										</Attribute>
-										<Attribute name="BaseVolume">
-											<sFloat32>
-												<Element>
-													<Value>0.75</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="VolumeVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="BasePitchShift">
-											<sFloat32>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="PitchShiftVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="AttenuationStartDist">
-											<sFloat32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="NoFutherAttenuationDist">
-											<sFloat32>
-												<Element>
-													<Value>300</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-										<Attribute name="Sample">
-											<kLoud-cSampleID>
-												<Element>
-													<Value>
-														<Attribute name="Filename">
-															<cDeltaString>
-																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_stage2_out.wav</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSampleID>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cSingleSampleSound>
-							<kLoud-cSingleSampleSound>
-								<Element>
-									<Value>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>MotorStage3Outside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="IsLooped">
-											<bool>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</bool>
-										</Attribute>
-										<Attribute name="Priority">
-											<sUInt32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sUInt32>
-										</Attribute>
-										<Attribute name="BaseVolume">
-											<sFloat32>
-												<Element>
-													<Value>0.75</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="VolumeVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="BasePitchShift">
-											<sFloat32>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="PitchShiftVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="AttenuationStartDist">
-											<sFloat32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="NoFutherAttenuationDist">
-											<sFloat32>
-												<Element>
-													<Value>300</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-										<Attribute name="Sample">
-											<kLoud-cSampleID>
-												<Element>
-													<Value>
-														<Attribute name="Filename">
-															<cDeltaString>
-																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_stage3_out.wav</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSampleID>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cSingleSampleSound>
-							<kLoud-cSingleSampleSound>
-								<Element>
-									<Value>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
 													<Value>MotorRampOutside</Value>
 												</Element>
 											</cDeltaString>
@@ -372,14 +75,14 @@
 										<Attribute name="AttenuationStartDist">
 											<sFloat32>
 												<Element>
-													<Value>50</Value>
+													<Value>10</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="NoFutherAttenuationDist">
 											<sFloat32>
 												<Element>
-													<Value>300</Value>
+													<Value>80</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -406,303 +109,6 @@
 															<cDeltaString>
 																<Element>
 																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_ramp_out.wav</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSampleID>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cSingleSampleSound>
-							<kLoud-cSingleSampleSound>
-								<Element>
-									<Value>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>MotorStage1Inside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="IsLooped">
-											<bool>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</bool>
-										</Attribute>
-										<Attribute name="Priority">
-											<sUInt32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sUInt32>
-										</Attribute>
-										<Attribute name="BaseVolume">
-											<sFloat32>
-												<Element>
-													<Value>0.5</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="VolumeVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="BasePitchShift">
-											<sFloat32>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="PitchShiftVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="AttenuationStartDist">
-											<sFloat32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="NoFutherAttenuationDist">
-											<sFloat32>
-												<Element>
-													<Value>300</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-										<Attribute name="Sample">
-											<kLoud-cSampleID>
-												<Element>
-													<Value>
-														<Attribute name="Filename">
-															<cDeltaString>
-																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_stage1.wav</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSampleID>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cSingleSampleSound>
-							<kLoud-cSingleSampleSound>
-								<Element>
-									<Value>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>MotorStage2Inside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="IsLooped">
-											<bool>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</bool>
-										</Attribute>
-										<Attribute name="Priority">
-											<sUInt32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sUInt32>
-										</Attribute>
-										<Attribute name="BaseVolume">
-											<sFloat32>
-												<Element>
-													<Value>0.5</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="VolumeVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="BasePitchShift">
-											<sFloat32>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="PitchShiftVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="AttenuationStartDist">
-											<sFloat32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="NoFutherAttenuationDist">
-											<sFloat32>
-												<Element>
-													<Value>300</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-										<Attribute name="Sample">
-											<kLoud-cSampleID>
-												<Element>
-													<Value>
-														<Attribute name="Filename">
-															<cDeltaString>
-																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_stage2.wav</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSampleID>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cSingleSampleSound>
-							<kLoud-cSingleSampleSound>
-								<Element>
-									<Value>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>MotorStage3Inside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="IsLooped">
-											<bool>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</bool>
-										</Attribute>
-										<Attribute name="Priority">
-											<sUInt32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sUInt32>
-										</Attribute>
-										<Attribute name="BaseVolume">
-											<sFloat32>
-												<Element>
-													<Value>0.5</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="VolumeVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="BasePitchShift">
-											<sFloat32>
-												<Element>
-													<Value>1</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="PitchShiftVariation">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="AttenuationStartDist">
-											<sFloat32>
-												<Element>
-													<Value>50</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="NoFutherAttenuationDist">
-											<sFloat32>
-												<Element>
-													<Value>300</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-										<Attribute name="Sample">
-											<kLoud-cSampleID>
-												<Element>
-													<Value>
-														<Attribute name="Filename">
-															<cDeltaString>
-																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_stage3.wav</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -867,14 +273,14 @@
 										<Attribute name="AttenuationStartDist">
 											<sFloat32>
 												<Element>
-													<Value>50</Value>
+													<Value>20</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="NoFutherAttenuationDist">
 											<sFloat32>
 												<Element>
-													<Value>300</Value>
+													<Value>150</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -1065,14 +471,14 @@
 										<Attribute name="AttenuationStartDist">
 											<sFloat32>
 												<Element>
-													<Value>50</Value>
+													<Value>5</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
 										<Attribute name="NoFutherAttenuationDist">
 											<sFloat32>
 												<Element>
-													<Value>300</Value>
+													<Value>50</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -1659,6 +1065,105 @@
 										<Attribute name="AttenuationStartDist">
 											<sFloat32>
 												<Element>
+													<Value>10</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="NoFutherAttenuationDist">
+											<sFloat32>
+												<Element>
+													<Value>80</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="InstanceGroup">
+											<kLoud-cInstanceGroup>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cInstanceGroup>
+										</Attribute>
+										<Attribute name="Sample">
+											<kLoud-cSampleID>
+												<Element>
+													<Value>
+														<Attribute name="Filename">
+															<cDeltaString>
+																<Element>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_whine_out.wav</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cSampleID>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cSingleSampleSound>
+							<kLoud-cSingleSampleSound>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesInt</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="IsLooped">
+											<bool>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</bool>
+										</Attribute>
+										<Attribute name="Priority">
+											<sUInt32>
+												<Element>
+													<Value>50</Value>
+												</Element>
+											</sUInt32>
+										</Attribute>
+										<Attribute name="BaseVolume">
+											<sFloat32>
+												<Element>
+													<Value>0.1</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="VolumeVariation">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="BasePitchShift">
+											<sFloat32>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="PitchShiftVariation">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="AttenuationStartDist">
+											<sFloat32>
+												<Element>
 													<Value>50</Value>
 												</Element>
 											</sFloat32>
@@ -1692,7 +1197,106 @@
 														<Attribute name="Filename">
 															<cDeltaString>
 																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\motor_whine_out.wav</Value>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\dynamic_brake_int.wav</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cSampleID>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cSingleSampleSound>
+							<kLoud-cSingleSampleSound>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesExt</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="IsLooped">
+											<bool>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</bool>
+										</Attribute>
+										<Attribute name="Priority">
+											<sUInt32>
+												<Element>
+													<Value>50</Value>
+												</Element>
+											</sUInt32>
+										</Attribute>
+										<Attribute name="BaseVolume">
+											<sFloat32>
+												<Element>
+													<Value>0.35</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="VolumeVariation">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="BasePitchShift">
+											<sFloat32>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="PitchShiftVariation">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="AttenuationStartDist">
+											<sFloat32>
+												<Element>
+													<Value>50</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="NoFutherAttenuationDist">
+											<sFloat32>
+												<Element>
+													<Value>300</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="InstanceGroup">
+											<kLoud-cInstanceGroup>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cInstanceGroup>
+										</Attribute>
+										<Attribute name="Sample">
+											<kLoud-cSampleID>
+												<Element>
+													<Value>
+														<Attribute name="Filename">
+															<cDeltaString>
+																<Element>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\dynamic_brake.wav</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -2161,7 +1765,7 @@
 										<Attribute name="NoFutherAttenuationDist">
 											<sFloat32>
 												<Element>
-													<Value>100</Value>
+													<Value>80</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -2386,6 +1990,105 @@
 															<cDeltaString>
 																<Element>
 																	<Value>RailVehicles\Electric\APM400\Audio\Samples\approaching_station_int.wav</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cSampleID>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cSingleSampleSound>
+							<kLoud-cSingleSampleSound>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DepartingStationInt</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="IsLooped">
+											<bool>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</bool>
+										</Attribute>
+										<Attribute name="Priority">
+											<sUInt32>
+												<Element>
+													<Value>50</Value>
+												</Element>
+											</sUInt32>
+										</Attribute>
+										<Attribute name="BaseVolume">
+											<sFloat32>
+												<Element>
+													<Value>0.65</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="VolumeVariation">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="BasePitchShift">
+											<sFloat32>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="PitchShiftVariation">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="AttenuationStartDist">
+											<sFloat32>
+												<Element>
+													<Value>50</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="NoFutherAttenuationDist">
+											<sFloat32>
+												<Element>
+													<Value>300</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="InstanceGroup">
+											<kLoud-cInstanceGroup>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cInstanceGroup>
+										</Attribute>
+										<Attribute name="Sample">
+											<kLoud-cSampleID>
+												<Element>
+													<Value>
+														<Attribute name="Filename">
+															<cDeltaString>
+																<Element>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\departing_station_int.wav</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -3740,6 +3443,369 @@
 									</Value>
 								</Element>
 							</kLoud-cCurve>
+							<kLoud-cCurve>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesVolumeCurrent</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="CurvePoint">
+											<__Indexed__kLoud-cRVector2>
+												<Element>
+													<Value>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>-500</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+													</Value>
+												</Element>
+											</__Indexed__kLoud-cRVector2>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cCurve>
+							<kLoud-cCurve>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesPitch</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="CurvePoint">
+											<__Indexed__kLoud-cRVector2>
+												<Element>
+													<Value>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>13</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>32</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>2.125</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>32.01</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>0.8</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>50</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1.6</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>50.01</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>0.78</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>100</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1.5</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+													</Value>
+												</Element>
+											</__Indexed__kLoud-cRVector2>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cCurve>
+							<kLoud-cCurve>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesVolumeSpeed</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="CurvePoint">
+											<__Indexed__kLoud-cRVector2>
+												<Element>
+													<Value>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>31.8</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>32</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>32.2</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>49.8</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>50</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>50.2</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+													</Value>
+												</Element>
+											</__Indexed__kLoud-cRVector2>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cCurve>
 						</Value>
 					</Element>
 				</__Indexed__kLoud-cCurve>
@@ -4496,6 +4562,132 @@
 										<Attribute name="Name">
 											<cDeltaString>
 												<Element>
+													<Value>DynamicBrakes</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="Modifier">
+											<__Indexed__kLoud-cModifier>
+												<Element>
+													<Value>
+														<kLoud-cVolumeCurveModifier>
+															<Element>
+																<Value>
+																	<Attribute name="ControllerIsGlobal">
+																		<bool>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</bool>
+																	</Attribute>
+																	<Attribute name="ControllerName">
+																		<cDeltaString>
+																			<Element>
+																				<Value>Ammeter</Value>
+																			</Element>
+																		</cDeltaString>
+																	</Attribute>
+																	<Attribute name="Curve">
+																		<kLoud-cCurve>
+																			<Element>
+																				<Value>
+																					<Attribute name="Name">
+																						<cDeltaString>
+																							<Element>
+																								<Value>DynamicBrakesVolumeCurrent</Value>
+																							</Element>
+																						</cDeltaString>
+																					</Attribute>
+																				</Value>
+																			</Element>
+																		</kLoud-cCurve>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cVolumeCurveModifier>
+														<kLoud-cVolumeCurveModifier>
+															<Element>
+																<Value>
+																	<Attribute name="ControllerIsGlobal">
+																		<bool>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</bool>
+																	</Attribute>
+																	<Attribute name="ControllerName">
+																		<cDeltaString>
+																			<Element>
+																				<Value>SpeedometerMPH</Value>
+																			</Element>
+																		</cDeltaString>
+																	</Attribute>
+																	<Attribute name="Curve">
+																		<kLoud-cCurve>
+																			<Element>
+																				<Value>
+																					<Attribute name="Name">
+																						<cDeltaString>
+																							<Element>
+																								<Value>DynamicBrakesVolumeSpeed</Value>
+																							</Element>
+																						</cDeltaString>
+																					</Attribute>
+																				</Value>
+																			</Element>
+																		</kLoud-cCurve>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cVolumeCurveModifier>
+														<kLoud-cPitchCurveModifier>
+															<Element>
+																<Value>
+																	<Attribute name="ControllerIsGlobal">
+																		<bool>
+																			<Element>
+																				<Value>0</Value>
+																			</Element>
+																		</bool>
+																	</Attribute>
+																	<Attribute name="ControllerName">
+																		<cDeltaString>
+																			<Element>
+																				<Value>SpeedometerMPH</Value>
+																			</Element>
+																		</cDeltaString>
+																	</Attribute>
+																	<Attribute name="Curve">
+																		<kLoud-cCurve>
+																			<Element>
+																				<Value>
+																					<Attribute name="Name">
+																						<cDeltaString>
+																							<Element>
+																								<Value>DynamicBrakesPitch</Value>
+																							</Element>
+																						</cDeltaString>
+																					</Attribute>
+																				</Value>
+																			</Element>
+																		</kLoud-cCurve>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cPitchCurveModifier>
+													</Value>
+												</Element>
+											</__Indexed__kLoud-cModifier>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cModifierChain>
+							<kLoud-cModifierChain>
+								<Element>
+									<Value>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
 													<Value>SpeedWarningLoop</Value>
 												</Element>
 											</cDeltaString>
@@ -4803,306 +4995,6 @@
 										<Attribute name="Name">
 											<cDeltaString>
 												<Element>
-													<Value>Stage1Outside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="Sound">
-											<kLoud-cSound>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>MotorStage1Outside</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSound>
-										</Attribute>
-										<Attribute name="ModifierChain">
-											<kLoud-cModifierChain>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>Stage1</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cModifierChain>
-										</Attribute>
-										<Attribute name="ControllerName">
-											<cDeltaString>
-												<Element>
-													<Value>SpeedometerMPH</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="LoopCondition">
-											<kLoud-cControlledLoop-eLoopCondition>
-												<Element>
-													<Value>ValueInRange</Value>
-												</Element>
-											</kLoud-cControlledLoop-eLoopCondition>
-										</Attribute>
-										<Attribute name="ActiveRangeStartValue">
-											<sFloat32>
-												<Element>
-													<Value>100.01</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ActiveRangeEndValue">
-											<sFloat32>
-												<Element>
-													<Value>10</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ValueIsChangingGateTime">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cControlledLoop>
-							<kLoud-cControlledLoop>
-								<Element>
-									<Value>
-										<Attribute name="PlayState">
-											<ePlayState>
-												<Element>
-													<Value>OUTSIDE</Value>
-												</Element>
-											</ePlayState>
-										</Attribute>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>Stage2Outside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="Sound">
-											<kLoud-cSound>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>MotorStage2Outside</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSound>
-										</Attribute>
-										<Attribute name="ModifierChain">
-											<kLoud-cModifierChain>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>Stage2</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cModifierChain>
-										</Attribute>
-										<Attribute name="ControllerName">
-											<cDeltaString>
-												<Element>
-													<Value>SpeedometerMPH</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="LoopCondition">
-											<kLoud-cControlledLoop-eLoopCondition>
-												<Element>
-													<Value>ValueInRange</Value>
-												</Element>
-											</kLoud-cControlledLoop-eLoopCondition>
-										</Attribute>
-										<Attribute name="ActiveRangeStartValue">
-											<sFloat32>
-												<Element>
-													<Value>500</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ActiveRangeEndValue">
-											<sFloat32>
-												<Element>
-													<Value>18</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ValueIsChangingGateTime">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cControlledLoop>
-							<kLoud-cControlledLoop>
-								<Element>
-									<Value>
-										<Attribute name="PlayState">
-											<ePlayState>
-												<Element>
-													<Value>OUTSIDE</Value>
-												</Element>
-											</ePlayState>
-										</Attribute>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>Stage3Outside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="Sound">
-											<kLoud-cSound>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>MotorStage3Outside</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSound>
-										</Attribute>
-										<Attribute name="ModifierChain">
-											<kLoud-cModifierChain>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>Stage3</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cModifierChain>
-										</Attribute>
-										<Attribute name="ControllerName">
-											<cDeltaString>
-												<Element>
-													<Value>SpeedometerMPH</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="LoopCondition">
-											<kLoud-cControlledLoop-eLoopCondition>
-												<Element>
-													<Value>ValueInRange</Value>
-												</Element>
-											</kLoud-cControlledLoop-eLoopCondition>
-										</Attribute>
-										<Attribute name="ActiveRangeStartValue">
-											<sFloat32>
-												<Element>
-													<Value>150</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ActiveRangeEndValue">
-											<sFloat32>
-												<Element>
-													<Value>100</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ValueIsChangingGateTime">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cControlledLoop>
-							<kLoud-cControlledLoop>
-								<Element>
-									<Value>
-										<Attribute name="PlayState">
-											<ePlayState>
-												<Element>
-													<Value>OUTSIDE</Value>
-												</Element>
-											</ePlayState>
-										</Attribute>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
 													<Value>MotorRampOutside</Value>
 												</Element>
 											</cDeltaString>
@@ -5155,306 +5047,6 @@
 											<sFloat32>
 												<Element>
 													<Value>0.5</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ActiveRangeEndValue">
-											<sFloat32>
-												<Element>
-													<Value>100</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ValueIsChangingGateTime">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cControlledLoop>
-							<kLoud-cControlledLoop>
-								<Element>
-									<Value>
-										<Attribute name="PlayState">
-											<ePlayState>
-												<Element>
-													<Value>INSIDE</Value>
-												</Element>
-											</ePlayState>
-										</Attribute>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>Stage1Inside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="Sound">
-											<kLoud-cSound>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>MotorStage1Inside</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSound>
-										</Attribute>
-										<Attribute name="ModifierChain">
-											<kLoud-cModifierChain>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>Stage1</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cModifierChain>
-										</Attribute>
-										<Attribute name="ControllerName">
-											<cDeltaString>
-												<Element>
-													<Value>SpeedometerMPH</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="LoopCondition">
-											<kLoud-cControlledLoop-eLoopCondition>
-												<Element>
-													<Value>ValueInRange</Value>
-												</Element>
-											</kLoud-cControlledLoop-eLoopCondition>
-										</Attribute>
-										<Attribute name="ActiveRangeStartValue">
-											<sFloat32>
-												<Element>
-													<Value>100.01</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ActiveRangeEndValue">
-											<sFloat32>
-												<Element>
-													<Value>10</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ValueIsChangingGateTime">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cControlledLoop>
-							<kLoud-cControlledLoop>
-								<Element>
-									<Value>
-										<Attribute name="PlayState">
-											<ePlayState>
-												<Element>
-													<Value>INSIDE</Value>
-												</Element>
-											</ePlayState>
-										</Attribute>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>Stage2Inside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="Sound">
-											<kLoud-cSound>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>MotorStage2Inside</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSound>
-										</Attribute>
-										<Attribute name="ModifierChain">
-											<kLoud-cModifierChain>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>Stage2</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cModifierChain>
-										</Attribute>
-										<Attribute name="ControllerName">
-											<cDeltaString>
-												<Element>
-													<Value>SpeedometerMPH</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="LoopCondition">
-											<kLoud-cControlledLoop-eLoopCondition>
-												<Element>
-													<Value>ValueInRange</Value>
-												</Element>
-											</kLoud-cControlledLoop-eLoopCondition>
-										</Attribute>
-										<Attribute name="ActiveRangeStartValue">
-											<sFloat32>
-												<Element>
-													<Value>500</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ActiveRangeEndValue">
-											<sFloat32>
-												<Element>
-													<Value>18</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="ValueIsChangingGateTime">
-											<sFloat32>
-												<Element>
-													<Value>0</Value>
-												</Element>
-											</sFloat32>
-										</Attribute>
-										<Attribute name="InstanceGroup">
-											<kLoud-cInstanceGroup>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value />
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cInstanceGroup>
-										</Attribute>
-									</Value>
-								</Element>
-							</kLoud-cControlledLoop>
-							<kLoud-cControlledLoop>
-								<Element>
-									<Value>
-										<Attribute name="PlayState">
-											<ePlayState>
-												<Element>
-													<Value>INSIDE</Value>
-												</Element>
-											</ePlayState>
-										</Attribute>
-										<Attribute name="Name">
-											<cDeltaString>
-												<Element>
-													<Value>Stage3Inside</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="Sound">
-											<kLoud-cSound>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>MotorStage3Inside</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cSound>
-										</Attribute>
-										<Attribute name="ModifierChain">
-											<kLoud-cModifierChain>
-												<Element>
-													<Value>
-														<Attribute name="Name">
-															<cDeltaString>
-																<Element>
-																	<Value>Stage3</Value>
-																</Element>
-															</cDeltaString>
-														</Attribute>
-													</Value>
-												</Element>
-											</kLoud-cModifierChain>
-										</Attribute>
-										<Attribute name="ControllerName">
-											<cDeltaString>
-												<Element>
-													<Value>SpeedometerMPH</Value>
-												</Element>
-											</cDeltaString>
-										</Attribute>
-										<Attribute name="LoopCondition">
-											<kLoud-cControlledLoop-eLoopCondition>
-												<Element>
-													<Value>ValueInRange</Value>
-												</Element>
-											</kLoud-cControlledLoop-eLoopCondition>
-										</Attribute>
-										<Attribute name="ActiveRangeStartValue">
-											<sFloat32>
-												<Element>
-													<Value>150</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -6162,6 +5754,206 @@
 											<sFloat32>
 												<Element>
 													<Value>100</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="ValueIsChangingGateTime">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="InstanceGroup">
+											<kLoud-cInstanceGroup>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cInstanceGroup>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cControlledLoop>
+							<kLoud-cControlledLoop>
+								<Element>
+									<Value>
+										<Attribute name="PlayState">
+											<ePlayState>
+												<Element>
+													<Value>INSIDE</Value>
+												</Element>
+											</ePlayState>
+										</Attribute>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesInt</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="Sound">
+											<kLoud-cSound>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value>DynamicBrakesInt</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cSound>
+										</Attribute>
+										<Attribute name="ModifierChain">
+											<kLoud-cModifierChain>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value>DynamicBrakes</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cModifierChain>
+										</Attribute>
+										<Attribute name="ControllerName">
+											<cDeltaString>
+												<Element>
+													<Value>SpeedometerMPH</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="LoopCondition">
+											<kLoud-cControlledLoop-eLoopCondition>
+												<Element>
+													<Value>ValueInRange</Value>
+												</Element>
+											</kLoud-cControlledLoop-eLoopCondition>
+										</Attribute>
+										<Attribute name="ActiveRangeStartValue">
+											<sFloat32>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="ActiveRangeEndValue">
+											<sFloat32>
+												<Element>
+													<Value>150</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="ValueIsChangingGateTime">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="InstanceGroup">
+											<kLoud-cInstanceGroup>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cInstanceGroup>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cControlledLoop>
+							<kLoud-cControlledLoop>
+								<Element>
+									<Value>
+										<Attribute name="PlayState">
+											<ePlayState>
+												<Element>
+													<Value>OUTSIDE</Value>
+												</Element>
+											</ePlayState>
+										</Attribute>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DynamicBrakesExt</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="Sound">
+											<kLoud-cSound>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value>DynamicBrakesExt</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cSound>
+										</Attribute>
+										<Attribute name="ModifierChain">
+											<kLoud-cModifierChain>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value>DynamicBrakes</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cModifierChain>
+										</Attribute>
+										<Attribute name="ControllerName">
+											<cDeltaString>
+												<Element>
+													<Value>SpeedometerMPH</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="LoopCondition">
+											<kLoud-cControlledLoop-eLoopCondition>
+												<Element>
+													<Value>ValueInRange</Value>
+												</Element>
+											</kLoud-cControlledLoop-eLoopCondition>
+										</Attribute>
+										<Attribute name="ActiveRangeStartValue">
+											<sFloat32>
+												<Element>
+													<Value>1</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="ActiveRangeEndValue">
+											<sFloat32>
+												<Element>
+													<Value>150</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -7393,6 +7185,99 @@
 											<cDeltaString>
 												<Element>
 													<Value>ApproachingStation</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="TriggerType">
+											<kLoud-eTriggerType>
+												<Element>
+													<Value>ValueIncreasePast</Value>
+												</Element>
+											</kLoud-eTriggerType>
+										</Attribute>
+										<Attribute name="TriggerValue">
+											<sFloat32>
+												<Element>
+													<Value>0.5</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="ValueIsChangingGateTime">
+											<sFloat32>
+												<Element>
+													<Value>0</Value>
+												</Element>
+											</sFloat32>
+										</Attribute>
+										<Attribute name="InstanceGroup">
+											<kLoud-cInstanceGroup>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cInstanceGroup>
+										</Attribute>
+									</Value>
+								</Element>
+							</kLoud-cTriggeredOneshot>
+							<kLoud-cTriggeredOneshot>
+								<Element>
+									<Value>
+										<Attribute name="PlayState">
+											<ePlayState>
+												<Element>
+													<Value>INSIDE</Value>
+												</Element>
+											</ePlayState>
+										</Attribute>
+										<Attribute name="Name">
+											<cDeltaString>
+												<Element>
+													<Value>DepartingStationInt</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+										<Attribute name="Sound">
+											<kLoud-cSound>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value>DepartingStationInt</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cSound>
+										</Attribute>
+										<Attribute name="ModifierChain">
+											<kLoud-cModifierChain>
+												<Element>
+													<Value>
+														<Attribute name="Name">
+															<cDeltaString>
+																<Element>
+																	<Value />
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</kLoud-cModifierChain>
+										</Attribute>
+										<Attribute name="ControllerName">
+											<cDeltaString>
+												<Element>
+													<Value>DepartingStation</Value>
 												</Element>
 											</cDeltaString>
 										</Attribute>

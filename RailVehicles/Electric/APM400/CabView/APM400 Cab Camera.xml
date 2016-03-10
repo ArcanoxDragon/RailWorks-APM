@@ -188,42 +188,42 @@
 							<Attribute name="SpringXCoefficient">
 								<sFloat32>
 									<Element>
-										<Value>0.065</Value>
+										<Value>0.12</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="SpringYCoefficient">
 								<sFloat32>
 									<Element>
-										<Value>0.06</Value>
+										<Value>0.28</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="SpringZCoefficient">
 								<sFloat32>
 									<Element>
-										<Value>0.065</Value>
+										<Value>0.12</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="DampingXCoefficient">
 								<sFloat32>
 									<Element>
-										<Value>0.0265</Value>
+										<Value>0.004</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="DampingYCoefficient">
 								<sFloat32>
 									<Element>
-										<Value>0.011</Value>
+										<Value>0.015</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="DampingZCoefficient">
 								<sFloat32>
 									<Element>
-										<Value>0.008</Value>
+										<Value>0.004</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
