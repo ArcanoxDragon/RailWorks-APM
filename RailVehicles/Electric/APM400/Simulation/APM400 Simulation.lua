@@ -35,7 +35,7 @@ function Setup()
 	MIN_ACCELERATION 			= 0.125
 	MAX_BRAKING 				= 1.0
 	MIN_BRAKING 				= 0.2
-	JERK_LIMIT 					= 1.0 / 1.65
+	JERK_LIMIT 					= 1.0 / 1.75
 	JERK_DELTA 					= JERK_LIMIT * 3.0
 	JERK_THRESHOLD 				= 1.0 / 2.5
 	MAX_SERVICE_BRAKE 			= 1.0
@@ -59,6 +59,7 @@ function Setup()
 	gAvgAccel 					= 0.0
 	gAvgAccelTime 				= 0.0
 	gBrakeRelease 				= 0.0
+	gTakeoffTime				= 0.0
 	brkAdjust 					= 0.0
 	gLastJerkLimit 				= 0.0
 	gPosAccelTime 				= 0.0
@@ -212,9 +213,13 @@ function Update( gTimeDelta )
 					Call( "*:SetControlValue", "Sander", 0, 0 )
 					Call( "*:SetControlValue", "HandBrake", 0, 0 )
 				end
+				
 				gSetReg = 0.0
 				gSetDynamic = 0.0
 				gSetBrake = 0.0
+				tTAccel = -1.0
+				gThrottleControl.value = -1.0
+				
 				if ( math.abs( ReverserLever ) < 0.9 ) then
 					Call( "*:SetControlValue", "ThrottleAndBrake", 0, -1.0 )
 				end
@@ -246,8 +251,13 @@ function Update( gTimeDelta )
 					tTAccel = 0.0
 					
 					if ( AbsSpeed < 0.1 ) then
-						gThrottleControl.value = 0
+						gTakeoffTime = 0.5
 					end
+				end
+				
+				if ( gTakeoffTime > 0.0 ) then
+					gThrottleControl.value = 0.0
+					gTakeoffTime = math.max( gTakeoffTime - gTimeDelta, 0.0 )
 				end
 				
 				gThrottleControl:set( tTAccel )

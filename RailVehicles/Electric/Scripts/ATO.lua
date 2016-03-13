@@ -5,13 +5,14 @@ local SIGNAL_STATE_STATION = 21
 local ATO_TARGET_DECELERATION = 1.20 -- Meters/second/second
 local ACCEL_PER_SECOND = 1.0 / 3.0 -- Units of acceleration per second ( jerk limit, used for extra buffers )
 local DEPART_WAIT_TIME = 5.0
-atoK_P = 1.0 / 5.0
+local SIG_DIR_CORRECTION_TIME = 1.0
+atoK_P = 1.0 / 7.5
 atoK_I = 1.0 / 12.0
 atoK_D = 0.0
 atoMIN_ERROR = -5.0
 atoMAX_ERROR =  5.0
 atoSigDirection = 0
-gLastSigDistTime = 0
+gSignalDirectionTime = 0
 atoOverrunDist = 0
 
 -- Stats variables
@@ -156,11 +157,18 @@ function UpdateATO( interval )
 		spdBuffer = spdBuffer + accelBuff -- Accomodate for jerk limit
 		
 		sigType, sigState, sigDist, sigAspect = Call( "*:GetNextRestrictiveSignal", atoSigDirection )
+				
+		sigDistDelta = ( sigDist - gLastSigDist ) / interval
+		if ( sigDistDelta > 0.5 ) then
+			gSignalDirectionTime = gSignalDirectionTime + interval
+		else
+			gSignalDirectionTime = 0
+		end
 		
-		gLastSigDistTime = gLastSigDistTime + interval
-		
-		if ( ( sigDist > gLastSigDist + 0.5 or trainSpeed < 0.1 ) and gLastSigDistTime >= 1.0 ) then
-			if ( atoSigDirection < 0.5 ) then
+		if ( gSignalDirectionTime >= SIG_DIR_CORRECTION_TIME ) then
+			gSignalDirectionTime = 0
+			
+			if ( atoSigDirection == 0 ) then
 				atoSigDirection = 1
 			else
 				atoSigDirection = 0
@@ -178,14 +186,7 @@ function UpdateATO( interval )
 			searchDist = tSigDist + 0.1
 		end
 		
-		if ( gLastSigDistTime >= 1.0 ) then
-			gLastSigDistTime = 0.0
-			gLastSigDist = sigDist
-		end
-		
 		Call( "*:SetControlValue", "SpeedBuffer", 0, spdBuffer )
-		--Call( "*:SetControlValue", "NextSignalDist", 0, round( sigDist * 100.0, 2 ) )
-		--Call( "*:SetControlValue", "NextSignalAspect", 0, sigAspect )
 		
 		if ( sigAspect == SIGNAL_STATE_STATION ) then
 			if ( trainSpeedMPH > 10.0 and sigDist <= spdBuffer and sigDist >= 15 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist ) then
@@ -201,10 +202,11 @@ function UpdateATO( interval )
 			end
 		end
 		
-		SetControlValue( "db_AtoStopping"	 , atoStopping    )
-		SetControlValue( "db_AtoStopped" 	 , atoIsStopped   )
-		SetControlValue( "db_AtoTimeStopped" , atoTimeStopped )
-		SetControlValue( "db_Doors" 		 , doors		  )
+		gLastSigDist = sigDist
+		
+		SetControlValue( "db_SigAspect", sigAspect )
+		SetControlValue( "db_SigDist"  , sigDist   )
+		SetControlValue( "db_SpdBuffer", spdBuffer )
 		
 		if ( atoStopping > 0.5 ) then
 			local distBuffer = 1.05

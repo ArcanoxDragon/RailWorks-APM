@@ -2632,14 +2632,14 @@
 																	<Attribute name="X">
 																		<sFloat32>
 																			<Element>
-																				<Value>60</Value>
+																				<Value>105</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
 																	<Attribute name="Y">
 																		<sFloat32>
 																			<Element>
-																				<Value>1</Value>
+																				<Value>1.45</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
@@ -3685,7 +3685,7 @@
 																	<Attribute name="X">
 																		<sFloat32>
 																			<Element>
-																				<Value>31.8</Value>
+																				<Value>20</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
@@ -3693,6 +3693,26 @@
 																		<sFloat32>
 																			<Element>
 																				<Value>1</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																</Value>
+															</Element>
+														</kLoud-cRVector2>
+														<kLoud-cRVector2>
+															<Element>
+																<Value>
+																	<Attribute name="X">
+																		<sFloat32>
+																			<Element>
+																				<Value>31.8</Value>
+																			</Element>
+																		</sFloat32>
+																	</Attribute>
+																	<Attribute name="Y">
+																		<sFloat32>
+																			<Element>
+																				<Value>0.2</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
@@ -3732,7 +3752,7 @@
 																	<Attribute name="Y">
 																		<sFloat32>
 																			<Element>
-																				<Value>1</Value>
+																				<Value>0.9</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
@@ -3752,7 +3772,7 @@
 																	<Attribute name="Y">
 																		<sFloat32>
 																			<Element>
-																				<Value>1</Value>
+																				<Value>0.7</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
@@ -3792,7 +3812,7 @@
 																	<Attribute name="Y">
 																		<sFloat32>
 																			<Element>
-																				<Value>1</Value>
+																				<Value>0.85</Value>
 																			</Element>
 																		</sFloat32>
 																	</Attribute>
