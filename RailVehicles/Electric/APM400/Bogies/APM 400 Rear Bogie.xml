@@ -12,7 +12,7 @@
 			<Attribute name="WheelGauge">
 				<sFloat32>
 					<Element>
-						<Value>1.5</Value>
+						<Value>1.509</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
@@ -40,7 +40,7 @@
 			<Attribute name="SuspensionStiffness">
 				<sFloat32>
 					<Element>
-						<Value>8E+19</Value>
+						<Value>8E+08</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>

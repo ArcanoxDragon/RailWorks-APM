@@ -43,6 +43,7 @@ function Setup()
 	ACCEL_CORRECTION_THRESHOLD	= 0.1
 	ACCEL_CORRECTION_DELAY 		= 1.5
 	ACCEL_CORRECTION_RATE 		= 0.25
+	TAKEOFF_TIMEOUT				= 0.75
 	
 -- Propulsion system variables
 	realAccel 					= 0.0
@@ -72,7 +73,7 @@ function Setup()
 	gThrottleControl = ThrottleControl.create( JERK_LIMIT, JERK_DELTA, JERK_THRESHOLD )
 
 -- For controlling delayed doors interlocks.
-	DOORDELAYTIME = 9.5 -- seconds.
+	DOORDELAYTIME = 6.5 -- seconds.
 	gDoorsDelay = DOORDELAYTIME
 end
 
@@ -251,12 +252,12 @@ function Update( gTimeDelta )
 					tTAccel = 0.0
 					
 					if ( AbsSpeed < 0.1 ) then
-						gTakeoffTime = 0.5
+						gTakeoffTime = TAKEOFF_TIMEOUT
 					end
 				end
 				
 				if ( gTakeoffTime > 0.0 ) then
-					gThrottleControl.value = 0.0
+					gThrottleControl.value = math.min( gThrottleControl.value, 0.025 + ( TAKEOFF_TIMEOUT - gTakeoffTime ) / 8.0 )
 					gTakeoffTime = math.max( gTakeoffTime - gTimeDelta, 0.0 )
 				end
 				

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cSpotLightBlueprint>
+<cHeadLightBlueprint>
 	<Element>
 		<Value>
 			<Attribute name="Name">
@@ -268,7 +268,7 @@
 							<Attribute name="GeometryID">
 								<cDeltaString>
 									<Element>
-										<Value>RailVehicles\Electric\APM400\Lights\gizmo.igs</Value>
+										<Value>RailVehicles\Electric\APM400\Lights\gizmo</Value>
 									</Element>
 								</cDeltaString>
 							</Attribute>
@@ -403,21 +403,21 @@
 							<Attribute name="Radius">
 								<sFloat32>
 									<Element>
-										<Value>10</Value>
+										<Value>80</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="Phi">
 								<sFloat32>
 									<Element>
-										<Value>35</Value>
+										<Value>20</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="Theta">
 								<sFloat32>
 									<Element>
-										<Value>30</Value>
+										<Value>18</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -489,6 +489,98 @@
 					</Element>
 				</cSpotLightComponentBlueprint>
 			</Attribute>
+			<Attribute name="HeadLightFlareComponent">
+				<cHeadLightFlareComponentBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="FlareTextureID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="FlareSizeX">
+								<sFloat32>
+									<Element>
+										<Value>1</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="FlareSizeY">
+								<sFloat32>
+									<Element>
+										<Value>1</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="FlareStartSizeX">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="FlareStartSizeY">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="LensFlareTextureID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="NumFlareTextures">
+								<sInt32>
+									<Element>
+										<Value>4</Value>
+									</Element>
+								</sInt32>
+							</Attribute>
+							<Attribute name="FadeStartDistance">
+								<sFloat32>
+									<Element>
+										<Value>10</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="FadeEndDistance">
+								<sFloat32>
+									<Element>
+										<Value>30</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="LensFlareIntensity">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="ExtrusionOffset">
+								<sFloat32>
+									<Element>
+										<Value>1</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="LensFlare">
+								<__Indexed__cHeadLightFlareComponentBlueprint-sLensFlare>
+									<Element>
+										<Value />
+									</Element>
+								</__Indexed__cHeadLightFlareComponentBlueprint-sLensFlare>
+							</Attribute>
+						</Value>
+					</Element>
+				</cHeadLightFlareComponentBlueprint>
+			</Attribute>
 		</Value>
 	</Element>
-</cSpotLightBlueprint>
+</cHeadLightBlueprint>
