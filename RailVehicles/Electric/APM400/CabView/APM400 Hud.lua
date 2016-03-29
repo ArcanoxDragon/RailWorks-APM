@@ -32,8 +32,8 @@ function UpdateHUD(time)
 	
 	local SpeedLimit		 	= GetControlValue( "ATCRestrictedSpeed" 	)
 	local TrainSpeed 			= GetControlValue( "SpeedometerMPH" 		)
-	local DoorsLeft  			= GetControlValue( "DoorsOpenCloseLeft"  	) > 0.5
-	local DoorsRight 			= GetControlValue( "DoorsOpenCloseRight" 	) > 0.5
+	local DoorsLeft  			= GetControlValue( "DoorsLeftGlobal"  		) > 0.5
+	local DoorsRight 			= GetControlValue( "DoorsRightGlobal" 		) > 0.5
 	local DoorsOpen  			= GetControlValue( "DoorsOpen" 				) > 0.5
 	
 	-- Overspeed Warning
@@ -58,10 +58,12 @@ function UpdateHUD(time)
 		
 	if DoorsLeft then
 		gDoorsLeft  = true
+		gDoorsRight = false
 	end
 	
 	if DoorsRight then
 		gDoorsRight = true
+		gDoorsLeft  = false
 	end
 	
 	if not DoorsOpen then

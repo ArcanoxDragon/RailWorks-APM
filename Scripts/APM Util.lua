@@ -25,11 +25,37 @@ function SetControlValue( name, value )
 	end
 end
 
+function carPrint( msg )
+	debugPrint( "[" .. Call( "*:GetRVNumber" ) .. "] " .. msg )
+end
+
 function debugPrint( msg )
 	Print( msg )
 	debugFile:seek( "end", 0 )
 	debugFile:write( msg .. "\n" )
 	debugFile:flush()
+end
+
+function split(pString, pPattern)
+	local Table = {}
+	local fpat = "(.-)" .. pPattern
+	local last_end = 1
+	local s, e, cap = string.find(pString, fpat, 1)
+	
+	while s do
+		if s ~= 1 or cap ~= "" then
+			table.insert(Table,cap)
+		end
+		last_end = e+1
+		s, e, cap = string.find(pString, fpat, last_end)
+	end
+	
+	if last_end <= string.len(pString) then
+		cap = string.sub(pString, last_end)
+		table.insert(Table, cap)
+	end
+	
+	return Table
 end
 
 function blend( a, b, bias )
