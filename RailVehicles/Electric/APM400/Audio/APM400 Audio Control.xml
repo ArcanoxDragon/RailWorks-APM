@@ -1829,7 +1829,7 @@
 										<Attribute name="BaseVolume">
 											<sFloat32>
 												<Element>
-													<Value>0.5</Value>
+													<Value>0.35</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
