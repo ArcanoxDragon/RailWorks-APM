@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cTrackRulesBlueprint>
+	<Element>
+		<Value>
+			<Attribute name="TrackTypes">
+				<__Indexed__iBlueprintLibrary-cAbsoluteBlueprintID>
+					<Element>
+						<Value>
+							<iBlueprintLibrary-cAbsoluteBlueprintID>
+								<Element>
+									<Value>
+										<Attribute name="BlueprintSetID">
+											<iBlueprintLibrary-cBlueprintSetID>
+												<Element>
+													<Value>
+														<Attribute name="Provider">
+															<cDeltaString>
+																<Element>
+																	<Value>briman0094</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="Product">
+															<cDeltaString>
+																<Element>
+																	<Value>APM</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</iBlueprintLibrary-cBlueprintSetID>
+										</Attribute>
+										<Attribute name="BlueprintID">
+											<cDeltaString>
+												<Element>
+													<Value>RailNetwork\Track\Maglev Beam.xml</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+									</Value>
+								</Element>
+							</iBlueprintLibrary-cAbsoluteBlueprintID>
+						</Value>
+					</Element>
+				</__Indexed__iBlueprintLibrary-cAbsoluteBlueprintID>
+			</Attribute>
+			<Attribute name="DefaultTrackType">
+				<iBlueprintLibrary-cAbsoluteBlueprintID>
+					<Element>
+						<Value>
+							<Attribute name="BlueprintSetID">
+								<iBlueprintLibrary-cBlueprintSetID>
+									<Element>
+										<Value>
+											<Attribute name="Provider">
+												<cDeltaString>
+													<Element>
+														<Value>briman0094</Value>
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Product">
+												<cDeltaString>
+													<Element>
+														<Value>APM</Value>
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cBlueprintSetID>
+							</Attribute>
+							<Attribute name="BlueprintID">
+								<cDeltaString>
+									<Element>
+										<Value>RailNetwork\Track\Maglev Beam.xml</Value>
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</iBlueprintLibrary-cAbsoluteBlueprintID>
+			</Attribute>
+			<Attribute name="DefaultLineType">
+				<Network-iTrackNetworkLineType-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="LineType">
+								<Network-iTrackNetworkLineType-cPropertyValue-eLineType>
+									<Element>
+										<Value>Passenger</Value>
+									</Element>
+								</Network-iTrackNetworkLineType-cPropertyValue-eLineType>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkLineType-cPropertyValue>
+			</Attribute>
+			<Attribute name="DefaultSpeedLimit">
+				<Network-iTrackNetworkSpeedLimit-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="Primary">
+								<sInt32>
+									<Element>
+										<Value>65</Value>
+									</Element>
+								</sInt32>
+							</Attribute>
+							<Attribute name="Secondary">
+								<sInt32>
+									<Element>
+										<Value>65</Value>
+									</Element>
+								</sInt32>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkSpeedLimit-cPropertyValue>
+			</Attribute>
+			<Attribute name="DefaultLineDirection">
+				<Network-iTrackNetworkLineDirection-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="LineDirection">
+								<Network-iTrackNetworkLineDirection-cPropertyValue-eLineDirection>
+									<Element>
+										<Value>Both</Value>
+									</Element>
+								</Network-iTrackNetworkLineDirection-cPropertyValue-eLineDirection>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkLineDirection-cPropertyValue>
+			</Attribute>
+			<Attribute name="DefaultElectrification">
+				<Network-iTrackNetworkElectrification-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="Electrification">
+								<Network-iTrackNetworkElectrification-cPropertyValue-eElectrification>
+									<Element>
+										<Value>ThirdRail</Value>
+									</Element>
+								</Network-iTrackNetworkElectrification-cPropertyValue-eElectrification>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkElectrification-cPropertyValue>
+			</Attribute>
+			<Attribute name="DefaultSCollision">
+				<Network-iTrackNetworkSpecialCollision-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="SpecialCollision">
+								<Network-iTrackNetworkSpecialCollision-cPropertyValue-eSpecialCollision>
+									<Element>
+										<Value>Off</Value>
+									</Element>
+								</Network-iTrackNetworkSpecialCollision-cPropertyValue-eSpecialCollision>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkSpecialCollision-cPropertyValue>
+			</Attribute>
+			<Attribute name="DefaultSuperelevation">
+				<Network-iTrackNetworkSuperelevation-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="MaxCantAngleDegrees">
+								<sFloat32>
+									<Element>
+										<Value>15</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="CurveToAnglePercent">
+								<sFloat32>
+									<Element>
+										<Value>7.5</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkSuperelevation-cPropertyValue>
+			</Attribute>
+			<Attribute name="DefaultRideQuality">
+				<Network-iTrackNetworkRideQuality-cPropertyValue>
+					<Element>
+						<Value>
+							<Attribute name="LineUnevenness">
+								<sFloat32>
+									<Element>
+										<Value>5</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+						</Value>
+					</Element>
+				</Network-iTrackNetworkRideQuality-cPropertyValue>
+			</Attribute>
+			<Attribute name="GradientValue">
+				<iTrackRulesBlueprint-eGradientValue>
+					<Element>
+						<Value>Percent</Value>
+					</Element>
+				</iTrackRulesBlueprint-eGradientValue>
+			</Attribute>
+			<Attribute name="SpeedUnitValue">
+				<iTrackRulesBlueprint-eSpeedUnitValue>
+					<Element>
+						<Value>MPH</Value>
+					</Element>
+				</iTrackRulesBlueprint-eSpeedUnitValue>
+			</Attribute>
+			<Attribute name="TrackGauge">
+				<sFloat32>
+					<Element>
+						<Value>100</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="ParallelDistance">
+				<sFloat32>
+					<Element>
+						<Value>4.5</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="CatenaryHeight">
+				<sFloat32>
+					<Element>
+						<Value>5.5</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="MainLineTrackLimits">
+				<iTrackRulesBlueprint-sCurvatureLimits>
+					<Element>
+						<Value>
+							<Attribute name="MaxSpeedTolerance">
+								<sUInt32>
+									<Element>
+										<Value>60</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+							<Attribute name="MinRadius">
+								<sUInt32>
+									<Element>
+										<Value>150</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+						</Value>
+					</Element>
+				</iTrackRulesBlueprint-sCurvatureLimits>
+			</Attribute>
+			<Attribute name="YardTrackLimits">
+				<iTrackRulesBlueprint-sCurvatureLimits>
+					<Element>
+						<Value>
+							<Attribute name="MaxSpeedTolerance">
+								<sUInt32>
+									<Element>
+										<Value>60</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+							<Attribute name="MinRadius">
+								<sUInt32>
+									<Element>
+										<Value>25</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+						</Value>
+					</Element>
+				</iTrackRulesBlueprint-sCurvatureLimits>
+			</Attribute>
+			<Attribute name="PassengerTrackLimits">
+				<iTrackRulesBlueprint-sCurvatureLimits>
+					<Element>
+						<Value>
+							<Attribute name="MaxSpeedTolerance">
+								<sUInt32>
+									<Element>
+										<Value>60</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+							<Attribute name="MinRadius">
+								<sUInt32>
+									<Element>
+										<Value>50</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+						</Value>
+					</Element>
+				</iTrackRulesBlueprint-sCurvatureLimits>
+			</Attribute>
+			<Attribute name="FreightTrackLimits">
+				<iTrackRulesBlueprint-sCurvatureLimits>
+					<Element>
+						<Value>
+							<Attribute name="MaxSpeedTolerance">
+								<sUInt32>
+									<Element>
+										<Value>60</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+							<Attribute name="MinRadius">
+								<sUInt32>
+									<Element>
+										<Value>150</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+						</Value>
+					</Element>
+				</iTrackRulesBlueprint-sCurvatureLimits>
+			</Attribute>
+			<Attribute name="SuperElevation">
+				<sFloat32>
+					<Element>
+						<Value>0</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="CatenaryBlueprint">
+				<iBlueprintLibrary-cAbsoluteBlueprintID>
+					<Element>
+						<Value>
+							<Attribute name="BlueprintSetID">
+								<iBlueprintLibrary-cBlueprintSetID>
+									<Element>
+										<Value>
+											<Attribute name="Provider">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Product">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cBlueprintSetID>
+							</Attribute>
+							<Attribute name="BlueprintID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</iBlueprintLibrary-cAbsoluteBlueprintID>
+			</Attribute>
+			<Attribute name="ThirdRailBlueprint">
+				<iBlueprintLibrary-cAbsoluteBlueprintID>
+					<Element>
+						<Value>
+							<Attribute name="BlueprintSetID">
+								<iBlueprintLibrary-cBlueprintSetID>
+									<Element>
+										<Value>
+											<Attribute name="Provider">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Product">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cBlueprintSetID>
+							</Attribute>
+							<Attribute name="BlueprintID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</iBlueprintLibrary-cAbsoluteBlueprintID>
+			</Attribute>
+			<Attribute name="FourthRailBlueprint">
+				<iBlueprintLibrary-cAbsoluteBlueprintID>
+					<Element>
+						<Value>
+							<Attribute name="BlueprintSetID">
+								<iBlueprintLibrary-cBlueprintSetID>
+									<Element>
+										<Value>
+											<Attribute name="Provider">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Product">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cBlueprintSetID>
+							</Attribute>
+							<Attribute name="BlueprintID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</iBlueprintLibrary-cAbsoluteBlueprintID>
+			</Attribute>
+			<Attribute name="ManualJunctionEntity">
+				<iTrackRulesBlueprint-sPatternEntityDesc>
+					<Element>
+						<Value>
+							<Attribute name="Blueprint">
+								<iBlueprintLibrary-cAbsoluteBlueprintID>
+									<Element>
+										<Value>
+											<Attribute name="BlueprintSetID">
+												<iBlueprintLibrary-cBlueprintSetID>
+													<Element>
+														<Value>
+															<Attribute name="Provider">
+																<cDeltaString>
+																	<Element>
+																		<Value />
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+															<Attribute name="Product">
+																<cDeltaString>
+																	<Element>
+																		<Value />
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+														</Value>
+													</Element>
+												</iBlueprintLibrary-cBlueprintSetID>
+											</Attribute>
+											<Attribute name="BlueprintID">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cAbsoluteBlueprintID>
+							</Attribute>
+							<Attribute name="SidewaysOffset">
+								<sFloat32>
+									<Element>
+										<Value>1.57</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="AnimID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="TransitionTime">
+								<sFloat32>
+									<Element>
+										<Value>2</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+						</Value>
+					</Element>
+				</iTrackRulesBlueprint-sPatternEntityDesc>
+			</Attribute>
+			<Attribute name="AutomaticJunctionEntity">
+				<iTrackRulesBlueprint-sPatternEntityDesc>
+					<Element>
+						<Value>
+							<Attribute name="Blueprint">
+								<iBlueprintLibrary-cAbsoluteBlueprintID>
+									<Element>
+										<Value>
+											<Attribute name="BlueprintSetID">
+												<iBlueprintLibrary-cBlueprintSetID>
+													<Element>
+														<Value>
+															<Attribute name="Provider">
+																<cDeltaString>
+																	<Element>
+																		<Value>briman0094</Value>
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+															<Attribute name="Product">
+																<cDeltaString>
+																	<Element>
+																		<Value>CTA</Value>
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+														</Value>
+													</Element>
+												</iBlueprintLibrary-cBlueprintSetID>
+											</Attribute>
+											<Attribute name="BlueprintID">
+												<cDeltaString>
+													<Element>
+														<Value>RailNetwork\Junctions\Automatic Junction.xml</Value>
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cAbsoluteBlueprintID>
+							</Attribute>
+							<Attribute name="SidewaysOffset">
+								<sFloat32>
+									<Element>
+										<Value>1.57</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="AnimID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="TransitionTime">
+								<sFloat32>
+									<Element>
+										<Value>2</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+						</Value>
+					</Element>
+				</iTrackRulesBlueprint-sPatternEntityDesc>
+			</Attribute>
+			<Attribute name="TrackSpeedLimitColours">
+				<__Indexed__iTrackRulesBlueprint-sTrackSpeedLimitColours>
+					<Element>
+						<Value />
+					</Element>
+				</__Indexed__iTrackRulesBlueprint-sTrackSpeedLimitColours>
+			</Attribute>
+			<Attribute name="BrowseInformation">
+				<iBrowseableBlueprint-cBrowseInformation>
+					<Element>
+						<Value>
+							<Attribute name="DisplayName">
+								<Localisation-cUserLocalisedString>
+									<Element>
+										<Value>
+											<Attribute name="English">
+												<cDeltaString>
+													<Element>
+														<Value>Maglev Track Rules</Value>
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="French">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Italian">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="German">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Spanish">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Dutch">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Polish">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Russian">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Other">
+												<__Indexed__Localisation-cUserLocalisedString-cOtherStringLangPair>
+													<Element>
+														<Value />
+													</Element>
+												</__Indexed__Localisation-cUserLocalisedString-cOtherStringLangPair>
+											</Attribute>
+											<Attribute name="Key">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</Localisation-cUserLocalisedString>
+							</Attribute>
+							<Attribute name="Description">
+								<Localisation-cUserLocalisedString>
+									<Element>
+										<Value>
+											<Attribute name="English">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="French">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Italian">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="German">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Spanish">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Dutch">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Polish">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Russian">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+											<Attribute name="Other">
+												<__Indexed__Localisation-cUserLocalisedString-cOtherStringLangPair>
+													<Element>
+														<Value />
+													</Element>
+												</__Indexed__Localisation-cUserLocalisedString-cOtherStringLangPair>
+											</Attribute>
+											<Attribute name="Key">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</Localisation-cUserLocalisedString>
+							</Attribute>
+							<Attribute name="Category">
+								<iBrowseableBlueprint-eBrowseableCategory>
+									<Element>
+										<Value>eTrack</Value>
+									</Element>
+								</iBrowseableBlueprint-eBrowseableCategory>
+							</Attribute>
+							<Attribute name="ValidInScenarios">
+								<eBoolean>
+									<Element>
+										<Value>eFalse</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+						</Value>
+					</Element>
+				</iBrowseableBlueprint-cBrowseInformation>
+			</Attribute>
+		</Value>
+	</Element>
+</cTrackRulesBlueprint>
