@@ -209,10 +209,10 @@ function UpdateATO( interval )
 		SetControlValue( "db_SpdBuffer", spdBuffer )
 		
 		if ( atoStopping > 0.5 ) then
-			local distBuffer = 1.05
+			local distBuffer = 2.0
 			statStopTime = statStopTime + interval
 			
-			if ( ( sigDist < 1.05 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			if ( ( sigDist < 0.25 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then atoIsStopped = 1.0 end
@@ -260,7 +260,8 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), 1.0 * MPH_TO_MPS ) )
+				local minStopSpeed = mapRange( sigDist, 2.5, 1.0, 2.0, 0.5, true ) * MPH_TO_MPS
+				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
 			end
 			
 			if ( sigAspect ~= SIGNAL_STATE_STATION or sigDist > statStopDistance + 15 and atoIsStopped < 2.5 ) then -- Lost station marker; possibly overshot
@@ -286,12 +287,14 @@ function UpdateATO( interval )
 		pidTargetSpeed = targetSpeed
 		Call( "*:SetControlValue", "ATOTargetSpeed", 0, targetSpeed )
 		Call( "*:SetControlValue", "ATOOverrun", 0, round( atoOverrunDist * 100.0, 2 ) )
-		if ( targetSpeed < 0.25 ) then
+		if ( targetSpeed < 0.1 ) then
 				atoThrottle = -1.0
 		else
 			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
 			atoK_P = 1.0 / 4.0
-			if ( atoStopping > 0 ) then atoK_P = atoK_P * 2.0 end
+			if ( atoStopping > 0 ) then
+				atoK_P = atoK_P * mapRange( targetSpeed, 2.0, 0.2, 2.0, 10.0, true )
+			end
 			
 			-- Prevents I buildup while brakes are releasing, etc
 			if ( trainSpeedMPH < 5.0 and atoThrottle > 0.0 ) then resetPid( "ato" ) end

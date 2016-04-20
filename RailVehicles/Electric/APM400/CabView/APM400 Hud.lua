@@ -1,8 +1,8 @@
 --include=..\..\..\..\Scripts\APM Util.lua
 
-G_SPEED_WARNING_INTERVAL = 0.5 -- Seconds
+G_BLINK_INTERVAL 	= 0.5 -- Seconds
 
-gSetupHUD = false
+gSetupHUD 			= false
 
 function SetupHUD()
 	
@@ -11,9 +11,10 @@ function SetupHUD()
 	gSpeedWarningTimer 	= 0.0
 	
 	-- Doors
-	
 	gDoorsLeft 			= false
 	gDoorsRight 		= false
+	gDoorsBlink			= true
+	gDoorsBlinkTimer	= 0.0
 	
 	-- End
 	
@@ -35,13 +36,14 @@ function UpdateHUD(time)
 	local DoorsLeft  			= GetControlValue( "DoorsLeftGlobal"  		) > 0.5
 	local DoorsRight 			= GetControlValue( "DoorsRightGlobal" 		) > 0.5
 	local DoorsOpen  			= GetControlValue( "DoorsOpen" 				) > 0.5
+	local DoorsClosing			= GetControlValue( "DoorsClosing" 			) > 0.5
 	
 	-- Overspeed Warning
 	
 	if TrainSpeed >= SpeedLimit + 1.0 then
 		gSpeedWarningTimer = gSpeedWarningTimer + time
 		
-		if gSpeedWarningTimer >= G_SPEED_WARNING_INTERVAL then
+		if gSpeedWarningTimer >= G_BLINK_INTERVAL then
 			gSpeedWarning = not gSpeedWarning
 			gSpeedWarningTimer = 0.0
 		end
@@ -71,8 +73,19 @@ function UpdateHUD(time)
 		gDoorsRight = false
 	end
 	
-	SetControlValue( "HUD_DoorsLeft" , gDoorsLeft  and 1 or 0 )
-	SetControlValue( "HUD_DoorsRight", gDoorsRight and 1 or 0 )
+	if DoorsClosing then
+		gDoorsBlinkTimer = gDoorsBlinkTimer + time
+	
+		if ( gDoorsBlinkTimer >= G_BLINK_INTERVAL ) then
+			gDoorsBlink = not gDoorsBlink
+			gDoorsBlinkTimer = 0.0
+		end
+	else
+		gDoorsBlink = true
+	end
+	
+	SetControlValue( "HUD_DoorsLeft" , ( gDoorsLeft  and gDoorsBlink ) and 1 or 0 )
+	SetControlValue( "HUD_DoorsRight", ( gDoorsRight and gDoorsBlink ) and 1 or 0 )
 	
 	-- Speed Digits
 	

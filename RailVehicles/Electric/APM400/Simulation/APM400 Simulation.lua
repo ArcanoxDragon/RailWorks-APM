@@ -164,8 +164,8 @@ function Update( gTimeDelta )
 			end
 			
 			-- Reduce jerk while train comes to a complete stop
-			if ( AbsSpeed < 6.5 ) then
-				local maxBrake = clamp( mapRange( AbsSpeed, 6.5, 1.0, 1.0, 0.325 ), gMinBrakeAdjust, 1.0 )
+			if ( AbsSpeed < 7.0 ) then
+				local maxBrake = clamp( mapRange( AbsSpeed, 7.0, 1.0, 1.0, 0.325 ), gMinBrakeAdjust, 1.0 )
 				tTAccel = math.max( tTAccel, -maxBrake )
 			end
 			

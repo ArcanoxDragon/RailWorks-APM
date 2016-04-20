@@ -44,10 +44,6 @@ function ThrottleControl:update( interval )
 	else
 		self.value = self.target
 	end
-	
-	SetControlValue( "DebugA", self.jerkLimit )
-	SetControlValue( "DebugB", jerkLimit )
-	SetControlValue( "DebugC", targetJerk )
 end
 
 function ThrottleControl:getProgress()

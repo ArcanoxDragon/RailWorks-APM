@@ -9,56 +9,59 @@
 
 function Initialise( )
 -- For AWS self test.
-	gAWSReady = TRUE
-	gAWSTesting = FALSE
+	gAWSReady			= TRUE
+	gAWSTesting			= FALSE
 
 -- Stores for checking when values have changed.
-	gDriven = -1
-	gHeadlight = -1
-	gTaillight = -1
-	gInitialised = FALSE
+	gDriven				= -1
+	gHeadlight			= -1
+	gTaillight			= -1
+	gInitialised		= FALSE
 
 -- TractionRelay
-	gTractionRelay = false
-	gLastTractionRelay = false
+	gTractionRelay		= false
+	gLastTractionRelay	= false
 	
 -- Lead car pinging
-	gTrailingCars = {}
+	gTrailingCars		= {}
 
-	gPingDelay = 1.0 -- seconds
-	gPingTimeout = 3.0 -- seconds til a car "disappears"
-	gPingMessage = 4001
+	gPingDelay			= 1.0 -- seconds
+	gPingTimeout		= 3.0 -- seconds til a car "disappears"
+	gPingMessage		= 4001
 	
-	gTimeSincePing = gPingDelay
+	gTimeSincePing		= gPingDelay
 	
 -- Door interlocks
 	-- For controlling delayed doors interlocks.
-	DOORDELAYTIME = 6.5 -- seconds.
-	gDoorsDelay = 0.0
-	gDoorsLeft = false
-	gDoorsRight = false
-	gLastDoorsLeft = false
-	gLastDoorsRight = false
+	DOORDELAYTIME		= 6.5 -- seconds.
+	gDoorsDelay			= 0.0
+	gDoorsLeft			= false
+	gDoorsRight			= false
+	gDoorsClosing		= false
+	gLastDoorsLeft		= false
+	gLastDoorsRight		= false
 	
 -- Misc variables
-	gInit = false
+	gInit				= false
 
 	Call( "BeginUpdate" )
 end
 
 -- Message: carNum|leftDoors|rightDoors
 function OnCarPing( pingMsg )
-	local valTable = split( pingMsg, "|" )
+	local valTable		= split( pingMsg, "|" )
 	
-	local carNum = valTable[ 1 ]
-	local doorsLeft = valTable[ 2 ] and valTable[ 2 ] ~= "0"
-	local doorsRight = valTable[ 3 ] and valTable[ 3 ] ~= "0"
+	local carNum		= valTable[ 1 ]
+	local doorsLeft		= valTable[ 2 ] and valTable[ 2 ] ~= "0"
+	local doorsRight	= valTable[ 3 ] and valTable[ 3 ] ~= "0"
+	local doorsClosing	= valTable[ 4 ] and valTable[ 4 ] ~= "0"
 	
 	gTrailingCars[ carNum ] = {
-		carNum = carNum,
-		doorsLeft = doorsLeft,
-		doorsRight = doorsRight,
-		sincePing = 0
+		carNum			= carNum,
+		doorsLeft		= doorsLeft,
+		doorsRight		= doorsRight,
+		doorsClosing	= doorsClosing,
+		sincePing		= 0
 	}
 end
 
@@ -68,10 +71,11 @@ function UpdateTrailingCars( time )
 			v.sincePing = v.sincePing + time
 			
 			if ( v.sincePing >= gPingTimeout ) then
-				gTrailingCars[ k ] = nil
+				gTrailingCars[ k ]	= nil
 			else
-				gDoorsLeft = gDoorsLeft or v.doorsLeft
-				gDoorsRight = gDoorsRight or v.doorsRight
+				gDoorsLeft			= gDoorsLeft	or v.doorsLeft
+				gDoorsRight			= gDoorsRight	or v.doorsRight
+				gDoorsClosing		= gDoorsClosing	or v.doorsClosing
 			end
 		end
 	end
@@ -85,9 +89,10 @@ end
 function OnCameraEnter( cabEnd, carriage )
 	-- Reset door controls as they may switch sides when switching to a car facing the other way
 	-- (this will fix the HUD showing both sides open at once)
-	SetControlValue( "DoorsLeftGlobal", 0 )
-	SetControlValue( "DoorsRightGlobal", 0 )
-	SetControlValue( "DoorsOpen", 0 )
+	SetControlValue( "DoorsLeftGlobal"	, 0 )
+	SetControlValue( "DoorsRightGlobal"	, 0 )
+	SetControlValue( "DoorsClosing"		, 0 )
+	SetControlValue( "DoorsOpen"		, 0 )
 end
 
 function SwapMessageDoors( message )
@@ -111,7 +116,7 @@ function OnConsistMessage( msg, argument, direction )
 	end
 	
 	if ( GetControlValue( "Active" ) == 1 ) then
-		carPrint( table.concat( { msg, argument, direction }, "; " ) )
+		--carPrint( table.concat( { msg, argument, direction }, "; " ) )
 	end
 	
 	if ( msg == gPingMessage and direction == 1 ) then
@@ -125,17 +130,18 @@ function OnConsistMessage( msg, argument, direction )
 end
 
 function Update( time )
-	local trainSpeed = Call( "GetSpeed" ) * MPS_TO_MPH
-	local accel = Call( "GetAcceleration" ) * MPS_TO_MPH
-	local reverser = GetControlValue( "Reverser" )
-	local atoEnabled = GetControlValue( "ATOEnabled" ) > 0.5
-	local ammeter = GetControlValue( "Ammeter" )
+	local trainSpeed	= Call				( "GetSpeed"			) * MPS_TO_MPH
+	local accel			= Call				( "GetAcceleration"		) * MPS_TO_MPH
+	local reverser		= GetControlValue	( "Reverser"			)
+	local atoEnabled	= GetControlValue	( "ATOEnabled"			) > 0.5
+	local ammeter		= GetControlValue	( "Ammeter"				)
 	local throttle
-	local leftDoors = GetControlValue( "DoorsOpenCloseLeft" ) > 0.5
-	local rightDoors = GetControlValue( "DoorsOpenCloseRight" ) > 0.5
-	local doors = leftDoors or rightDoors
-	gDoorsLeft = leftDoors
-	gDoorsRight = rightDoors
+	local leftDoors		= GetControlValue	( "DoorsOpenCloseLeft"	) > 0.5
+	local rightDoors	= GetControlValue	( "DoorsOpenCloseRight"	) > 0.5
+	local doors			= leftDoors or rightDoors
+	gDoorsLeft			= leftDoors
+	gDoorsRight			= rightDoors
+	gDoorsClosing		= false
 	
 	if ( GetControlValue( "Active" ) == 1 ) then
 		UpdateTrailingCars( time )
@@ -146,17 +152,18 @@ function Update( time )
 	if ( doors ) then
 		gDoorsDelay = DOORDELAYTIME
 		
-		gLastDoorsLeft = gDoorsLeft
-		gLastDoorsRight = gDoorsRight
+		gLastDoorsLeft	= gDoorsLeft
+		gLastDoorsRight	= gDoorsRight
 	else
 		if ( gDoorsDelay > 0.0 ) then
-			gDoorsDelay = gDoorsDelay - time
-			gDoorsLeft = gLastDoorsLeft
-			gDoorsRight = gLastDoorsRight
+			gDoorsDelay		= gDoorsDelay - time
+			gDoorsLeft		= gLastDoorsLeft
+			gDoorsRight		= gLastDoorsRight
+			gDoorsClosing	= true
 		else
 			if ( gLastDoorsLeft or gLastDoorsRight ) then
-				gLastDoorsLeft = false
-				gLastDoorsRight = false
+				gLastDoorsLeft	= false
+				gLastDoorsRight	= false
 			end
 		end
 	end
@@ -170,8 +177,8 @@ function Update( time )
 	if ( gTimeSincePing >= gPingDelay and GetControlValue( "Active" ) == 0 ) then
 		gTimeSincePing = 0.0
 		
-		local pingMessageF = Call( "*:GetRVNumber" ) .. "|" .. ( gDoorsRight and "1" or "0" ) .. "|" .. ( gDoorsLeft and "1" or "0" )
-		local pingMessageB = Call( "*:GetRVNumber" ) .. "|" .. ( gDoorsLeft and "1" or "0" ) .. "|" .. ( gDoorsRight and "1" or "0" )
+		local pingMessageF = Call( "*:GetRVNumber" ) .. "|" .. ( gDoorsRight	and "1" or "0" ) .. "|" .. ( gDoorsLeft		and "1" or "0" ) .. "|" .. ( gDoorsClosing and "1" or "0" )
+		local pingMessageB = Call( "*:GetRVNumber" ) .. "|" .. ( gDoorsLeft		and "1" or "0" ) .. "|" .. ( gDoorsRight	and "1" or "0" ) .. "|" .. ( gDoorsClosing and "1" or "0" )
 		Call( "SendConsistMessage", gPingMessage, pingMessageB, 0 )
 		Call( "SendConsistMessage", gPingMessage, pingMessageF, 1 )
 	end
@@ -204,9 +211,10 @@ function Update( time )
 		local cabSpeed = clamp( math.floor( math.abs( trainSpeed ) ), 0, 72 )
 		SetControlValue( "CabSpeedIndicator", cabSpeed )
 		
-		SetControlValue( "DoorsOpen", ( gDoorsLeft or gDoorsRight ) and 1 or 0 )
-		SetControlValue( "DoorsLeftGlobal", gDoorsLeft and 1 or 0 )
-		SetControlValue( "DoorsRightGlobal", gDoorsRight and 1 or 0 )
+		SetControlValue( "DoorsOpen"		, ( gDoorsLeft or gDoorsRight ) and 1 or 0 )
+		SetControlValue( "DoorsLeftGlobal"	, gDoorsLeft	and 1 or 0 )
+		SetControlValue( "DoorsRightGlobal"	, gDoorsRight	and 1 or 0 )
+		SetControlValue( "DoorsClosing"		, gDoorsClosing and 1 or 0 )
 	else
 		Call( "HeadlightL:Activate", 0 )
 		Call( "HeadlightR:Activate", 0 )
