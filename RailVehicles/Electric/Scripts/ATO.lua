@@ -4,7 +4,7 @@ local SIGNAL_STATE_SPEED					= 20
 local SIGNAL_STATE_STATION					= 21
 local ATO_TARGET_DECELERATION				= 1.20 -- Meters/second/second
 local LOW_SPEED_BRAKE_DECELERATION			= 0.2675 -- Meters/second/second
-local LOW_SPEED_BRAKE_APPLY_TIME			= 0.1
+local LOW_SPEED_BRAKE_APPLY_TIME			= 0.02
 local ACCEL_PER_SECOND						= 1.0 / 3.0 -- Units of acceleration per second ( jerk limit, used for extra buffers )
 local DEPART_WAIT_TIME						= 2.0
 local SIG_DIR_CORRECTION_TIME				= 1.0
@@ -164,6 +164,8 @@ function UpdateATO( interval )
 		
 		if ( tSigAspect == SIGNAL_STATE_STATION ) then
 			sigType, sigState, sigDist, sigAspect = tSigType, tSigState, tSigDist, tSigAspect
+		else
+			sigType, sigState, sigAspect = tSigType, tSigState, tSigAspect
 		end
 				
 		sigDistDelta = ( tSigDist - gLastSigDist ) / interval
@@ -216,16 +218,19 @@ function UpdateATO( interval )
 		SetControlValue( "db_SigDist"  , tSigDist   )
 		SetControlValue( "db_SpdBuffer", spdBuffer  )
 		
-		if ( atoStopping > 0.5 ) then
-			local distBuffer = 1.8
+		if ( atoStopping > 0.5 or ( doors and trainSpeedMPH < 0.1 ) ) then
+			local distBuffer = 2.5
 			statStopTime = statStopTime + interval
+			atoStopping = 1
 			
-			local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
+			--local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
 			
-			if ( ( ( fullBrakesStopDist < 0.25 and sigDist < fullBrakesStopDist ) or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			if ( ( sigDist < 0.35 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
 				
-				if ( atoIsStopped < 0.5 ) then atoIsStopped = 1.0 end
+				if ( atoIsStopped < 0.5 ) then 
+					atoIsStopped = 1.0
+				end
 				
 				if ( trainSpeed <= 0.025 ) then
 					if ( atoIsStopped < 1.5 ) then
@@ -233,7 +238,8 @@ function UpdateATO( interval )
 						atoIsStopped = 2.0
 					end
 					
-					if ( doors ) then
+					if ( doors and atoIsStopped < 3.0 ) then
+						SetControlValue( "DepartingStation", 0 )
 						atoIsStopped = 3.0
 					end
 					
@@ -270,7 +276,7 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, 1.8, 0.25, 2.0, 0.5, true ) * MPH_TO_MPS
+				local minStopSpeed = mapRange( sigDist, 2.5, 0.5, 2.0, 0.5, true ) * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
 			end
 			
@@ -303,7 +309,7 @@ function UpdateATO( interval )
 			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
 			atoK_P = 1.0 / 6.0
 			if ( atoStopping > 0 ) then
-				atoK_P = atoK_P * mapRange( trainSpeedMPH, 6.0, 1.0, 2.5, 10.0, true )
+				atoK_P = atoK_P * mapRange( trainSpeedMPH, 5.0, 1.0, 2.5, 10.0, true )
 			end
 			
 			-- Prevents I buildup while brakes are releasing, etc
@@ -314,8 +320,8 @@ function UpdateATO( interval )
 			--atoThrottle = clamp( t, -1.0 - ( 1/8 ), 1.0 + ( 1/8 ) )
 			atoThrottle = clamp( t, -1.0, 1.0 )
 			
-			if ( atoStopping > 0 and trainSpeedMPH < 5.0 and atoThrottle > -0.05 ) then
-				atoThrottle = math.min( atoThrottle, mapRange( trainSpeedMPH, 5.0, 1.5, 1.0, -0.05, true ) )
+			if ( atoStopping > 0 and trainSpeedMPH < 7.0 and atoThrottle > -0.1 ) then
+				atoThrottle = math.min( atoThrottle, mapRange( trainSpeedMPH, 5.0, 2.0, 0.0, -0.1, true ) )
 			end
 			
 			Call( "*:SetControlValue", "PID_Settled", 0, gSettled["ato"] and 1 or 0 )
