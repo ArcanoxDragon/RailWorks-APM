@@ -1,27 +1,30 @@
-local MI_TO_M = 1609.34 -- Miles to Meters
-local M_TO_MI = 1.0 / MI_TO_M -- Meters to Miles
-local SIGNAL_STATE_SPEED = 20
-local SIGNAL_STATE_STATION = 21
-local ATO_TARGET_DECELERATION = 1.20 -- Meters/second/second
-local ACCEL_PER_SECOND = 1.0 / 3.0 -- Units of acceleration per second ( jerk limit, used for extra buffers )
-local DEPART_WAIT_TIME = 2.0
-local SIG_DIR_CORRECTION_TIME = 1.0
-atoK_P = 1.0 / 7.5
-atoK_I = 1.0 / 12.0
-atoK_D = 0.0
-atoMIN_ERROR = -5.0
-atoMAX_ERROR =  5.0
-atoSigDirection = 0
-gSignalDirectionTime = 0
-atoOverrunDist = 0
- sigType,  sigState,  sigDist,  sigAspect = 0, 0, 0, 0
-tSigType, tSigState, tSigDist, tSigAspect = 0, 0, 0, 0
+local MI_TO_M								= 1609.34 -- Miles to Meters
+local M_TO_MI								= 1.0 / MI_TO_M -- Meters to Miles
+local SIGNAL_STATE_SPEED					= 20
+local SIGNAL_STATE_STATION					= 21
+local ATO_TARGET_DECELERATION				= 1.20 -- Meters/second/second
+local LOW_SPEED_BRAKE_DECELERATION			= 0.2675 -- Meters/second/second
+local LOW_SPEED_BRAKE_APPLY_TIME			= 0.1
+local ACCEL_PER_SECOND						= 1.0 / 3.0 -- Units of acceleration per second ( jerk limit, used for extra buffers )
+local DEPART_WAIT_TIME						= 2.0
+local SIG_DIR_CORRECTION_TIME				= 1.0
+
+atoK_P										= 1.0 / 7.5
+atoK_I										= 1.0 / 12.0
+atoK_D										= 0.0
+atoMIN_ERROR								= -5.0
+atoMAX_ERROR								=  5.0
+atoSigDirection								= 0
+gSignalDirectionTime						= 0
+atoOverrunDist								= 0
+ sigType,  sigState,  sigDist,  sigAspect	= 0, 0, 0, 0
+tSigType, tSigState, tSigDist, tSigAspect	= 0, 0, 0, 0
 
 -- Stats variables
-statStopStartingSpeed = 0
-statStopSpeedLimit = 0
-statStopDistance = 0
-statStopTime = 0
+statStopStartingSpeed						= 0
+statStopSpeedLimit							= 0
+statStopDistance							= 0
+statStopTime								= 0
 
 local stopsFile = io.open( "apm_ato_stops.csv", "w" )
 stopsFile:write( "startSpeed_MPH,speedLimit_MPH,distance_m,stopTime_s,berthOffset_cm\n" )
@@ -214,10 +217,12 @@ function UpdateATO( interval )
 		SetControlValue( "db_SpdBuffer", spdBuffer  )
 		
 		if ( atoStopping > 0.5 ) then
-			local distBuffer = 2.1
+			local distBuffer = 1.8
 			statStopTime = statStopTime + interval
 			
-			if ( ( sigDist < 0.24 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
+			
+			if ( ( ( fullBrakesStopDist < 0.25 and sigDist < fullBrakesStopDist ) or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then atoIsStopped = 1.0 end
@@ -265,7 +270,7 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, 2.0, 0.24, 2.0, 0.5, true ) * MPH_TO_MPS
+				local minStopSpeed = mapRange( sigDist, 1.8, 0.25, 2.0, 0.5, true ) * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
 			end
 			

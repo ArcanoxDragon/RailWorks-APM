@@ -715,7 +715,7 @@
 														<Attribute name="BogeyPivotX">
 															<sFloat32>
 																<Element>
-																	<Value>6.125</Value>
+																	<Value>4.5</Value>
 																</Element>
 															</sFloat32>
 														</Attribute>
@@ -772,7 +772,7 @@
 														<Attribute name="BogeyPivotX">
 															<sFloat32>
 																<Element>
-																	<Value>-6.125</Value>
+																	<Value>-4.5</Value>
 																</Element>
 															</sFloat32>
 														</Attribute>

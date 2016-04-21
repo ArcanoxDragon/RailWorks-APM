@@ -5,21 +5,21 @@
 			<Attribute name="WheelRadius">
 				<sFloat32>
 					<Element>
-						<Value>0.5</Value>
+						<Value>0.3556</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
 			<Attribute name="WheelGauge">
 				<sFloat32>
 					<Element>
-						<Value>1.509</Value>
+						<Value>1.435</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
 			<Attribute name="Geometry">
 				<cDeltaString>
 					<Element>
-						<Value />
+						<Value>bogie_back</Value>
 					</Element>
 				</cDeltaString>
 			</Attribute>
@@ -40,14 +40,14 @@
 			<Attribute name="SuspensionStiffness">
 				<sFloat32>
 					<Element>
-						<Value>8E+08</Value>
+						<Value>5000</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
 			<Attribute name="SuspensionDamping">
 				<sFloat32>
 					<Element>
-						<Value>600000</Value>
+						<Value>100</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
@@ -61,7 +61,7 @@
 										<Attribute name="Radius">
 											<sFloat32>
 												<Element>
-													<Value>0.42</Value>
+													<Value>0.15</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -75,7 +75,7 @@
 										<Attribute name="NodeId">
 											<cDeltaString>
 												<Element>
-													<Value />
+													<Value>wheel_b2</Value>
 												</Element>
 											</cDeltaString>
 										</Attribute>
@@ -95,7 +95,7 @@
 										<Attribute name="Radius">
 											<sFloat32>
 												<Element>
-													<Value>0.42</Value>
+													<Value>0.15</Value>
 												</Element>
 											</sFloat32>
 										</Attribute>
@@ -109,7 +109,7 @@
 										<Attribute name="NodeId">
 											<cDeltaString>
 												<Element>
-													<Value />
+													<Value>wheel_b1</Value>
 												</Element>
 											</cDeltaString>
 										</Attribute>
