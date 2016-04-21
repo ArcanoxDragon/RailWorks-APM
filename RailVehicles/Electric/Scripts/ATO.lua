@@ -214,10 +214,10 @@ function UpdateATO( interval )
 		SetControlValue( "db_SpdBuffer", spdBuffer  )
 		
 		if ( atoStopping > 0.5 ) then
-			local distBuffer = 2.75
+			local distBuffer = 2.1
 			statStopTime = statStopTime + interval
 			
-			if ( ( sigDist < 0.255 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			if ( ( sigDist < 0.24 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then atoIsStopped = 1.0 end
@@ -265,7 +265,7 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, 1.5, 0.265, 2.0, 0.5, true ) * MPH_TO_MPS
+				local minStopSpeed = mapRange( sigDist, 2.0, 0.24, 2.0, 0.5, true ) * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
 			end
 			
