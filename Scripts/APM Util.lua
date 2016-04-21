@@ -94,7 +94,10 @@ function mapRange( value, sourceMin, sourceMax, destMin, destMax, doClamp )
 	local normalized = ( value - sourceMin ) / ( sourceMax - sourceMin )
 	
 	if c then
-		return clamp( normalized * ( destMax - destMin ) + destMin, destMin, destMax )
+		local clampMin = math.min( destMin, destMax )
+		local clampMax = math.max( destMin, destMax )
+	
+		return clamp( normalized * ( destMax - destMin ) + destMin, clampMin, clampMax )
 	else
 		return normalized * ( destMax - destMin ) + destMin
 	end

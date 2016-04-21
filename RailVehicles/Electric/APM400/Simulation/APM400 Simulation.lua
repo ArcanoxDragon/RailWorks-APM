@@ -35,7 +35,7 @@ function Setup()
 	MIN_ACCELERATION 			= 0.125
 	MAX_BRAKING 				= 1.0
 	MIN_BRAKING 				= 0.2
-	JERK_LIMIT 					= 1.0 / 1.75
+	JERK_LIMIT 					= 1.0 / 1.45
 	JERK_DELTA 					= JERK_LIMIT * 3.0
 	JERK_THRESHOLD 				= 1.0 / 2.5
 	MAX_SERVICE_BRAKE 			= 1.0
@@ -161,6 +161,7 @@ function Update( gTimeDelta )
 			-- If requesting acceleration and stopped, release brakes instantly
 			if ( tTAccel >= 0 and AbsSpeed < 0.1 ) then
 				tAccel = math.max( tAccel, 0.0 )
+				gThrottleControl.value = math.max( gThrottleControl.value, 0.0 )
 			end
 			
 			-- Reduce jerk while train comes to a complete stop

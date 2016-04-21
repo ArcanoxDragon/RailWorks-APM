@@ -14,6 +14,8 @@ atoMAX_ERROR =  5.0
 atoSigDirection = 0
 gSignalDirectionTime = 0
 atoOverrunDist = 0
+ sigType,  sigState,  sigDist,  sigAspect = 0, 0, 0, 0
+tSigType, tSigState, tSigDist, tSigAspect = 0, 0, 0, 0
 
 -- Stats variables
 statStopStartingSpeed = 0
@@ -116,7 +118,6 @@ function UpdateATO( interval )
 	-- Original plan was to allocate these *outside* the function for performance reasons
 	-- But Lua is stupid so that's not going to happen
 	local atoActive, atoThrottle, targetSpeed, trackSpeed, trainSpeed, doorsLeft, doorsRight, trueThrottle, distCorrection, spdBuffer, trainSpeedMPH
-	local sigType, sigState, sigDist, sigAspect
 	local t, p, i, d
 	
 	local TrackBrake = Call( "*:GetControlValue", "TrackBrake", 0 )
@@ -156,9 +157,13 @@ function UpdateATO( interval )
 		
 		spdBuffer = spdBuffer + accelBuff -- Accomodate for jerk limit
 		
-		sigType, sigState, sigDist, sigAspect = Call( "*:GetNextRestrictiveSignal", atoSigDirection )
+		tSigType, tSigState, tSigDist, tSigAspect = Call( "*:GetNextRestrictiveSignal", atoSigDirection )
+		
+		if ( tSigAspect == SIGNAL_STATE_STATION ) then
+			sigType, sigState, sigDist, sigAspect = tSigType, tSigState, tSigDist, tSigAspect
+		end
 				
-		sigDistDelta = ( sigDist - gLastSigDist ) / interval
+		sigDistDelta = ( tSigDist - gLastSigDist ) / interval
 		if ( sigDistDelta > 0.5 ) then
 			gSignalDirectionTime = gSignalDirectionTime + interval
 		else
@@ -175,7 +180,7 @@ function UpdateATO( interval )
 			end
 		end
 		
-		searchDist = sigDist + 0.1
+		searchDist = tSigDist + 0.1
 		searchCount = 0
 		while ( searchDist < spdBuffer and sigAspect ~= SIGNAL_STATE_STATION and searchCount < 20 ) do
 			tSigType, tSigState, tSigDist, tSigAspect = Call( "*:GetNextRestrictiveSignal", atoSigDirection, searchDist )
@@ -202,17 +207,17 @@ function UpdateATO( interval )
 			end
 		end
 		
-		gLastSigDist = sigDist
+		gLastSigDist = tSigDist
 		
-		SetControlValue( "db_SigAspect", sigAspect )
-		SetControlValue( "db_SigDist"  , sigDist   )
-		SetControlValue( "db_SpdBuffer", spdBuffer )
+		SetControlValue( "db_SigAspect", tSigAspect )
+		SetControlValue( "db_SigDist"  , tSigDist   )
+		SetControlValue( "db_SpdBuffer", spdBuffer  )
 		
 		if ( atoStopping > 0.5 ) then
-			local distBuffer = 2.0
+			local distBuffer = 2.75
 			statStopTime = statStopTime + interval
 			
-			if ( ( sigDist < 0.25 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			if ( ( sigDist < 0.255 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then atoIsStopped = 1.0 end
@@ -260,11 +265,11 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, 2.5, 1.0, 2.0, 0.5, true ) * MPH_TO_MPS
+				local minStopSpeed = mapRange( sigDist, 1.5, 0.265, 2.0, 0.5, true ) * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
 			end
 			
-			if ( sigAspect ~= SIGNAL_STATE_STATION or sigDist > statStopDistance + 15 and atoIsStopped < 2.5 ) then -- Lost station marker; possibly overshot
+			if ( sigAspect ~= SIGNAL_STATE_STATION or tSigDist > statStopDistance + 15 and atoIsStopped < 2.5 ) then -- Lost station marker; possibly overshot
 				atoOverrunDist = atoOverrunDist + ( trainSpeed * interval )
 				targetSpeed = 0.0
 				
@@ -291,21 +296,21 @@ function UpdateATO( interval )
 				atoThrottle = -1.0
 		else
 			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
-			atoK_P = 1.0 / 4.0
+			atoK_P = 1.0 / 6.0
 			if ( atoStopping > 0 ) then
-				atoK_P = atoK_P * mapRange( targetSpeed, 2.0, 0.2, 2.0, 10.0, true )
+				atoK_P = atoK_P * mapRange( trainSpeedMPH, 6.0, 1.0, 2.5, 10.0, true )
 			end
 			
 			-- Prevents I buildup while brakes are releasing, etc
-			if ( trainSpeedMPH < 5.0 and atoThrottle > 0.0 ) then resetPid( "ato" ) end
+			if ( trainSpeedMPH < 5.0 and ( atoStopping > 0 or atoThrottle > 0 ) ) then resetPid( "ato" ) end
 			
 			--t, p, i, d = pid( "ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0, 2.0, pidTargetSpeed )
 			t, p, i, d = pid( "ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0 )
 			--atoThrottle = clamp( t, -1.0 - ( 1/8 ), 1.0 + ( 1/8 ) )
 			atoThrottle = clamp( t, -1.0, 1.0 )
 			
-			if ( atoStopping > 0 and targetSpeed < 1.5 and trainSpeed < 1.0 ) then
-				atoThrottle = clamp( atoThrottle, -1.0, 0.0 )
+			if ( atoStopping > 0 and trainSpeedMPH < 5.0 and atoThrottle > -0.05 ) then
+				atoThrottle = math.min( atoThrottle, mapRange( trainSpeedMPH, 5.0, 1.5, 1.0, -0.05, true ) )
 			end
 			
 			Call( "*:SetControlValue", "PID_Settled", 0, gSettled["ato"] and 1 or 0 )
