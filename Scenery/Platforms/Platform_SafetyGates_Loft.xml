@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cLoftSectionBlueprint>
+	<Element>
+		<Value>
+			<Attribute name="DisplayName">
+				<Localisation-cUserLocalisedString>
+					<Element>
+						<Value>
+							<Attribute name="English">
+								<cDeltaString>
+									<Element>
+										<Value>APM Platform Safety Gates (Loft)</Value>
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="French">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="Italian">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="German">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="Spanish">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="Dutch">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="Polish">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="Russian">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="Other">
+								<__Indexed__Localisation-cUserLocalisedString-cOtherStringLangPair>
+									<Element>
+										<Value />
+									</Element>
+								</__Indexed__Localisation-cUserLocalisedString-cOtherStringLangPair>
+							</Attribute>
+							<Attribute name="Key">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</Localisation-cUserLocalisedString>
+			</Attribute>
+			<Attribute name="EditorGroundOffset">
+				<sFloat32>
+					<Element>
+						<Value>0</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="TrafficManagerBpID">
+				<cDeltaString>
+					<Element>
+						<Value />
+					</Element>
+				</cDeltaString>
+			</Attribute>
+			<Attribute name="Render">
+				<cSectionRenderBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="CrossSectionID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="CrossSectionCapID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="CrossSectionWidth">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="CrossSectionHeight">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="CatenaryID">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+							<Attribute name="StartGeometryBPID">
+								<iBlueprintLibrary-cAbsoluteBlueprintID>
+									<Element>
+										<Value>
+											<Attribute name="BlueprintSetID">
+												<iBlueprintLibrary-cBlueprintSetID>
+													<Element>
+														<Value>
+															<Attribute name="Provider">
+																<cDeltaString>
+																	<Element>
+																		<Value />
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+															<Attribute name="Product">
+																<cDeltaString>
+																	<Element>
+																		<Value />
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+														</Value>
+													</Element>
+												</iBlueprintLibrary-cBlueprintSetID>
+											</Attribute>
+											<Attribute name="BlueprintID">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cAbsoluteBlueprintID>
+							</Attribute>
+							<Attribute name="MiddleGeometryBPID">
+								<iBlueprintLibrary-cAbsoluteBlueprintID>
+									<Element>
+										<Value>
+											<Attribute name="BlueprintSetID">
+												<iBlueprintLibrary-cBlueprintSetID>
+													<Element>
+														<Value>
+															<Attribute name="Provider">
+																<cDeltaString>
+																	<Element>
+																		<Value>briman0094</Value>
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+															<Attribute name="Product">
+																<cDeltaString>
+																	<Element>
+																		<Value>APM</Value>
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+														</Value>
+													</Element>
+												</iBlueprintLibrary-cBlueprintSetID>
+											</Attribute>
+											<Attribute name="BlueprintID">
+												<cDeltaString>
+													<Element>
+														<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cAbsoluteBlueprintID>
+							</Attribute>
+							<Attribute name="EndGeometryBPID">
+								<iBlueprintLibrary-cAbsoluteBlueprintID>
+									<Element>
+										<Value>
+											<Attribute name="BlueprintSetID">
+												<iBlueprintLibrary-cBlueprintSetID>
+													<Element>
+														<Value>
+															<Attribute name="Provider">
+																<cDeltaString>
+																	<Element>
+																		<Value />
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+															<Attribute name="Product">
+																<cDeltaString>
+																	<Element>
+																		<Value />
+																	</Element>
+																</cDeltaString>
+															</Attribute>
+														</Value>
+													</Element>
+												</iBlueprintLibrary-cBlueprintSetID>
+											</Attribute>
+											<Attribute name="BlueprintID">
+												<cDeltaString>
+													<Element>
+														<Value />
+													</Element>
+												</cDeltaString>
+											</Attribute>
+										</Value>
+									</Element>
+								</iBlueprintLibrary-cAbsoluteBlueprintID>
+							</Attribute>
+							<Attribute name="RotateEndGeometry">
+								<eBoolean>
+									<Element>
+										<Value>eTrue</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+							<Attribute name="PopulationFrequency">
+								<sFloat32>
+									<Element>
+										<Value>14</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="ProfileMatchesPopulation">
+								<eBoolean>
+									<Element>
+										<Value>eFalse</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+							<Attribute name="LeftOffset">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="RightOffset">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="CapIfSectionTypeChange">
+								<eBoolean>
+									<Element>
+										<Value>eFalse</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+							<Attribute name="StartBufferOffset">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="EndBufferOffset">
+								<sFloat32>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</sFloat32>
+							</Attribute>
+							<Attribute name="EditorOnly">
+								<eBoolean>
+									<Element>
+										<Value>eFalse</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+							<Attribute name="SpecialCurve">
+								<kCurve-eCurveType>
+									<Element>
+										<Value>eInvalid</Value>
+									</Element>
+								</kCurve-eCurveType>
+							</Attribute>
+						</Value>
+					</Element>
+				</cSectionRenderBlueprint>
+			</Attribute>
+			<Attribute name="CanEditWidth">
+				<eBoolean>
+					<Element>
+						<Value>eFalse</Value>
+					</Element>
+				</eBoolean>
+			</Attribute>
+			<Attribute name="MinimumWidth">
+				<sFloat32>
+					<Element>
+						<Value>0.5</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="MaximumWidth">
+				<sFloat32>
+					<Element>
+						<Value>100</Value>
+					</Element>
+				</sFloat32>
+			</Attribute>
+			<Attribute name="Category">
+				<cLoftSectionBlueprint-eLoftCategory>
+					<Element>
+						<Value>eScenery</Value>
+					</Element>
+				</cLoftSectionBlueprint-eLoftCategory>
+			</Attribute>
+		</Value>
+	</Element>
+</cLoftSectionBlueprint>

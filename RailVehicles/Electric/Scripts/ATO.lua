@@ -219,13 +219,13 @@ function UpdateATO( interval )
 		SetControlValue( "db_SpdBuffer", spdBuffer  )
 		
 		if ( atoStopping > 0.5 or ( doors and trainSpeedMPH < 0.1 ) ) then
-			local distBuffer = 2.5
+			local distBuffer = 2.0
 			statStopTime = statStopTime + interval
 			atoStopping = 1
 			
 			--local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
 			
-			if ( ( sigDist < 0.35 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			if ( ( sigDist < 0.17 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then 
@@ -276,7 +276,7 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, 2.5, 0.5, 2.0, 0.5, true ) * MPH_TO_MPS
+				local minStopSpeed = mapRange( sigDist, 3.5, 0.45, 2.0, 0.5, true ) * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
 			end
 			
@@ -307,13 +307,14 @@ function UpdateATO( interval )
 				atoThrottle = -1.0
 		else
 			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
-			atoK_P = 1.0 / 6.0
 			if ( atoStopping > 0 ) then
-				atoK_P = atoK_P * mapRange( trainSpeedMPH, 5.0, 1.0, 2.5, 10.0, true )
+				atoK_P = 1.0 / mapRange( trainSpeedMPH, 5.0, 2.0, 2.0, 0.5, true )
+			else
+				atoK_P = 1.0 / 6.0
 			end
 			
 			-- Prevents I buildup while brakes are releasing, etc
-			if ( trainSpeedMPH < 5.0 and ( atoStopping > 0 or atoThrottle > 0 ) ) then resetPid( "ato" ) end
+			if ( trainSpeedMPH < 7.0 and ( atoStopping > 0 or atoThrottle > 0 ) ) then resetPid( "ato" ) end
 			
 			--t, p, i, d = pid( "ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0, 2.0, pidTargetSpeed )
 			t, p, i, d = pid( "ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0 )
@@ -341,7 +342,7 @@ function UpdateATO( interval )
 		end]]
 		
 		Call( "*:SetControlValue", "ThrottleAndBrake", 0, ( Call( "*:GetControlValue", "ATOThrottle", 0 ) + 1 ) / 2 )
-		Call( "*:SetControlValue", "ApproachingStation", 0, atoStopping )
+		Call( "*:SetControlValue", "ApproachingStation", 0, ( atoStopping > 0 and trainSpeedMPH > 2.0 ) and 1 or 0 )
 		Call( "*:LockControl", "ApproachingStation", 1 )
 		Call( "*:LockControl", "DepartingStation", 1 )
 	else
