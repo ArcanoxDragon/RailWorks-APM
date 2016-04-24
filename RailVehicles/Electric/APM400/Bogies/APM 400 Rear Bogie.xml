@@ -47,7 +47,7 @@
 			<Attribute name="SuspensionDamping">
 				<sFloat32>
 					<Element>
-						<Value>100</Value>
+						<Value>30</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
