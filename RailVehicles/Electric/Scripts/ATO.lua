@@ -304,7 +304,11 @@ function UpdateATO( interval )
 		Call( "*:SetControlValue", "ATOTargetSpeed", 0, targetSpeed )
 		Call( "*:SetControlValue", "ATOOverrun", 0, round( atoOverrunDist * 100.0, 2 ) )
 		if ( targetSpeed < 0.1 ) then
+			if ( GetControlValue( "DepartingStation" ) > 0 ) then
+				atoThrottle = 0.0
+			else
 				atoThrottle = -1.0
+			end
 		else
 			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
 			if ( atoStopping > 0 ) then

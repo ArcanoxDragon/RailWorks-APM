@@ -30,6 +30,7 @@ function Initialise( )
 	gPingMessage		= 4001
 	
 	gTimeSincePing		= gPingDelay
+	gTimeStopped		= 0.0
 	
 -- Door interlocks
 	-- For controlling delayed doors interlocks.
@@ -262,8 +263,15 @@ function Update( time )
 		Call( "*:ActivateNode", "headlights", 0 )
 	end
 	
+	-- Count stopping time
+	if ( trainSpeed < 0.0025 ) then
+		gTimeStopped = gTimeStopped + time
+	else
+		gTimeStopped = 0.0
+	end
+	
 	-- Traction relay
-	if ( gDoorsOpen ) then
+	if ( gTimeStopped > 0.5 ) then
 		gTractionRelay = false
 	elseif ( ammeter > 0.01 ) then
 		gTractionRelay = true
