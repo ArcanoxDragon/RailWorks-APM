@@ -1,6 +1,7 @@
 --include=..\..\..\..\Scripts\APM Util.lua
 
-G_BLINK_INTERVAL 	= 0.5 -- Seconds
+G_BLINK_INTERVAL 		= 0.5	-- Seconds
+G_FAST_BLINK_INTERVAL 	= 0.25	-- Seconds
 
 gSetupHUD 			= false
 
@@ -15,6 +16,10 @@ function SetupHUD()
 	gDoorsRight 		= false
 	gDoorsBlink			= true
 	gDoorsBlinkTimer	= 0.0
+	
+	-- Skip stop
+	gSkipStopBlink		= true
+	gSkipStopBlinkTimer	= 0.0
 	
 	-- End
 	
@@ -37,6 +42,8 @@ function UpdateHUD(time)
 	local DoorsRight 			= GetControlValue( "DoorsRightGlobal" 		) > 0.5
 	local DoorsOpen  			= GetControlValue( "DoorsOpen" 				) > 0.5
 	local DoorsClosing			= GetControlValue( "DoorsClosing" 			) > 0.5
+	local SkipStop				= GetControlValue( "SkipStop"				) > 0.5
+	local SkippingStop			= GetControlValue( "SkippingStop"			) > 0.5
 	
 	-- Overspeed Warning
 	
@@ -54,6 +61,24 @@ function UpdateHUD(time)
 		gSpeedWarningTimer = 0.0
 		
 		SetControlValue( "HUD_SpeedWarning", 0 )
+	end
+	
+	-- Skip stop
+	
+	if ( SkipStop ) then
+		gSkipStopBlinkTimer = gSkipStopBlinkTimer + time
+		
+		if ( gSkipStopBlinkTimer >= G_FAST_BLINK_INTERVAL ) then
+			gSkipStopBlink		= not gSkipStopBlink
+			gSkipStopBlinkTimer	= 0.0
+		end
+		
+		SetControlValue( "HUD_SkipStop", ( SkippingStop and gSkipStopBlink ) and 0 or 1 )
+	else
+		gSkipStopBlink		= false
+		gSkipStopBlinkTimer	= 0.0
+		
+		SetControlValue( "HUD_SkipStop", 0 )
 	end
 	
 	-- Doors

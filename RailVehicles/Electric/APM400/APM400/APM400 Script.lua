@@ -292,9 +292,9 @@ function OnCustomSignalMessage( argument )
 				SetControlValue( "ATOSpeedLimit", speedLimit )
 			end
 		elseif ( tonumber( msg ) == MSG_BERTH_STATUS ) then
-			local berthed = tonumber( arg ) > 0
+			local berthed = tonumber( arg )
 			
-			SetControlValue( "Berthed", berthed and 1 or 0 )
+			SetControlValue( "Berthed", berthed )
 		end
 	end
 	

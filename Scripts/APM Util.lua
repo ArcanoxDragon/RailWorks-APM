@@ -41,23 +41,23 @@ function debugPrint( msg )
 	debugFile:flush()
 end
 
-function split(pString, pPattern)
+function split( pString, pPattern )
 	local Table = {}
 	local fpat = "(.-)" .. pPattern
 	local last_end = 1
-	local s, e, cap = string.find(pString, fpat, 1)
+	local s, e, cap = string.find( pString, fpat, 1 )
 	
 	while s do
 		if s ~= 1 or cap ~= "" then
-			table.insert(Table,cap)
+			table.insert( Table,cap )
 		end
-		last_end = e+1
-		s, e, cap = string.find(pString, fpat, last_end)
+		last_end = e + 1
+		s, e, cap = string.find( pString, fpat, last_end )
 	end
 	
-	if last_end <= string.len(pString) then
-		cap = string.sub(pString, last_end)
-		table.insert(Table, cap)
+	if last_end <= string.len( pString ) then
+		cap = string.sub( pString, last_end )
+		table.insert( Table, cap )
 	end
 	
 	return Table
@@ -92,6 +92,11 @@ end
 function reverseMsgDir( direction )
 	if ( direction == 0 ) then return 1 end
 	return 0
+end
+
+function SendCustomSignalMessage( messageId, messageVal )
+	local msg = tostring( messageId ) .. "=" .. tostring( messageVal )
+	Call( "SendConsistMessage", MSG_CUSTOM, msg )
 end
 
 function mapRange( value, sourceMin, sourceMax, destMin, destMax, doClamp )

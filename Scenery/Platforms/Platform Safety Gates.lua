@@ -118,12 +118,21 @@ function OnConsistPass( prevFrontDist, prevBackDist, frontDist, backDist, linkIn
 	elseif ( crossingEnd == 1 ) then
 		if gOccupationTable[ linkIndex ] > 0 then gOccupationTable[ linkIndex ] = gOccupationTable[ linkIndex ] - 1 end
 		
-		if ( gOccupationTable[ 0 ] == 0 and gOccupationTable[ 1 ] == 0 ) then gTrainsInside = gTrainsInside + 1 end
+		debugPrint( "ce; li: " .. tostring( linkIndex ) .. "; fd: " .. tostring( frontDist ) .. "; bd: " .. tostring( backDist ) )
+		
+		if ( ( linkIndex == 0 and frontDist < 0 and backDist < 0 ) or ( linkIndex == 1 and frontDist > 0 and backDist > 0 ) ) then -- Entering berth zone
+			debugPrint( "A train entered the berth zone" )
+			if ( gOccupationTable[ 0 ] == 0 and gOccupationTable[ 1 ] == 0 ) then gTrainsInside = gTrainsInside + 1 end
+		end
 	end
 	
 	if ( gTrainsInside ~= gLastTrainsInside ) then
-		Call( "SendConsistMessage", MSG_CUSTOM, "")
+		SendCustomSignalMessage( MSG_BERTH_STATUS, math.min( gTrainsInside, 1 ) )
 	end
 	
 	gLastTrainsInside = gTrainsInside
+end
+
+function OnSignalMessage( a, b, c, d )
+	-- Unused
 end

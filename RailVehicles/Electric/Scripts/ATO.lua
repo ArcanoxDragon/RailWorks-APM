@@ -136,9 +136,10 @@ function UpdateATO( interval )
 	-- Begin Automatic Train Operation ( ATO )
 	atoActive = Call( "*:GetControlValue", "ATOEnabled", 0 )
 	atoThrottle = Call( "*:GetControlValue", "ATOThrottle", 0 )
-	if ( atoActive > 0.0 ) then
-		if ( gLastATO < 0.0 ) then
+	if ( atoActive > 0.5 ) then
+		if ( gLastATO < 0.5 ) then
 			gLastATC = Call( "*:GetControlValue", "ATCEnabled", 0 )
+			gLockSkipStop = 0
 		end
 		
 		Call( "*:SetControlValue", "Headlights", 0, 1 )
@@ -207,6 +208,7 @@ function UpdateATO( interval )
 					atoSkippingStop = 1
 					gLockSkipStop = 1
 					statStopDistance = sigDist
+					atoStopping = 0
 				else
 					if ( atoStopping < 0.5 ) then
 						statStopStartingSpeed = trainSpeed
@@ -235,6 +237,7 @@ function UpdateATO( interval )
 			--local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
 			
 			if ( ( sigDist < 0.28 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+				gLockSkipStop = 1
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then 
@@ -261,6 +264,7 @@ function UpdateATO( interval )
 								atoStopping = 0
 								atoIsStopped = 0
 								atoTimeStopped = 0.0
+								gLockSkipStop = 0
 								
 								-- logStop( startingSpeed, speedLimit, distance, totalStopTime, distanceFromMarker )
 								local berthOffset
@@ -302,9 +306,11 @@ function UpdateATO( interval )
 				end
 			end
 		else
-			if ( sigAspect ~= SIGNAL_STATE_STATION or tSigDist > statStopDistance + 2 ) then
+			if ( ( sigAspect ~= SIGNAL_STATE_STATION or tSigDist > statStopDistance + 2 ) and atoSkippingStop > 0 ) then
 				atoSkippingStop = 0
 				gLockSkipStop = 0
+				SetControlValue( "SkipStop", -1 )
+				debugPrint("Setting to -1")
 			end
 		
 			if ( trainSpeedMPH > 2.0 ) then
@@ -316,6 +322,11 @@ function UpdateATO( interval )
 		end
 		
 		targetSpeed = math.floor( targetSpeed * MPS_TO_MPH * 10 ) / 10 -- Round down to nearest 0.1
+		
+		if ( atoSkippingStop > 0 ) then
+			targetSpeed = math.min( targetSpeed, 35 ) -- If skipping a stop, make sure we don't exceed 35 MPH going through a platform (for safety)
+		end
+		
 		pidTargetSpeed = targetSpeed
 		Call( "*:SetControlValue", "ATOTargetSpeed", 0, targetSpeed )
 		Call( "*:SetControlValue", "ATOOverrun", 0, round( atoOverrunDist * 100.0, 2 ) )
@@ -363,18 +374,19 @@ function UpdateATO( interval )
 		
 		Call( "*:SetControlValue", "ThrottleAndBrake", 0, ( Call( "*:GetControlValue", "ATOThrottle", 0 ) + 1 ) / 2 )
 		Call( "*:SetControlValue", "ApproachingStation", 0, ( atoStopping > 0 and trainSpeedMPH > 2.0 ) and 1 or 0 )
-		Call( "*:LockControl", "ApproachingStation", 1 )
-		Call( "*:LockControl", "DepartingStation", 1 )
-		Call( "*:LockControl", "SkipStop", gLockSkipStop )
+		Call( "*:SetControlValue", "SkippingStop", 0, atoSkippingStop )
+		Call( "*:LockControl", "ApproachingStation", 0, 1 )
+		Call( "*:LockControl", "DepartingStation", 0, 1 )
+		Call( "*:LockControl", "SkipStop", 0, gLockSkipStop )
 	else
-		if ( gLastATO > 0.0 ) then
+		if ( gLastATO > 0.5 ) then
 			Call( "*:SetControlValue", "ThrottleAndBrake", 0, 0 )
 			Call( "*:SetControlValue", "ApproachingStation", 0, 0 )
 			Call( "*:SetControlValue", "DepartingStation", 0, 0 )
-			Call( "*:SetControlValue", "SkipStop", 0, 0 )
-			Call( "*:LockControl", "ApproachingStation", 0 )
-			Call( "*:LockControl", "DepartingStation", 0 )
-			Call( "*:LockControl", "SkipStop", 1 )
+			Call( "*:SetControlValue", "SkipStop", 0, -1 )
+			Call( "*:LockControl", "SkipStop", 0, 1 )
+			Call( "*:LockControl", "ApproachingStation", 0, 0 )
+			Call( "*:LockControl", "DepartingStation", 0, 0 )
 			Call( "*:SetControlValue", "ATCEnabled", 0, gLastATC )
 			Call( "*:SetControlValue", "CancelJerkLimit", 0, 0 )
 			Call( "*:LockControl", "ThrottleAndBrake", 0, 0 )
@@ -383,7 +395,7 @@ function UpdateATO( interval )
 			atoStopping = 0
 			atoSkippingStop = 0
 			atoIsStopped = 0
-			gLockSkipStop = 0
+			gLockSkipStop = 1
 			atoTimeStopped = 0.0
 			resetPid( "ato" )
 		end
