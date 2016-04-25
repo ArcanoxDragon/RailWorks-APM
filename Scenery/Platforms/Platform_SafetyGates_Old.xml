@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cAnimSceneryBlueprint>
+<cSceneryBlueprint>
 	<Element>
 		<Value>
 			<Attribute name="Name">
@@ -188,7 +188,7 @@
 				</iBrowseableBlueprint-cBrowseInformation>
 			</Attribute>
 			<Attribute name="RenderComponent">
-				<cAnimSceneryRenderBlueprint>
+				<cSceneryRenderBlueprint>
 					<Element>
 						<Value>
 							<Attribute name="PrimaryNamedTextureSet">
@@ -385,16 +385,9 @@
 									</Element>
 								</cSceneryRenderBlueprint-sDetailLevelGenerationRange>
 							</Attribute>
-							<Attribute name="AnimSet">
-								<__Indexed__cAnimSceneryRenderBlueprint-cAutoAnimation>
-									<Element>
-										<Value />
-									</Element>
-								</__Indexed__cAnimSceneryRenderBlueprint-cAutoAnimation>
-							</Attribute>
 						</Value>
 					</Element>
-				</cAnimSceneryRenderBlueprint>
+				</cSceneryRenderBlueprint>
 			</Attribute>
 			<Attribute name="PosOriComponent">
 				<cPosOriBlueprint>
@@ -425,6 +418,28 @@
 					</Element>
 				</cEntityContainerBlueprint>
 			</Attribute>
+			<Attribute name="CollisionComponent">
+				<cCollisionComponentBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="Boxes">
+								<__Indexed__cHcR3dBox>
+									<Element>
+										<Value />
+									</Element>
+								</__Indexed__cHcR3dBox>
+							</Attribute>
+							<Attribute name="RequiredAtEndOfTrack">
+								<bool>
+									<Element>
+										<Value>0</Value>
+									</Element>
+								</bool>
+							</Attribute>
+						</Value>
+					</Element>
+				</cCollisionComponentBlueprint>
+			</Attribute>
 		</Value>
 	</Element>
-</cAnimSceneryBlueprint>
+</cSceneryBlueprint>
