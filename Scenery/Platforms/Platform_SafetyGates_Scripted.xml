@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cSceneryBlueprint>
+<cAnimSignalBlueprint>
 	<Element>
 		<Value>
 			<Attribute name="Name">
 				<cDeltaString>
 					<Element>
-						<Value>APM Platform Safety Gates (8)</Value>
+						<Value>APM Platform Safety Gates (Scripted)</Value>
 					</Element>
 				</cDeltaString>
 			</Attribute>
@@ -20,7 +20,7 @@
 											<Attribute name="English">
 												<cDeltaString>
 													<Element>
-														<Value>APM Platform Safety Gates (8)</Value>
+														<Value>APM Platform Safety Gates (Scripted)</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
@@ -187,8 +187,15 @@
 					</Element>
 				</iBrowseableBlueprint-cBrowseInformation>
 			</Attribute>
-			<Attribute name="RenderComponent">
-				<cSceneryRenderBlueprint>
+			<Attribute name="_posori">
+				<cPosOriBlueprint>
+					<Element>
+						<Value />
+					</Element>
+				</cPosOriBlueprint>
+			</Attribute>
+			<Attribute name="_object">
+				<cAnimObjectRenderBlueprint>
 					<Element>
 						<Value>
 							<Attribute name="PrimaryNamedTextureSet">
@@ -385,18 +392,97 @@
 									</Element>
 								</cSceneryRenderBlueprint-sDetailLevelGenerationRange>
 							</Attribute>
+							<Attribute name="AnimSet">
+								<__Indexed__iAnimObjectRenderBlueprint-cAnimation>
+									<Element>
+										<Value>
+											<iAnimObjectRenderBlueprint-cAnimation>
+												<Element>
+													<Value>
+														<Attribute name="AnimationID">
+															<cDeltaString>
+																<Element>
+																	<Value>doors</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="AnimationName">
+															<cDeltaString>
+																<Element>
+																	<Value>Scenery\Platforms\Platform_SafetyGates_Doors.ia</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="AnimateInEditor">
+															<eBoolean>
+																<Element>
+																	<Value>eFalse</Value>
+																</Element>
+															</eBoolean>
+														</Attribute>
+													</Value>
+												</Element>
+											</iAnimObjectRenderBlueprint-cAnimation>
+										</Value>
+									</Element>
+								</__Indexed__iAnimObjectRenderBlueprint-cAnimation>
+							</Attribute>
 						</Value>
 					</Element>
-				</cSceneryRenderBlueprint>
+				</cAnimObjectRenderBlueprint>
 			</Attribute>
-			<Attribute name="PosOriComponent">
-				<cPosOriBlueprint>
+			<Attribute name="_signal">
+				<cSignalComponentBlueprint>
 					<Element>
-						<Value />
+						<Value>
+							<Attribute name="NumberOfTrackLinks">
+								<sUInt32>
+									<Element>
+										<Value>2</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+							<Attribute name="Stopping">
+								<eBoolean>
+									<Element>
+										<Value>eFalse</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+							<Attribute name="JunctionSignalType">
+								<cSignalComponentBlueprint-eJunctionSignalTypes>
+									<Element>
+										<Value>eJunctionTypeNone</Value>
+									</Element>
+								</cSignalComponentBlueprint-eJunctionSignalTypes>
+							</Attribute>
+							<Attribute name="ControlMode">
+								<cSignalComponentBlueprint-eControlModes>
+									<Element>
+										<Value>eControlModeAutomatic</Value>
+									</Element>
+								</cSignalComponentBlueprint-eControlModes>
+							</Attribute>
+						</Value>
 					</Element>
-				</cPosOriBlueprint>
+				</cSignalComponentBlueprint>
 			</Attribute>
-			<Attribute name="ContainerComponent">
+			<Attribute name="_script">
+				<cScriptComponentBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="Name">
+								<cDeltaString>
+									<Element>
+										<Value>Scenery\Platforms\Platform Safety Gates.lua</Value>
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</cScriptComponentBlueprint>
+			</Attribute>
+			<Attribute name="_container">
 				<cEntityContainerBlueprint>
 					<Element>
 						<Value>
@@ -450,7 +536,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -603,7 +689,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -756,7 +842,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -909,7 +995,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -1062,7 +1148,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -1215,7 +1301,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -1368,7 +1454,7 @@
 																		<Attribute name="BlueprintID">
 																			<cDeltaString>
 																				<Element>
-																					<Value>Scenery\Platforms\Platform_SafetyGates.xml</Value>
+																					<Value>Scenery\Platforms\Platform_SafetyGates_Scripted_Child.xml</Value>
 																				</Element>
 																			</cDeltaString>
 																		</Attribute>
@@ -1490,28 +1576,6 @@
 					</Element>
 				</cEntityContainerBlueprint>
 			</Attribute>
-			<Attribute name="CollisionComponent">
-				<cCollisionComponentBlueprint>
-					<Element>
-						<Value>
-							<Attribute name="Boxes">
-								<__Indexed__cHcR3dBox>
-									<Element>
-										<Value />
-									</Element>
-								</__Indexed__cHcR3dBox>
-							</Attribute>
-							<Attribute name="RequiredAtEndOfTrack">
-								<bool>
-									<Element>
-										<Value>0</Value>
-									</Element>
-								</bool>
-							</Attribute>
-						</Value>
-					</Element>
-				</cCollisionComponentBlueprint>
-			</Attribute>
 		</Value>
 	</Element>
-</cSceneryBlueprint>
+</cAnimSignalBlueprint>
