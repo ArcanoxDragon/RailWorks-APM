@@ -2,7 +2,7 @@
 
 PRINT_TIME			= 0.1
 OPEN_DELAY			= 1.5
-OPEN_TIME			= 13.75
+OPEN_TIME			= 14.25
 ANIM_TIME			= 2.0
 NUM_CHILDREN		= 7
 
@@ -13,6 +13,7 @@ gAnimTime			= 0.0
 
 gOccupationTable	= {}
 gTrainsInside		= 0
+gLastTrainsInside	= 0
 gLastConsistSpeed	= 0.0
 gTrainStopped		= false
 gDoorsOpen			= false
@@ -119,4 +120,10 @@ function OnConsistPass( prevFrontDist, prevBackDist, frontDist, backDist, linkIn
 		
 		if ( gOccupationTable[ 0 ] == 0 and gOccupationTable[ 1 ] == 0 ) then gTrainsInside = gTrainsInside + 1 end
 	end
+	
+	if ( gTrainsInside ~= gLastTrainsInside ) then
+		
+	end
+	
+	gLastTrainsInside = gTrainsInside
 end

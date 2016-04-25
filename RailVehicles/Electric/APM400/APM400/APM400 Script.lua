@@ -264,17 +264,17 @@ function Update( time )
 	end
 	
 	-- Count stopping time
-	if ( trainSpeed < 0.0025 ) then
+	if ( trainSpeed < 0.005 ) then
 		gTimeStopped = gTimeStopped + time
 	else
 		gTimeStopped = 0.0
 	end
 	
 	-- Traction relay
-	if ( gTimeStopped > 0.5 ) then
-		gTractionRelay = false
-	elseif ( ammeter > 0.01 ) then
+	if ( ammeter > 0.01 ) then
 		gTractionRelay = true
+	elseif ( gTimeStopped > 0.5 ) then
+		gTractionRelay = false
 	end
 	
 	if ( gTractionRelay ~= gLastTractionRelay ) then
@@ -285,12 +285,16 @@ function Update( time )
 end
 
 function OnCustomSignalMessage( argument )
-	for msg, arg in string.gfind( tostring( argument ), "( [^=\n]+ )=( [^=\n]+ )" ) do
+	for msg, arg in string.gfind( tostring( argument ), "([^=\n]+)=([^=\n]+)" ) do
 		if ( tonumber( msg ) == MSG_ATO_SPEED_LIMIT ) then
 			local speedLimit = tonumber( arg )
 			if ( speedLimit ) then
 				SetControlValue( "ATOSpeedLimit", speedLimit )
 			end
+		elseif ( tonumber( msg ) == MSG_BERTH_STATUS ) then
+			local berthed = tonumber( arg ) > 0
+			
+			SetControlValue( "Berthed", berthed and 1 or 0 )
 		end
 	end
 	

@@ -268,7 +268,7 @@
 							<Attribute name="GeometryID">
 								<cDeltaString>
 									<Element>
-										<Value>Scenery\Platforms\Platform_SafetyGates.igs</Value>
+										<Value>Scenery\Platforms\Platform_SafetyGates_NoDoors.igs</Value>
 									</Element>
 								</cDeltaString>
 							</Attribute>

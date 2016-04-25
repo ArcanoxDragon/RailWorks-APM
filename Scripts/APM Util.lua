@@ -5,13 +5,18 @@ MPH_TO_MiPS = 0.000277777778 -- Miles/Hour to Miles/Second
 pi = 3.14159265
 
 -- Why RailWorks defined these, I have no clue, but I'm keeping them defined anyways...
-TRUE = 1
-FALSE = 0
+TRUE				= 1
+FALSE				= 0
 
 -- Digits constants
+PRIMARY_DIGITS		= 0
+SECONDARY_DIGITS	= 1
 
-PRIMARY_DIGITS = 0
-SECONDARY_DIGITS = 1
+-- Custom signal message
+MSG_CUSTOM			= 15
+
+MSG_ATO_SPEED_LIMIT	= 42
+MSG_BERTH_STATUS	= 47
 
 function GetControlValue( name )
 	return Call( "*:GetControlValue", name, 0 )
