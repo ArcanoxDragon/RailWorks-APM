@@ -122,7 +122,7 @@ function OnConsistPass( prevFrontDist, prevBackDist, frontDist, backDist, linkIn
 	end
 	
 	if ( gTrainsInside ~= gLastTrainsInside ) then
-		
+		Call( "SendConsistMessage", MSG_CUSTOM, "")
 	end
 	
 	gLastTrainsInside = gTrainsInside
