@@ -108,7 +108,7 @@ function pid( pidName, tD, kP, kI, kD, target, real, minErr, maxErr, buffer, iTa
 end
 
 gLastATO 				= 1
-gLastATC 				= 0
+gLastATC 				= 1
 gLastATOThrottle 		= 0
 gLockSkipStop			= 0
 atoSigDirection 		= 0

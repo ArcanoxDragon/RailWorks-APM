@@ -44,7 +44,8 @@ function Initialise( )
 	
 -- Misc variables
 	gInit				= false
-
+	gLastSkipStopToggle	= false
+	
 	Call( "BeginUpdate" )
 end
 
@@ -199,6 +200,19 @@ function Update( time )
 	--if ( Call( "GetIsPlayer" ) == 1 ) then
 
 	if ( GetControlValue( "Active" ) == 1 ) then
+		if ( GetControlValue( "SkipStopToggle" ) > 0 ) then
+			if ( not gLastSkipStopToggle and Call( "*:IsControlLocked", "SkipStop", 0 ) < 1 ) then
+				gLastSkipStopToggle = true
+				
+				if ( GetControlValue( "SkipStop" ) < 0 ) then
+					SetControlValue( "SkipStop", 1 )
+				else
+					SetControlValue( "SkipStop", -1 )
+				end
+			end
+		else
+			gLastSkipStopToggle = false
+		end
 		
 		Headlights = GetControlValue( "Headlights" )
 		if ( Headlights > 0.5 ) then
@@ -264,14 +278,14 @@ function Update( time )
 	end
 	
 	-- Count stopping time
-	if ( trainSpeed < 0.005 ) then
+	if ( math.abs( trainSpeed ) < 0.01 ) then
 		gTimeStopped = gTimeStopped + time
 	else
 		gTimeStopped = 0.0
 	end
 	
 	-- Traction relay
-	if ( ammeter > 0.01 ) then
+	if ( ammeter > 1.0 ) then
 		gTractionRelay = true
 	elseif ( gTimeStopped > 0.5 ) then
 		gTractionRelay = false

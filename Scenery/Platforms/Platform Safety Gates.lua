@@ -118,10 +118,7 @@ function OnConsistPass( prevFrontDist, prevBackDist, frontDist, backDist, linkIn
 	elseif ( crossingEnd == 1 ) then
 		if gOccupationTable[ linkIndex ] > 0 then gOccupationTable[ linkIndex ] = gOccupationTable[ linkIndex ] - 1 end
 		
-		debugPrint( "ce; li: " .. tostring( linkIndex ) .. "; fd: " .. tostring( frontDist ) .. "; bd: " .. tostring( backDist ) )
-		
 		if ( ( linkIndex == 0 and frontDist < 0 and backDist < 0 ) or ( linkIndex == 1 and frontDist > 0 and backDist > 0 ) ) then -- Entering berth zone
-			debugPrint( "A train entered the berth zone" )
 			if ( gOccupationTable[ 0 ] == 0 and gOccupationTable[ 1 ] == 0 ) then gTrainsInside = gTrainsInside + 1 end
 		end
 	end
