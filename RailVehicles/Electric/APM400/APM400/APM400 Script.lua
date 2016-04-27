@@ -15,6 +15,7 @@ function Initialise( )
 -- Stores for checking when values have changed.
 	gDriven				= -1
 	gHeadlight			= -1
+	gLastStartup		= false
 	gTaillight			= -1
 	gInitialised		= FALSE
 
@@ -135,6 +136,7 @@ function Update( time )
 	local trainSpeed	= Call				( "GetSpeed"			) * MPS_TO_MPH
 	local accel			= Call				( "GetAcceleration"		) * MPS_TO_MPH
 	local reverser		= GetControlValue	( "Reverser"			)
+	local startup		= GetControlValue	( "Startup"				) > 0.5
 	local atoEnabled	= GetControlValue	( "ATOEnabled"			) > 0.5
 	local ammeter		= GetControlValue	( "Ammeter"				)
 	local throttle
@@ -148,6 +150,17 @@ function Update( time )
 	if ( GetControlValue( "Active" ) == 1 ) then
 		UpdateTrailingCars( time )
 	end
+	
+	-- Interior lights
+	
+	if ( startup ~= gLastStartup ) then
+		Call( "IntLightFrontCenter:Activate", startup and 1 or 0 )
+		Call( "IntLightBackCenter:Activate"	, startup and 1 or 0 )
+		Call( "IntLightFront:Activate"		, startup and 1 or 0 )
+		Call( "IntLightBack:Activate"		, startup and 1 or 0 )
+	end
+	
+	gLastStartup = startup
 	
 	-- Doors
 	

@@ -179,7 +179,7 @@
 							<Attribute name="ValidInScenarios">
 								<eBoolean>
 									<Element>
-										<Value>eFalse</Value>
+										<Value>eTrue</Value>
 									</Element>
 								</eBoolean>
 							</Attribute>
@@ -403,7 +403,7 @@
 							<Attribute name="Radius">
 								<sFloat32>
 									<Element>
-										<Value>15</Value>
+										<Value>4</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -414,21 +414,21 @@
 											<Attribute name="Red">
 												<sFloat32>
 													<Element>
-														<Value>0.5676348</Value>
+														<Value>0.6630705</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
 											<Attribute name="Green">
 												<sFloat32>
 													<Element>
-														<Value>0.6182573</Value>
+														<Value>0.7302905</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
 											<Attribute name="Blue">
 												<sFloat32>
 													<Element>
-														<Value>0.6597511</Value>
+														<Value>0.7593362</Value>
 													</Element>
 												</sFloat32>
 											</Attribute>
@@ -453,7 +453,7 @@
 							<Attribute name="DayNightCycle">
 								<bool>
 									<Element>
-										<Value>1</Value>
+										<Value>0</Value>
 									</Element>
 								</bool>
 							</Attribute>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cSpotLightBlueprint>
+<cAnimSignalBlueprint>
 	<Element>
 		<Value>
 			<Attribute name="Name">
 				<cDeltaString>
 					<Element>
-						<Value>APM400 Headlight</Value>
+						<Value>APM Platform Screen Doors (Script Child)</Value>
 					</Element>
 				</cDeltaString>
 			</Attribute>
@@ -20,7 +20,7 @@
 											<Attribute name="English">
 												<cDeltaString>
 													<Element>
-														<Value />
+														<Value>APM Platform Screen Doors (Script Child)</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
@@ -179,7 +179,7 @@
 							<Attribute name="ValidInScenarios">
 								<eBoolean>
 									<Element>
-										<Value>eFalse</Value>
+										<Value>eTrue</Value>
 									</Element>
 								</eBoolean>
 							</Attribute>
@@ -187,8 +187,15 @@
 					</Element>
 				</iBrowseableBlueprint-cBrowseInformation>
 			</Attribute>
-			<Attribute name="RenderComponent">
-				<cEditorSceneryRenderBlueprint>
+			<Attribute name="_posori">
+				<cPosOriBlueprint>
+					<Element>
+						<Value />
+					</Element>
+				</cPosOriBlueprint>
+			</Attribute>
+			<Attribute name="_object">
+				<cAnimObjectRenderBlueprint>
 					<Element>
 						<Value>
 							<Attribute name="PrimaryNamedTextureSet">
@@ -268,7 +275,7 @@
 							<Attribute name="GeometryID">
 								<cDeltaString>
 									<Element>
-										<Value>RailVehicles\Electric\APM400\Lights\gizmo.igs</Value>
+										<Value>Scenery\Platforms\Platform_ScreenDoors.igs</Value>
 									</Element>
 								</cDeltaString>
 							</Attribute>
@@ -289,7 +296,7 @@
 							<Attribute name="CastsShadows">
 								<eBoolean>
 									<Element>
-										<Value>eFalse</Value>
+										<Value>eTrue</Value>
 									</Element>
 								</eBoolean>
 							</Attribute>
@@ -385,110 +392,118 @@
 									</Element>
 								</cSceneryRenderBlueprint-sDetailLevelGenerationRange>
 							</Attribute>
-						</Value>
-					</Element>
-				</cEditorSceneryRenderBlueprint>
-			</Attribute>
-			<Attribute name="PosOriComponent">
-				<cPosOriBlueprint>
-					<Element>
-						<Value />
-					</Element>
-				</cPosOriBlueprint>
-			</Attribute>
-			<Attribute name="LightComponent">
-				<cSpotLightComponentBlueprint>
-					<Element>
-						<Value>
-							<Attribute name="Radius">
-								<sFloat32>
-									<Element>
-										<Value>55</Value>
-									</Element>
-								</sFloat32>
-							</Attribute>
-							<Attribute name="Phi">
-								<sFloat32>
-									<Element>
-										<Value>35</Value>
-									</Element>
-								</sFloat32>
-							</Attribute>
-							<Attribute name="Theta">
-								<sFloat32>
-									<Element>
-										<Value>30</Value>
-									</Element>
-								</sFloat32>
-							</Attribute>
-							<Attribute name="Colour">
-								<cHcColour>
+							<Attribute name="AnimSet">
+								<__Indexed__iAnimObjectRenderBlueprint-cAnimation>
 									<Element>
 										<Value>
-											<Attribute name="Red">
-												<sFloat32>
-													<Element>
-														<Value>0.8713693</Value>
-													</Element>
-												</sFloat32>
-											</Attribute>
-											<Attribute name="Green">
-												<sFloat32>
-													<Element>
-														<Value>0.9170125</Value>
-													</Element>
-												</sFloat32>
-											</Attribute>
-											<Attribute name="Blue">
-												<sFloat32>
-													<Element>
-														<Value>1</Value>
-													</Element>
-												</sFloat32>
-											</Attribute>
-											<Attribute name="Alpha">
-												<sFloat32>
-													<Element>
-														<Value>1</Value>
-													</Element>
-												</sFloat32>
-											</Attribute>
+											<iAnimObjectRenderBlueprint-cAnimation>
+												<Element>
+													<Value>
+														<Attribute name="AnimationID">
+															<cDeltaString>
+																<Element>
+																	<Value>doors</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="AnimationName">
+															<cDeltaString>
+																<Element>
+																	<Value>Scenery\Platforms\Platform_ScreenDoors_Doors.ia</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="AnimateInEditor">
+															<eBoolean>
+																<Element>
+																	<Value>eFalse</Value>
+																</Element>
+															</eBoolean>
+														</Attribute>
+													</Value>
+												</Element>
+											</iAnimObjectRenderBlueprint-cAnimation>
 										</Value>
 									</Element>
-								</cHcColour>
+								</__Indexed__iAnimObjectRenderBlueprint-cAnimation>
 							</Attribute>
-							<Attribute name="CastShadow">
+						</Value>
+					</Element>
+				</cAnimObjectRenderBlueprint>
+			</Attribute>
+			<Attribute name="_signal">
+				<cSignalComponentBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="NumberOfTrackLinks">
+								<sUInt32>
+									<Element>
+										<Value>2</Value>
+									</Element>
+								</sUInt32>
+							</Attribute>
+							<Attribute name="Stopping">
+								<eBoolean>
+									<Element>
+										<Value>eFalse</Value>
+									</Element>
+								</eBoolean>
+							</Attribute>
+							<Attribute name="JunctionSignalType">
+								<cSignalComponentBlueprint-eJunctionSignalTypes>
+									<Element>
+										<Value>eJunctionTypeNone</Value>
+									</Element>
+								</cSignalComponentBlueprint-eJunctionSignalTypes>
+							</Attribute>
+							<Attribute name="ControlMode">
+								<cSignalComponentBlueprint-eControlModes>
+									<Element>
+										<Value>eControlModeAutomatic</Value>
+									</Element>
+								</cSignalComponentBlueprint-eControlModes>
+							</Attribute>
+						</Value>
+					</Element>
+				</cSignalComponentBlueprint>
+			</Attribute>
+			<Attribute name="_script">
+				<cScriptComponentBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="Name">
+								<cDeltaString>
+									<Element>
+										<Value />
+									</Element>
+								</cDeltaString>
+							</Attribute>
+						</Value>
+					</Element>
+				</cScriptComponentBlueprint>
+			</Attribute>
+			<Attribute name="_container">
+				<cEntityContainerBlueprint>
+					<Element>
+						<Value>
+							<Attribute name="TrackTerrainInEditor">
 								<bool>
 									<Element>
 										<Value>0</Value>
 									</Element>
 								</bool>
 							</Attribute>
-							<Attribute name="DayNightCycle">
-								<bool>
-									<Element>
-										<Value>1</Value>
-									</Element>
-								</bool>
-							</Attribute>
-							<Attribute name="AnimTexture">
-								<cDeltaString>
+							<Attribute name="Children">
+								<__Indexed__cEntityContainerBlueprint-sChild>
 									<Element>
 										<Value />
 									</Element>
-								</cDeltaString>
-							</Attribute>
-							<Attribute name="ProjectedTexture">
-								<cDeltaString>
-									<Element>
-										<Value />
-									</Element>
-								</cDeltaString>
+								</__Indexed__cEntityContainerBlueprint-sChild>
 							</Attribute>
 						</Value>
 					</Element>
-				</cSpotLightComponentBlueprint>
+				</cEntityContainerBlueprint>
 			</Attribute>
 		</Value>
 	</Element>
-</cSpotLightBlueprint>
+</cAnimSignalBlueprint>
