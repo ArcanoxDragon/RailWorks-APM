@@ -182,7 +182,7 @@ function UpdateATC( interval )
 	gLastSpeedLimit = targetSpeed
 
 	if not enabled then
-		targetSpeed = 70
+		targetSpeed = 110
 	end
 
 	Call( "*:SetControlValue", "ATCRestrictedSpeed", 0, targetSpeed )

@@ -20,6 +20,14 @@ atoOverrunDist								= 0
  sigType,  sigState,  sigDist,  sigAspect	= 0, 0, 0, 0
 tSigType, tSigState, tSigDist, tSigAspect	= 0, 0, 0, 0
 
+-- Station Stop Calibration
+gStopDistBuffer		= 1.0	-- The distance buffer to add to the stop speed equation (target to stop this far in front of the target)
+gStopSigDist		= 0.28	-- The signal distance threshold at which point we apply maximum brakes regardless of speed
+gStopRampMaxDist	= 2.0	-- The maximum signal distance for the "precision" ramp equation (lower-speed, wider-range stopping ramp for higher accuracy)
+gStopRampMinDist	= 0.45	-- The minimum signal distance for the "precision" ramp
+gStopRampMaxSpeed	= 2.0	-- The maximum train speed for the "precision" ramp
+gStopRampMinSpeed	= 0.5	-- The minimum train speed for the "precision" ramp
+
 -- Stats variables
 statStopStartingSpeed						= 0
 statStopSpeedLimit							= 0
@@ -230,13 +238,12 @@ function UpdateATO( interval )
 		SetControlValue( "db_SpdBuffer", spdBuffer  )
 		
 		if ( atoStopping > 0.5 or ( doors and trainSpeedMPH < 0.1 ) ) then
-			local distBuffer = 1.25
 			statStopTime = statStopTime + interval
 			atoStopping = 1
 			
 			--local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
 			
-			if ( ( sigDist < 0.28 or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
+			if ( ( sigDist < gStopSigDist or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
 				gLockSkipStop = 1
 				targetSpeed = 0.0
 				
@@ -289,8 +296,8 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, 2.5, 0.45, 2.0, 0.5, true ) * MPH_TO_MPS
-				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - distBuffer ) ), minStopSpeed ) )
+				local minStopSpeed = mapRange( sigDist, gStopRampMaxDist, gStopRampMinDist, gStopRampMaxSpeed, gStopRampMinSpeed, true ) * MPH_TO_MPS
+				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - gStopDistBuffer ) ), minStopSpeed ) )
 			end
 			
 			if ( sigAspect ~= SIGNAL_STATE_STATION or tSigDist > statStopDistance + 15 and atoIsStopped < 2.5 ) then -- Lost station marker; possibly overshot

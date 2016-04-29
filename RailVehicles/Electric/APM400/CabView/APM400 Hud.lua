@@ -116,10 +116,10 @@ function UpdateHUD(time)
 	
 	TrainSpeed = math.floor( TrainSpeed + 0.5 ) -- Round at 0.5, not 0.0 (for display)
 	
-	local Speed_10s = math.floor( mod( TrainSpeed / 10, 10 ) )
-	local Speed_1s  = math.floor( mod( TrainSpeed     , 10 ) )
-	local Limit_10s = math.floor( mod( SpeedLimit / 10, 10 ) )
-	local Limit_1s  = math.floor( mod( SpeedLimit     , 10 ) )
+	local Speed_10s = math.min( math.floor( mod( TrainSpeed / 10, 10 ) ), 9 )
+	local Speed_1s  = math.min( math.floor( mod( TrainSpeed     , 10 ) ), 9 )
+	local Limit_10s = math.min( math.floor( mod( SpeedLimit / 10, 10 ) ), 9 )
+	local Limit_1s  = math.min( math.floor( mod( SpeedLimit     , 10 ) ), 9 )
 	
 	if Speed_10s == 0 then Speed_10s = -1 end -- Hide "0" from 10s place if value is less than 10
 	if Limit_10s == 0 then Limit_10s = -1 end

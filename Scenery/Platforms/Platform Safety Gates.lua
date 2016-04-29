@@ -131,5 +131,6 @@ function OnConsistPass( prevFrontDist, prevBackDist, frontDist, backDist, linkIn
 end
 
 function OnSignalMessage( a, b, c, d )
-	-- Unused
+	-- Just pass the message along...we're a repeater
+	Call("SendSignalMessage", message, parameter, -direction, 1, linkIndex)
 end
