@@ -35,6 +35,8 @@ function Setup()
 	MIN_ACCELERATION 			= 0.125
 	MAX_BRAKING 				= 1.0
 	MIN_BRAKING 				= 0.2
+	DYNAMIC_FALLOFF_MIN_SPEED	= 0.5
+	DYNAMIC_FALLOFF_MAX_SPEED	= 2.5
 	JERK_LIMIT 					= 1.0 / 1.45
 	JERK_DELTA 					= JERK_LIMIT * 3.0
 	JERK_THRESHOLD 				= 1.0 / 2.5
@@ -166,7 +168,9 @@ function Update( gTimeDelta )
 			
 			-- Reduce jerk while train comes to a complete stop
 			if ( AbsSpeed < 7.0 and tTAccel < 0.0 ) then
-				local maxBrake = clamp( mapRange( AbsSpeed, 7.0, 1.0, 1.0, 0.325 ), gMinBrakeAdjust, 1.0 )
+				local brakeRelease = ATOEnabled and 0.55 or 0.325
+			
+				local maxBrake = clamp( mapRange( AbsSpeed, 7.0, 1.0, 1.0, brakeRelease ), gMinBrakeAdjust, 1.0 )
 				
 				if ( ATOEnabled ) then
 					tTAccel = tTAccel * maxBrake
@@ -203,7 +207,6 @@ function Update( gTimeDelta )
 					tAccel = math.min( tAccel, 0.0 )
 				else
 					Call( "*:SetControlValue", "Sander", 0, 0 )
-					Call( "*:SetControlValue", "HandBrake", 0, 0 )
 				end
 				
 				gSetReg = 0.0
@@ -217,7 +220,6 @@ function Update( gTimeDelta )
 				end
 			else
 				Call( "*:SetControlValue", "Sander", 0, 0 )
-				Call( "*:SetControlValue", "HandBrake", 0, 0 )
 				
 				if ( DoorsOpen == TRUE ) then
 					gSetReg = 0.0
@@ -271,11 +273,19 @@ function Update( gTimeDelta )
 					end
 				end
 				
-				Call( "*:SetControlValue", "TAccel", 0, tAccel)
-				Call( "*:SetControlValue", "Regulator", 0, gSetReg)
-				Call( "*:SetControlValue", "DynamicBrake", 0, gSetBrake )
-				Call( "*:SetControlValue", "TrainBrakeControl", 0, gSetBrake )
+				Call( "*:SetControlValue", "TAccel", 0, tAccel )
+				Call( "*:SetControlValue", "Regulator", 0, gSetReg )
 				Call( "*:SetControlValue", "TrueThrottle", 0, gThrottleControl.value )
+				
+				if ( gSetBrake > 0.0 ) then
+					local dynamicFade = mapRange( TrainSpeed, DYNAMIC_FALLOFF_MAX_SPEED, DYNAMIC_FALLOFF_MIN_SPEED, 0.0, 1.0, true )
+					Call( "*:SetControlValue", "TrainBrakeControl"	, 0, gSetBrake * dynamicFade )
+					Call( "*:SetControlValue", "DynamicBrake"		, 0, gSetBrake - ( gSetBrake * dynamicFade ) )
+				else
+					Call( "*:SetControlValue", "TrainBrakeControl", 0, 0.0 )
+					Call( "*:SetControlValue", "DynamicBrake", 0, 0.0 )
+				end
+				
 			end
 
 			-- End propulsion system

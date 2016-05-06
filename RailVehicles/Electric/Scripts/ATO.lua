@@ -21,11 +21,11 @@ atoOverrunDist								= 0
 tSigType, tSigState, tSigDist, tSigAspect	= 0, 0, 0, 0
 
 -- Station Stop Calibration
-gStopDistBuffer		= 1.0	-- The distance buffer to add to the stop speed equation (target to stop this far in front of the target)
-gStopSigDist		= 0.28	-- The signal distance threshold at which point we apply maximum brakes regardless of speed
-gStopRampMaxDist	= 2.0	-- The maximum signal distance for the "precision" ramp equation (lower-speed, wider-range stopping ramp for higher accuracy)
-gStopRampMinDist	= 0.45	-- The minimum signal distance for the "precision" ramp
-gStopRampMaxSpeed	= 2.0	-- The maximum train speed for the "precision" ramp
+gStopDistBuffer		= 0.28	-- The distance buffer to add to the stop speed equation (target to stop this far in front of the target)
+gStopSigDist		= 0.25	-- The signal distance threshold at which point we apply maximum brakes regardless of speed
+gStopRampMaxDist	= 3.2	-- The maximum signal distance for the "precision" ramp equation (lower-speed, wider-range stopping ramp for higher accuracy)
+gStopRampMinDist	= 0.1	-- The minimum signal distance for the "precision" ramp
+gStopRampMaxSpeed	= 3.0	-- The maximum train speed for the "precision" ramp
 gStopRampMinSpeed	= 0.5	-- The minimum train speed for the "precision" ramp
 
 -- Stats variables
@@ -296,7 +296,7 @@ function UpdateATO( interval )
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, gStopRampMaxDist, gStopRampMinDist, gStopRampMaxSpeed, gStopRampMinSpeed, true ) * MPH_TO_MPS
+				local minStopSpeed = mapRange( sigDist, gStopRampMaxDist + gStopDistBuffer, gStopRampMinDist + gStopDistBuffer, gStopRampMaxSpeed, gStopRampMinSpeed, true ) * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - gStopDistBuffer ) ), minStopSpeed ) )
 			end
 			
@@ -341,12 +341,12 @@ function UpdateATO( interval )
 			if ( GetControlValue( "DepartingStation" ) > 0 ) then
 				atoThrottle = 0.0
 			else
-				atoThrottle = -1.0
+				atoThrottle = -0.75
 			end
 		else
 			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
 			if ( atoStopping > 0 ) then
-				atoK_P = 1.0 / mapRange( trainSpeedMPH, 5.0, 2.0, 2.0, 0.5, true )
+				atoK_P = 1.0 / mapRange( trainSpeedMPH, 5.0, 2.0, 2.5, 0.75, true )
 			else
 				atoK_P = 1.0 / 6.0
 			end

@@ -290,6 +290,10 @@ function Update( time )
 		Call( "*:ActivateNode", "headlights", 0 )
 	end
 	
+	-- "Fake" per-car dynamic brake using Handbrake
+	local setDynamic = GetControlValue( "DynamicBrake" )
+	SetControlValue( "HandBrake", setDynamic )
+	
 	-- Count stopping time
 	if ( math.abs( trainSpeed ) < 0.01 ) then
 		gTimeStopped = gTimeStopped + time

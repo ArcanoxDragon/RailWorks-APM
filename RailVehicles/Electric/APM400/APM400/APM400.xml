@@ -2909,7 +2909,7 @@
 														<Attribute name="ApplyToConsist">
 															<eBoolean>
 																<Element>
-																	<Value>eFalse</Value>
+																	<Value>eTrue</Value>
 																</Element>
 															</eBoolean>
 														</Attribute>
@@ -4981,7 +4981,7 @@
 														<Attribute name="ApplyToConsist">
 															<eBoolean>
 																<Element>
-																	<Value>eTrue</Value>
+																	<Value>eFalse</Value>
 																</Element>
 															</eBoolean>
 														</Attribute>
