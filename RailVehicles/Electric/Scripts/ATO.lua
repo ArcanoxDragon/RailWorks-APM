@@ -2,31 +2,35 @@ local MI_TO_M								= 1609.34 -- Miles to Meters
 local M_TO_MI								= 1.0 / MI_TO_M -- Meters to Miles
 local SIGNAL_STATE_SPEED					= 20
 local SIGNAL_STATE_STATION					= 21
-local ATO_TARGET_DECELERATION				= 1.20 -- Meters/second/second
+local ATO_TARGET_DECELERATION				= 1.7 -- Meters/second/second
 local LOW_SPEED_BRAKE_DECELERATION			= 0.2675 -- Meters/second/second
 local LOW_SPEED_BRAKE_APPLY_TIME			= 0.02
 local ACCEL_PER_SECOND						= 1.0 / 3.0 -- Units of acceleration per second ( jerk limit, used for extra buffers )
 local DEPART_WAIT_TIME						= 2.0
 local SIG_DIR_CORRECTION_TIME				= 1.0
 
-atoK_P										= 1.0 / 7.5
-atoK_I										= 1.0 / 12.0
+atoK_P										= 1.0 / 6.0
+atoK_I										= 1.0 / 8.0
 atoK_D										= 0.0
-atoMIN_ERROR								= -5.0
-atoMAX_ERROR								=  5.0
+atoMAX_ERROR								= 1.0 / atoK_I
+atoMIN_ERROR								= -atoMAX_ERROR
+atoD_THRESHOLD								= 0.4
+atoRESET_THRESHOLD							= 1.8
 atoSigDirection								= 0
 gSignalDirectionTime						= 0
 atoOverrunDist								= 0
  sigType,  sigState,  sigDist,  sigAspect	= 0, 0, 0, 0
 tSigType, tSigState, tSigDist, tSigAspect	= 0, 0, 0, 0
+atoPid = PID:create( atoK_P, atoK_I, atoK_D, atoMIN_ERROR, atoMAX_ERROR, atoD_THRESHOLD, atoRESET_THRESHOLD )
 
 -- Station Stop Calibration
-gStopDistBuffer		= 0.28	-- The distance buffer to add to the stop speed equation (target to stop this far in front of the target)
-gStopSigDist		= 0.25	-- The signal distance threshold at which point we apply maximum brakes regardless of speed
-gStopRampMaxDist	= 3.2	-- The maximum signal distance for the "precision" ramp equation (lower-speed, wider-range stopping ramp for higher accuracy)
-gStopRampMinDist	= 0.1	-- The minimum signal distance for the "precision" ramp
-gStopRampMaxSpeed	= 3.0	-- The maximum train speed for the "precision" ramp
-gStopRampMinSpeed	= 0.5	-- The minimum train speed for the "precision" ramp
+gStopDistBuffer		= -.20	-- The distance buffer to add to the stop speed equation (target to stop this far in front of the target)
+gStopSigDist		= 0.30	-- The signal distance threshold at which point we apply maximum brakes regardless of speed
+gStopMinSpeed		= 0.5	-- The minimum speed the train should move at while homing on the stop target (speed ramp not used anymore)
+gStopRampMaxDist	= 4.00	-- The maximum signal distance for the "precision" ramp equation (lower-speed, wider-range stopping ramp for higher accuracy)
+gStopRampMinDist	= 0.75	-- The minimum signal distance for the "precision" ramp
+gStopRampMaxSpeed	= 5.00	-- The maximum train speed for the "precision" ramp
+gStopRampMinSpeed	= 0.50	-- The minimum train speed for the "precision" ramp
 
 -- Stats variables
 statStopStartingSpeed						= 0
@@ -56,65 +60,6 @@ function getStoppingSpeed( vI, a, d )
 	return math.sqrt( math.max( ( vI * vI ) + ( 2 * a * d ), 0.0 ) )
 end
 
-local gErrorSums = { }
-local gLastErrors = { }
-local gSettled = { }
-local gSettledTime = { }
-local gSettleTarget = { }
-
-function resetPid( pidName )
-	local pN = pidName or "default"
-	gErrorSums[pN] = 0.0
-	gLastErrors[pN] = 0.0
-	gSettled[pN] = false
-	gSettledTime[pN] = 0.0
-	gSettleTarget[pN] = 0.0
-end
-
-function pid( pidName, tD, kP, kI, kD, target, real, minErr, maxErr, buffer, iTarget )
-	local pN = pidName or "default"
-	local mnErr = minErr or -1
-	local mxErr = maxErr or 1
-	local buf = buffer or 0.0
-	local iT = iTarget or target
-	
-	local e = math.min( target - real, 0 ) - math.min( real - ( target - buf ), 0 )
-	local iE = math.min( iT - real, 0 ) - math.min( real - ( iT - ( buf * 0.75 ) ), 0 )
-	
-	if ( gErrorSums[pN] == nil or gLastErrors[pN] == nil or gSettled[pN] == nil or gSettleTarget[pN] == nil or gSettledTime[pN] == nil ) then resetPid( pN ) end
-	if ( gSettled[pN] ) then
-		gErrorSums[pN] = math.max( math.min( gErrorSums[pN] + ( iE * tD ), mxErr ), mnErr )
-	else
-		gErrorSums[pN] = 0.0
-	end
-	
-	local p = kP * e
-	local i = kI * gErrorSums[pN]
-	local d = kD * ( e - gLastErrors[pN] ) / tD
-	
-	if ( math.abs( ( e - gLastErrors[pN] ) / tD ) < 1.0 ) then
-		if ( gSettledTime[pN] > 1.0 ) then
-			gSettled[pN] = true
-		else
-			gSettledTime[pN] = gSettledTime[pN] + tD
-		end
-		gSettleTarget[pN] = target
-	else
-		gSettledTime[pN] = 0
-	end
-	
-	if ( math.abs( gSettleTarget[pN] - target ) > 0.1 ) then
-		gSettled[pN] = false
-		gSettledTime[pN] = 0
-	end
-	
-	--debugPrint( "[" .. pN .. "] gES: " .. tostring( gErrorSums[pN] ) .. " gLE: " .. tostring( gLastErrors[pN] ) .. " gS: " .. tostring( gSettled[pN] ) )
-	--debugPrint( "[" .. pN .. "] gSTm: " .. tostring( gSettledTime[pN] ) .. " gSTg: " .. tostring( gSettleTarget[pN] ) .. " gED: " .. tostring( ( e - gLastErrors[pN] ) * tD ) )
-	
-	gLastErrors[pN] = e
-	return p + i + d, p, i, d
-end
-
 gLastATO 				= 1
 gLastATC 				= 1
 gLastATOThrottle 		= 0
@@ -131,7 +76,7 @@ function UpdateATO( interval )
 	-- Original plan was to allocate these *outside* the function for performance reasons
 	-- But Lua is stupid so that's not going to happen
 	local atoActive, atoThrottle, targetSpeed, trackSpeed, trainSpeed, doorsLeft, doorsRight, trueThrottle, distCorrection, spdBuffer, trainSpeedMPH
-	local t, p, i, d
+	local p, i, d
 	
 	local TrackBrake = Call( "*:GetControlValue", "TrackBrake", 0 )
 	if TrackBrake and TrackBrake > 0.5 then
@@ -244,7 +189,6 @@ function UpdateATO( interval )
 			--local fullBrakesStopDist = trainSpeed * ( trainSpeed / LOW_SPEED_BRAKE_DECELERATION + LOW_SPEED_BRAKE_APPLY_TIME )
 			
 			if ( ( sigDist < gStopSigDist or trainSpeed < 0.01 or atoIsStopped > 0.5 ) and atoOverrunDist < 5.0 ) then
-				gLockSkipStop = 1
 				targetSpeed = 0.0
 				
 				if ( atoIsStopped < 0.5 ) then 
@@ -257,7 +201,7 @@ function UpdateATO( interval )
 						atoIsStopped = 2.0
 					end
 					
-					if ( doors and atoIsStopped < 3.0 ) then
+					if ( ( doors or skipStop ) and atoIsStopped < 3.0 ) then
 						SetControlValue( "DepartingStation", 0 )
 						atoIsStopped = 3.0
 					end
@@ -272,6 +216,8 @@ function UpdateATO( interval )
 								atoIsStopped = 0
 								atoTimeStopped = 0.0
 								gLockSkipStop = 0
+								atoSkippingStop = 0
+								SetControlValue( "SkipStop", -1 )
 								
 								-- logStop( startingSpeed, speedLimit, distance, totalStopTime, distanceFromMarker )
 								local berthOffset
@@ -292,11 +238,13 @@ function UpdateATO( interval )
 							end
 						else
 							atoTimeStopped = 0.0
+							gLockSkipStop = 1
 						end
 					end
 				end
 			else
-				local minStopSpeed = mapRange( sigDist, gStopRampMaxDist + gStopDistBuffer, gStopRampMinDist + gStopDistBuffer, gStopRampMaxSpeed, gStopRampMinSpeed, true ) * MPH_TO_MPS
+				--local minStopSpeed = mapRange( sigDist, gStopRampMaxDist + gStopDistBuffer, gStopRampMinDist + gStopDistBuffer, gStopRampMaxSpeed, gStopRampMinSpeed, true ) * MPH_TO_MPS
+				local minStopSpeed = gStopMinSpeed * MPH_TO_MPS
 				targetSpeed = math.min( ATCRestrictedSpeed * MPH_TO_MPS, math.max( getStoppingSpeed( targetSpeed, -ATO_TARGET_DECELERATION, spdBuffer - ( sigDist - gStopDistBuffer ) ), minStopSpeed ) )
 			end
 			
@@ -344,28 +292,36 @@ function UpdateATO( interval )
 				atoThrottle = -0.75
 			end
 		else
-			-- pid( tD, kP, kI, kD, e, minErr, maxErr )
 			if ( atoStopping > 0 ) then
-				atoK_P = 1.0 / mapRange( trainSpeedMPH, 5.0, 2.0, 2.5, 0.75, true )
+				atoPid.kP			= 1.0 / mapRange( trainSpeedMPH, 10.0, 2.0, 6.0,   0.8, true )
+				atoPid.kI			= 1.0 / mapRange( trainSpeedMPH, 10.0, 2.0, 8.0, 800.0, true )
+				atoPid.maxI			= 1.0 / atoPid.kI
+				atoPid.minI			= -atoPid.maxI
+				atoPid.dThreshold	= 15.0
+				atoPid.resetThresh	= 16.0
 			else
-				atoK_P = 1.0 / 6.0
+				atoPid.kP			= atoK_P
+				atoPid.kI			= atoK_I
+				atoPid.maxI			= atoMAX_ERROR
+				atoPid.minI			= atoMIN_ERROR
+				atoPid.dThreshold	= atoD_THRESHOLD
+				atoPid.resetThresh	= atoRESET_THRESHOLD
 			end
 			
 			-- Prevents I buildup while brakes are releasing, etc
-			if ( trainSpeedMPH < 7.0 and ( atoStopping > 0 or atoThrottle > 0 ) ) then resetPid( "ato" ) end
+			if ( trainSpeedMPH < 7.0 and atoThrottle > 0 ) then atoPid:reset() end
 			
-			--t, p, i, d = pid( "ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0, 2.0, pidTargetSpeed )
-			t, p, i, d = pid( "ato", interval, atoK_P, atoK_I, atoK_D, targetSpeed, trainSpeedMPH, -5.0, 5.0 )
-			--atoThrottle = clamp( t, -1.0 - ( 1/8 ), 1.0 + ( 1/8 ) )
-			atoThrottle = clamp( t, -1.0, 1.0 )
+			atoPid:update( targetSpeed, trainSpeedMPH, interval )
+			p, i, d = atoPid.p, atoPid.i, atoPid.d
+			atoThrottle = clamp( atoPid.value, -1.0, 1.0 )
 			
-			if ( atoStopping > 0 and trainSpeedMPH < 7.0 and atoThrottle > -0.1 ) then
-				atoThrottle = math.min( atoThrottle, mapRange( trainSpeedMPH, 5.0, 2.0, 0.0, -0.1, true ) )
-			end
+			--if ( atoStopping > 0 and trainSpeedMPH < 7.0 and atoThrottle > -0.1 ) then
+			--	atoThrottle = math.min( atoThrottle, mapRange( trainSpeedMPH, 5.0, 2.0, 0.0, -0.1, true ) )
+			--end
 			
-			Call( "*:SetControlValue", "PID_Settled", 0, gSettled["ato"] and 1 or 0 )
+			Call( "*:SetControlValue", "PID_Settled", 0, atoPid.settled and 1 or 0 )
 			Call( "*:SetControlValue", "PID_P", 0, p )
-			Call( "*:SetControlValue", "PID_I", 0, i )
+			Call( "*:SetControlValue", "PID_I", 0, atoPid.p )
 			Call( "*:SetControlValue", "PID_D", 0, d )
 		end
 		
@@ -404,7 +360,7 @@ function UpdateATO( interval )
 			atoIsStopped = 0
 			gLockSkipStop = 1
 			atoTimeStopped = 0.0
-			resetPid( "ato" )
+			atoPid:reset()
 		end
 	end
 	

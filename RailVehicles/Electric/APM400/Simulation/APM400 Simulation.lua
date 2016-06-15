@@ -1,8 +1,11 @@
+--include=..\..\..\..\Scripts\APM Util.lua
+--include=..\..\..\..\Scripts\PID.lua
+
+--include=..\..\Scripts\ThrottleControl.lua
 --include=..\..\Scripts\ATC.lua
 --include=..\..\Scripts\ATO.lua
+
 --include=..\CabView\APM400 Hud.lua
---include=..\..\..\..\Scripts\APM Util.lua
---include=..\..\Scripts\ThrottleControl.lua
 
 
 ------------------------------------------------------------
@@ -35,8 +38,8 @@ function Setup()
 	MIN_ACCELERATION 			= 0.125
 	MAX_BRAKING 				= 1.0
 	MIN_BRAKING 				= 0.2
-	DYNAMIC_FALLOFF_MIN_SPEED	= 0.5
-	DYNAMIC_FALLOFF_MAX_SPEED	= 2.5
+	DYNAMIC_FALLOFF_MIN_SPEED	= 0.25
+	DYNAMIC_FALLOFF_MAX_SPEED	= 1.75
 	JERK_LIMIT 					= 1.0 / 1.45
 	JERK_DELTA 					= JERK_LIMIT * 3.0
 	JERK_THRESHOLD 				= 1.0 / 2.5

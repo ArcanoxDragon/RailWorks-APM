@@ -820,7 +820,7 @@
 																					<Attribute name="MinimumUsableSpeed">
 																						<sFloat32>
 																							<Element>
-																								<Value>10</Value>
+																								<Value>0.25</Value>
 																							</Element>
 																						</sFloat32>
 																					</Attribute>
