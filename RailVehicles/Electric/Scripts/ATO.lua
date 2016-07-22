@@ -297,8 +297,8 @@ function UpdateATO( interval )
 				atoPid.kI			= 1.0 / mapRange( trainSpeedMPH, 10.0, 2.0, 8.0, 800.0, true )
 				atoPid.maxI			= 1.0 / atoPid.kI
 				atoPid.minI			= -atoPid.maxI
-				atoPid.dThreshold	= 15.0
-				atoPid.resetThresh	= 16.0
+				atoPid.dThreshold	= 99.0
+				atoPid.resetThresh	= 100.0
 			else
 				atoPid.kP			= atoK_P
 				atoPid.kI			= atoK_I
