@@ -156,7 +156,7 @@ function UpdateATO( interval )
 		Call( "*:SetControlValue", "SpeedBuffer", 0, spdBuffer )
 		
 		if ( sigAspect == SIGNAL_STATE_STATION ) then
-			if ( trainSpeedMPH > 10.0 and sigDist <= spdBuffer and sigDist >= 15 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist ) then
+			if ( trainSpeedMPH > 5.0 and sigDist <= spdBuffer and sigDist >= 7 --[[ we don't want to stop at stations we're too close to ]] and sigDist < gLastSigDist ) then
 				if ( skipStop ) then
 					atoSkippingStop = 1
 					gLockSkipStop = 1
