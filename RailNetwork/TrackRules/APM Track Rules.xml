@@ -209,14 +209,14 @@
 							<Attribute name="Primary">
 								<sInt32>
 									<Element>
-										<Value>55</Value>
+										<Value>70</Value>
 									</Element>
 								</sInt32>
 							</Attribute>
 							<Attribute name="Secondary">
 								<sInt32>
 									<Element>
-										<Value>55</Value>
+										<Value>70</Value>
 									</Element>
 								</sInt32>
 							</Attribute>
@@ -276,14 +276,14 @@
 							<Attribute name="MaxCantAngleDegrees">
 								<sFloat32>
 									<Element>
-										<Value>5</Value>
+										<Value>7.5</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="CurveToAnglePercent">
 								<sFloat32>
 									<Element>
-										<Value>20</Value>
+										<Value>25</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -298,7 +298,7 @@
 							<Attribute name="LineUnevenness">
 								<sFloat32>
 									<Element>
-										<Value>45</Value>
+										<Value>20</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -392,7 +392,7 @@
 							<Attribute name="MaxSpeedTolerance">
 								<sUInt32>
 									<Element>
-										<Value>25</Value>
+										<Value>45</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
@@ -992,7 +992,7 @@
 											<Attribute name="English">
 												<cDeltaString>
 													<Element>
-														<Value>[CTA] CTA Track Rules</Value>
+														<Value>[APM] APM Track Rules</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
