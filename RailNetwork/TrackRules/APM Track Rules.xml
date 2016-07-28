@@ -23,7 +23,7 @@
 														<Attribute name="Product">
 															<cDeltaString>
 																<Element>
-																	<Value>APM</Value>
+																	<Value>CTA</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -34,7 +34,112 @@
 										<Attribute name="BlueprintID">
 											<cDeltaString>
 												<Element>
-													<Value>RailNetwork\Track\Maglev Beam.xml</Value>
+													<Value>RailNetwork\Track\CTA Elevated Track.xml</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+									</Value>
+								</Element>
+							</iBlueprintLibrary-cAbsoluteBlueprintID>
+							<iBlueprintLibrary-cAbsoluteBlueprintID>
+								<Element>
+									<Value>
+										<Attribute name="BlueprintSetID">
+											<iBlueprintLibrary-cBlueprintSetID>
+												<Element>
+													<Value>
+														<Attribute name="Provider">
+															<cDeltaString>
+																<Element>
+																	<Value>briman0094</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="Product">
+															<cDeltaString>
+																<Element>
+																	<Value>CTA</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</iBlueprintLibrary-cBlueprintSetID>
+										</Attribute>
+										<Attribute name="BlueprintID">
+											<cDeltaString>
+												<Element>
+													<Value>RailNetwork\Track\CTA Elevated Track (Rails Only).xml</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+									</Value>
+								</Element>
+							</iBlueprintLibrary-cAbsoluteBlueprintID>
+							<iBlueprintLibrary-cAbsoluteBlueprintID>
+								<Element>
+									<Value>
+										<Attribute name="BlueprintSetID">
+											<iBlueprintLibrary-cBlueprintSetID>
+												<Element>
+													<Value>
+														<Attribute name="Provider">
+															<cDeltaString>
+																<Element>
+																	<Value>briman0094</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="Product">
+															<cDeltaString>
+																<Element>
+																	<Value>CTA</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</iBlueprintLibrary-cBlueprintSetID>
+										</Attribute>
+										<Attribute name="BlueprintID">
+											<cDeltaString>
+												<Element>
+													<Value>RailNetwork\Track\CTA Grade Track.xml</Value>
+												</Element>
+											</cDeltaString>
+										</Attribute>
+									</Value>
+								</Element>
+							</iBlueprintLibrary-cAbsoluteBlueprintID>
+							<iBlueprintLibrary-cAbsoluteBlueprintID>
+								<Element>
+									<Value>
+										<Attribute name="BlueprintSetID">
+											<iBlueprintLibrary-cBlueprintSetID>
+												<Element>
+													<Value>
+														<Attribute name="Provider">
+															<cDeltaString>
+																<Element>
+																	<Value>briman0094</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+														<Attribute name="Product">
+															<cDeltaString>
+																<Element>
+																	<Value>CTA</Value>
+																</Element>
+															</cDeltaString>
+														</Attribute>
+													</Value>
+												</Element>
+											</iBlueprintLibrary-cBlueprintSetID>
+										</Attribute>
+										<Attribute name="BlueprintID">
+											<cDeltaString>
+												<Element>
+													<Value>RailNetwork\Track\CTA Tunnel Track.xml</Value>
 												</Element>
 											</cDeltaString>
 										</Attribute>
@@ -56,14 +161,14 @@
 											<Attribute name="Provider">
 												<cDeltaString>
 													<Element>
-														<Value>briman0094</Value>
+														<Value />
 													</Element>
 												</cDeltaString>
 											</Attribute>
 											<Attribute name="Product">
 												<cDeltaString>
 													<Element>
-														<Value>APM</Value>
+														<Value />
 													</Element>
 												</cDeltaString>
 											</Attribute>
@@ -74,7 +179,7 @@
 							<Attribute name="BlueprintID">
 								<cDeltaString>
 									<Element>
-										<Value>RailNetwork\Track\Maglev Beam.xml</Value>
+										<Value />
 									</Element>
 								</cDeltaString>
 							</Attribute>
@@ -104,14 +209,14 @@
 							<Attribute name="Primary">
 								<sInt32>
 									<Element>
-										<Value>65</Value>
+										<Value>55</Value>
 									</Element>
 								</sInt32>
 							</Attribute>
 							<Attribute name="Secondary">
 								<sInt32>
 									<Element>
-										<Value>65</Value>
+										<Value>55</Value>
 									</Element>
 								</sInt32>
 							</Attribute>
@@ -171,14 +276,14 @@
 							<Attribute name="MaxCantAngleDegrees">
 								<sFloat32>
 									<Element>
-										<Value>15</Value>
+										<Value>5</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
 							<Attribute name="CurveToAnglePercent">
 								<sFloat32>
 									<Element>
-										<Value>7.5</Value>
+										<Value>20</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -193,7 +298,7 @@
 							<Attribute name="LineUnevenness">
 								<sFloat32>
 									<Element>
-										<Value>5</Value>
+										<Value>45</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -218,14 +323,14 @@
 			<Attribute name="TrackGauge">
 				<sFloat32>
 					<Element>
-						<Value>100</Value>
+						<Value>143.5</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
 			<Attribute name="ParallelDistance">
 				<sFloat32>
 					<Element>
-						<Value>4.5</Value>
+						<Value>3.75</Value>
 					</Element>
 				</sFloat32>
 			</Attribute>
@@ -243,14 +348,14 @@
 							<Attribute name="MaxSpeedTolerance">
 								<sUInt32>
 									<Element>
-										<Value>60</Value>
+										<Value>55</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
 							<Attribute name="MinRadius">
 								<sUInt32>
 									<Element>
-										<Value>150</Value>
+										<Value>27</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
@@ -265,14 +370,14 @@
 							<Attribute name="MaxSpeedTolerance">
 								<sUInt32>
 									<Element>
-										<Value>60</Value>
+										<Value>55</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
 							<Attribute name="MinRadius">
 								<sUInt32>
 									<Element>
-										<Value>25</Value>
+										<Value>27</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
@@ -287,14 +392,14 @@
 							<Attribute name="MaxSpeedTolerance">
 								<sUInt32>
 									<Element>
-										<Value>60</Value>
+										<Value>25</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
 							<Attribute name="MinRadius">
 								<sUInt32>
 									<Element>
-										<Value>50</Value>
+										<Value>27</Value>
 									</Element>
 								</sUInt32>
 							</Attribute>
@@ -457,14 +562,14 @@
 															<Attribute name="Provider">
 																<cDeltaString>
 																	<Element>
-																		<Value />
+																		<Value>briman0094</Value>
 																	</Element>
 																</cDeltaString>
 															</Attribute>
 															<Attribute name="Product">
 																<cDeltaString>
 																	<Element>
-																		<Value />
+																		<Value>CTA</Value>
 																	</Element>
 																</cDeltaString>
 															</Attribute>
@@ -475,7 +580,7 @@
 											<Attribute name="BlueprintID">
 												<cDeltaString>
 													<Element>
-														<Value />
+														<Value>RailNetwork\Junctions\Automatic Junction.xml</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
@@ -486,7 +591,7 @@
 							<Attribute name="SidewaysOffset">
 								<sFloat32>
 									<Element>
-										<Value>1.57</Value>
+										<Value>1.875</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -552,7 +657,7 @@
 							<Attribute name="SidewaysOffset">
 								<sFloat32>
 									<Element>
-										<Value>1.57</Value>
+										<Value>1.875</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -566,7 +671,7 @@
 							<Attribute name="TransitionTime">
 								<sFloat32>
 									<Element>
-										<Value>2</Value>
+										<Value>1</Value>
 									</Element>
 								</sFloat32>
 							</Attribute>
@@ -577,7 +682,302 @@
 			<Attribute name="TrackSpeedLimitColours">
 				<__Indexed__iTrackRulesBlueprint-sTrackSpeedLimitColours>
 					<Element>
-						<Value />
+						<Value>
+							<iTrackRulesBlueprint-sTrackSpeedLimitColours>
+								<Element>
+									<Value>
+										<Attribute name="Colour">
+											<cHcColour>
+												<Element>
+													<Value>
+														<Attribute name="Red">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Green">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Blue">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Alpha">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+													</Value>
+												</Element>
+											</cHcColour>
+										</Attribute>
+										<Attribute name="Speed">
+											<sInt32>
+												<Element>
+													<Value>15</Value>
+												</Element>
+											</sInt32>
+										</Attribute>
+									</Value>
+								</Element>
+							</iTrackRulesBlueprint-sTrackSpeedLimitColours>
+							<iTrackRulesBlueprint-sTrackSpeedLimitColours>
+								<Element>
+									<Value>
+										<Attribute name="Colour">
+											<cHcColour>
+												<Element>
+													<Value>
+														<Attribute name="Red">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Green">
+															<sFloat32>
+																<Element>
+																	<Value>0.2406639</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Blue">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Alpha">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+													</Value>
+												</Element>
+											</cHcColour>
+										</Attribute>
+										<Attribute name="Speed">
+											<sInt32>
+												<Element>
+													<Value>25</Value>
+												</Element>
+											</sInt32>
+										</Attribute>
+									</Value>
+								</Element>
+							</iTrackRulesBlueprint-sTrackSpeedLimitColours>
+							<iTrackRulesBlueprint-sTrackSpeedLimitColours>
+								<Element>
+									<Value>
+										<Attribute name="Colour">
+											<cHcColour>
+												<Element>
+													<Value>
+														<Attribute name="Red">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Green">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Blue">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Alpha">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+													</Value>
+												</Element>
+											</cHcColour>
+										</Attribute>
+										<Attribute name="Speed">
+											<sInt32>
+												<Element>
+													<Value>35</Value>
+												</Element>
+											</sInt32>
+										</Attribute>
+									</Value>
+								</Element>
+							</iTrackRulesBlueprint-sTrackSpeedLimitColours>
+							<iTrackRulesBlueprint-sTrackSpeedLimitColours>
+								<Element>
+									<Value>
+										<Attribute name="Colour">
+											<cHcColour>
+												<Element>
+													<Value>
+														<Attribute name="Red">
+															<sFloat32>
+																<Element>
+																	<Value>0.3443984</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Green">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Blue">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Alpha">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+													</Value>
+												</Element>
+											</cHcColour>
+										</Attribute>
+										<Attribute name="Speed">
+											<sInt32>
+												<Element>
+													<Value>45</Value>
+												</Element>
+											</sInt32>
+										</Attribute>
+									</Value>
+								</Element>
+							</iTrackRulesBlueprint-sTrackSpeedLimitColours>
+							<iTrackRulesBlueprint-sTrackSpeedLimitColours>
+								<Element>
+									<Value>
+										<Attribute name="Colour">
+											<cHcColour>
+												<Element>
+													<Value>
+														<Attribute name="Red">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Green">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Blue">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Alpha">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+													</Value>
+												</Element>
+											</cHcColour>
+										</Attribute>
+										<Attribute name="Speed">
+											<sInt32>
+												<Element>
+													<Value>55</Value>
+												</Element>
+											</sInt32>
+										</Attribute>
+									</Value>
+								</Element>
+							</iTrackRulesBlueprint-sTrackSpeedLimitColours>
+							<iTrackRulesBlueprint-sTrackSpeedLimitColours>
+								<Element>
+									<Value>
+										<Attribute name="Colour">
+											<cHcColour>
+												<Element>
+													<Value>
+														<Attribute name="Red">
+															<sFloat32>
+																<Element>
+																	<Value>0</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Green">
+															<sFloat32>
+																<Element>
+																	<Value>0.3153527</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Blue">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+														<Attribute name="Alpha">
+															<sFloat32>
+																<Element>
+																	<Value>1</Value>
+																</Element>
+															</sFloat32>
+														</Attribute>
+													</Value>
+												</Element>
+											</cHcColour>
+										</Attribute>
+										<Attribute name="Speed">
+											<sInt32>
+												<Element>
+													<Value>70</Value>
+												</Element>
+											</sInt32>
+										</Attribute>
+									</Value>
+								</Element>
+							</iTrackRulesBlueprint-sTrackSpeedLimitColours>
+						</Value>
 					</Element>
 				</__Indexed__iTrackRulesBlueprint-sTrackSpeedLimitColours>
 			</Attribute>
@@ -592,7 +992,7 @@
 											<Attribute name="English">
 												<cDeltaString>
 													<Element>
-														<Value>Maglev Track Rules</Value>
+														<Value>[CTA] CTA Track Rules</Value>
 													</Element>
 												</cDeltaString>
 											</Attribute>
