@@ -702,7 +702,7 @@
 														<Attribute name="Filename">
 															<cDeltaString>
 																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\doors_close_warning</Value>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\alerts\doors_closing_ext</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -801,7 +801,7 @@
 														<Attribute name="Filename">
 															<cDeltaString>
 																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\doors_close_warning_int</Value>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\alerts\doors_closing</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -2088,7 +2088,7 @@
 														<Attribute name="Filename">
 															<cDeltaString>
 																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\approaching_station_int.wav</Value>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\alerts\station_arrival</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>
@@ -2187,7 +2187,7 @@
 														<Attribute name="Filename">
 															<cDeltaString>
 																<Element>
-																	<Value>RailVehicles\Electric\APM400\Audio\Samples\departing_station_int.wav</Value>
+																	<Value>RailVehicles\Electric\APM400\Audio\Samples\alerts\station_departure</Value>
 																</Element>
 															</cDeltaString>
 														</Attribute>

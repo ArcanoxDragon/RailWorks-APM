@@ -10,18 +10,19 @@ local DEPART_WAIT_TIME						= 2.0
 local SIG_DIR_CORRECTION_TIME				= 1.0
 
 atoK_P										= 1.0 / 6.0
-atoK_I										= 1.0 / 8.0
+atoK_I										= 1.0 / 7.0
 atoK_D										= 0.0
 atoMAX_ERROR								= 1.0 / atoK_I
 atoMIN_ERROR								= -atoMAX_ERROR
-atoD_THRESHOLD								= 0.4
+atoD_THRESHOLD								= 0.3
 atoRESET_THRESHOLD							= 1.8
+atoPid = PID:create( atoK_P, atoK_I, atoK_D, atoMIN_ERROR, atoMAX_ERROR, atoD_THRESHOLD, atoRESET_THRESHOLD )
+
 atoSigDirection								= 0
 gSignalDirectionTime						= 0
 atoOverrunDist								= 0
  sigType,  sigState,  sigDist,  sigAspect	= 0, 0, 0, 0
 tSigType, tSigState, tSigDist, tSigAspect	= 0, 0, 0, 0
-atoPid = PID:create( atoK_P, atoK_I, atoK_D, atoMIN_ERROR, atoMAX_ERROR, atoD_THRESHOLD, atoRESET_THRESHOLD )
 
 -- Station Stop Calibration
 gStopDistBuffer		= -.20	-- The distance buffer to add to the stop speed equation (target to stop this far in front of the target)
